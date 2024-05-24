@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1716527644.99771 "c:/Users/Admin/Desktop/DESKTOP/CODE/PTDLKD/Latex/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1716527645.51158 0
-  "C:/Users/Admin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1716527582 82507 a9eef8696c92627b87e9975edea03b2a ""
+["pdflatex"] 1716527923.13835 "c:/Users/Admin/Desktop/DESKTOP/CODE/PTDLKD/Latex/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1716527923.62765 0
+  "C:/Users/Admin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1716527651 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/Admin/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1716527538 24240354 06ce4dceb813dca6b687ffea6b151f80 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136765053 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -83,9 +83,9 @@
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "IEEEtran.cls" 1716498362 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "c:/Users/Admin/Desktop/DESKTOP/CODE/PTDLKD/Latex/conference_101719.tex" 1716527643 15312 62584ff40b68933cc4206fd59e6e4323 ""
-  "conference_101719.aux" 1716527645 2374 ef9e8bef768166409b15f8515fbcbdd4 "pdflatex"
-  "conference_101719.tex" 1716527643 15312 62584ff40b68933cc4206fd59e6e4323 ""
+  "c:/Users/Admin/Desktop/DESKTOP/CODE/PTDLKD/Latex/conference_101719.tex" 1716527922 15874 6a6274f585cccbcea047c1445124a553 ""
+  "conference_101719.aux" 1716527923 2374 ef9e8bef768166409b15f8515fbcbdd4 "pdflatex"
+  "conference_101719.tex" 1716527922 15874 6a6274f585cccbcea047c1445124a553 ""
   "fig1.png" 1716498362 4535 0e284ca354e1b5c77378d3dfdb543874 ""
   (generated)
   "conference_101719.aux"
