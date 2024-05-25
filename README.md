@@ -19,7 +19,7 @@
    [Email hoặc ORCID]
 
 5. **Given Name Surname**  
-   _Bộ phận, Tổ chức, Thành phố, Quốc gia_  
+   _Bộ phận, Tổ chức, Thành phố, Quốcg gia_  
    [Email hoặc ORCID]
 
 ### Tóm Tắt
