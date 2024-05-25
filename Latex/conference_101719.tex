@@ -87,116 +87,106 @@ phi tuyến để ước lượng giá trị nhỏ nhất của bình phương s
 \section{Phương pháp luận}
 \subsection{Gauss newton method nonlinear}
 \subsubsection{Least Squares}
-The distance between a fitted curve and an observation is called a residual, or an error.
+Khoảng cách giữa một đường cong được khớp và một quan sát được gọi là sai số dư, hoặc lỗi.
 
 \begin{center}
     $Residuals = y_i - \widehat{y}_i$
 \end{center}
 
-The sum of squared errors is calculated by the following equation:
+Tổng của các sai số bình phương được tính bằng phương trình sau:
 
 \begin{center}
     $SSE = \sum_{i=1}^{n}(y_i - \widehat{y}_i)^2$
 \end{center}
 
-Where: \\
-\indent\textbullet\ \(y_i\) is observed values\\
-\indent\textbullet\ \(\widehat{y}_i\) is fitted values\\
+Trong đó: \\
+\indent\textbullet\ \(y_i\) là các giá trị quan sát được\\
+\indent\textbullet\ \(\widehat{y}_i\) là các giá trị khớp\\
 
-\subsubsection{Newton's method}
-With the function \( y = y_0e^{-kt} \) we find the mininum of SSE. we find the \(k\) value with Newton's method
-
-\begin{center}
-    $SSE = \sum_{i}^{n}(y_i-y_0e^{-kt_i})^2$
-\end{center}
-
+\subsubsection{Phương pháp Newton}
+Với hàm \( y = y_0 e^{-kt} \), chúng ta tìm giá trị nhỏ nhất của SSE. Chúng ta tìm giá trị \(k\) bằng phương pháp Newton.
 
 \begin{center}
-
-    \(k_{new} = k_{old} - \frac{f'(k_{old})}{f''(k_{old})}\)
-
+    $SSE = \sum_{i}^{n}(y_i - y_0 e^{-kt_i})^2$
 \end{center}
 
-Or we can explain by Hessan matrix like this:
+\begin{center}
+    \(k_{\text{new}} = k_{\text{old}} - \frac{f'(k_{\text{old}})}{f''(k_{\text{old}})}\)
+\end{center}
+
+Hoặc chúng ta có thể giải thích bằng ma trận Hessian như sau:
 
 \begin{center}
     \[
         \begin{pmatrix}
-            k_{\text{new}} \\ y_{0, \text{new}}
+            k_{\text{new}} \\ y_{0,\text{new}}
         \end{pmatrix} =
         \begin{pmatrix}
-            k_{\text{old}} \\ y_{0, \text{old}}
+            k_{\text{old}} \\ y_{0,\text{old}}
         \end{pmatrix} - H^{-1}G
     \]
 \end{center}
 
-Where: \\
+Trong đó: \\
 \indent\textbullet\ \(H = \begin{bmatrix}
-    \frac{\partial^2 f}{\partial k} & \frac{\partial^2 f}{\partial k \partial y_0}
-    \\ \frac{\partial^2 f}{\partial y_0}  & \frac{\partial^2 f}{\partial y_0 \partial k}
-\end{bmatrix}\)
+    \frac{\partial^2 f}{\partial k^2}            & \frac{\partial^2 f}{\partial k \partial y_0} \\
+    \frac{\partial^2 f}{\partial y_0 \partial k} & \frac{\partial^2 f}{\partial y_0^2}
+\end{bmatrix}\)\\
 \indent\textbullet\ \(G = \begin{bmatrix}
     \frac{\partial f}{\partial k} \\ \frac{\partial f}{\partial y_0}
 \end{bmatrix}\)\\
 
-The problem with Neuton's method in nonlinear regression is the Hessian and its inverse are problematic to calculate. To solve this problem, the Gauss-Newton method instead approximates the Hessian.
+Vấn đề với phương pháp Newton trong hồi quy phi tuyến là việc tính toán ma trận Hessian và nghịch đảo của nó gặp khó khăn. Để giải quyết vấn đề này, phương pháp Gauss-Newton thay thế bằng cách xấp xỉ ma trận Hessian.
 
-We can rewrite the SSE like this:
+Chúng ta có thể viết lại SSE như sau:
 \begin{center}
-    $SSE = \sum_{i}^{n}r_i^2 = r^Tr$
+    $SSE = \sum_{i}^{n}r_i^2 = r^T r$
 \end{center}
 
-Where: \\
-\indent\textbullet\ \(r\) represents a vector with the residuals \\
+Trong đó: \\
+\indent\textbullet\ \(r\) là một vector chứa các sai số dư \\
 
-\subsubsection{Gauss Newton method}
-We differentiate SSE respect to the parameters in the model with the chain rule, we obtain the following equation.
+\subsubsection{Phương pháp Gauss-Newton}
+Chúng ta lấy đạo hàm của SSE theo các tham số trong mô hình bằng quy tắc chuỗi, chúng ta có được phương trình sau:
 \begin{center}
-
     \(
-    {\frac{\partial SSE}{\partial \beta_j}} = 2\sum_{i}^{n}{r_i.\frac{\partial r_i}{\partial\beta_j}}
+    \frac{\partial SSE}{\partial \beta_j} = 2\sum_{i}^{n} r_i \frac{\partial r_i}{\partial \beta_j}
     \)
-
 \end{center}
-Then, remove two number because it will not affect the estimation of the parameters. Corresponds to the Jacobian matrix.
 
+Sau đó, bỏ số hai vì nó sẽ không ảnh hưởng đến việc ước tính các tham số. Tương ứng với ma trận Jacobian.
 
 \begin{center}
-
     \(
     J_r = \begin{bmatrix}
-        \frac{\partial r_1}{\partial \beta_1} &  & \frac{\partial r_1}{\partial \beta_2} \\
-        \frac{\partial r_2}{\partial \beta_1} &  & \frac{\partial r_2}{\partial \beta_2} \\
-        \vdots                                &  & \vdots                                \\
-        \frac{\partial r_n}{\partial \beta_1} &  & \frac{\partial r_n}{\partial \beta_2}
+        \frac{\partial r_1}{\partial \beta_1} & \frac{\partial r_1}{\partial \beta_2} \\
+        \frac{\partial r_2}{\partial \beta_1} & \frac{\partial r_2}{\partial \beta_2} \\
+        \vdots                                & \vdots                                \\
+        \frac{\partial r_n}{\partial \beta_1} & \frac{\partial r_n}{\partial \beta_2}
     \end{bmatrix}
     \)
-
 \end{center}
 
-With the following equation for the sum of squared errors (SSE):
+Với phương trình sau cho tổng các sai số bình phương (SSE):
 \[
     SSE = \sum_{i=1}^{n} (y_i - y_0 e^{-kt_i})^2
 \]
-We have:
+Chúng ta có:
 \begin{center}
-
     \(
-    \frac{\partial^2 {SSE}}{\partial B_j \partial \beta_k} = \sum_{i}^{n}(\frac{\partial r_i}{\beta_j}\frac{\partial r_i}{\beta_k} + r_i\frac{\partial^2 r_i}{\partial \beta_j \partial \beta_k})
+    \frac{\partial^2 {SSE}}{\partial \beta_j \partial \beta_k} = \sum_{i}^{n} \left( \frac{\partial r_i}{\partial \beta_j} \frac{\partial r_i}{\partial \beta_k} + r_i \frac{\partial^2 r_i}{\partial \beta_j \partial \beta_k} \right)
     \)
-
-\end{center}
-The main difference between Newton's method and Gauss-Newton is that the Gauss-Newton method neglects \(r_i\frac{\partial^2 r_i}{\partial \beta_j \partial \beta_k}\)
-So that the second derivative is approximated by the following function
-\begin{center}
-
-    \(
-    \frac{\partial^2 {SSE}}{\partial B_j \partial \beta_k} \approx \sum_{i}^{n}(\frac{\partial r_i}{\beta_j}\frac{\partial r_i}{\beta_k}) = J^T_rJ_r
-    \)
-
 \end{center}
 
-Using the following updating  role in Newton's method.  For Gauss-Newton simplying plug in the approximation for the Hessian matrix and for the gradient.
+Sự khác biệt chính giữa phương pháp Newton và Gauss-Newton là phương pháp Gauss-Newton bỏ qua \(r_i \frac{\partial^2 r_i}{\partial \beta_j \partial \beta_k}\).
+Do đó, đạo hàm bậc hai được xấp xỉ bằng hàm sau:
+\begin{center}
+    \(
+    \frac{\partial^2 {SSE}}{\partial \beta_j \partial \beta_k} \approx \sum_{i}^{n} \left( \frac{\partial r_i}{\partial \beta_j} \frac{\partial r_i}{\partial \beta_k} \right) = J^T_r J_r
+    \)
+\end{center}
+
+Sử dụng quy tắc cập nhật sau trong phương pháp Newton. Đối với Gauss-Newton, đơn giản chỉ cần cắm vào xấp xỉ cho ma trận Hessian và gradient.
 
 \begin{center}
     \[
@@ -209,7 +199,7 @@ Using the following updating  role in Newton's method.  For Gauss-Newton simplyi
     \]
 \end{center}
 
-With \(\beta\) as a column vector with the parameters that are estimated. For a simple example where we only estimate two parameters, the equation looks like this:
+Với \(\beta\) là một vector cột với các tham số được ước tính. Đối với ví dụ đơn giản chỉ ước tính hai tham số, phương trình trông như sau:
 
 \begin{center}
     \[
@@ -226,6 +216,7 @@ With \(\beta\) as a column vector with the parameters that are estimated. For a 
         \end{pmatrix}
     \]
 \end{center}
+
 
 
 \begin{thebibliography}{00}
