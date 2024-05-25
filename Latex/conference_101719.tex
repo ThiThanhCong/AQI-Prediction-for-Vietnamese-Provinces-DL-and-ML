@@ -367,6 +367,33 @@ Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng
 
 \end{figure}
 
+\subsubsection{Hoạt động của cổng cập nhật}
+Cổng này xác định mức độ giống nhau giữa tráng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Biến cổng (gating variable) \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
+trình cập nhật cuối cho GRU.
+
+\begin{equation*}
+    \mathbf{H}_t = \mathbf{Z}_t \circ \mathbf{H}_{t-1} + (1 - \mathbf{Z}_t) \circ \tilde{\mathbf{H}}_t.
+\end{equation*}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_3.pdf}
+        \caption{Tính toán trạng thái ẩn trong một GRU. Phép nhân được thực hiện cho từng phần tử}
+        \label{fig:gru_up}
+    \end{minipage}
+
+\end{figure}
+
+Nếu các giá trị trong cổng cập nhật $\mathbf{Z}_t$ bằng 1, chúng ta chỉ đơn giản giữ lại trạng thái cũ. Trong trường hợp này, thông tin từ $\mathbf{X}_t$ về cơ bản được bỏ qua, tương đương với việc bỏ qua bước thời gian $t$ trong chuỗi phụ thuộc. Ngược lại, nếu $\mathbf{Z}_t$ gần giá trị 0, trạng thái ẩn $\mathbf{H}_t$ sẽ gần với trạng thái ẩn tiềm năng $\tilde{\mathbf{H}}_t$. Những thiết kế trên có thể giúp chúng ta giải quyết vấn đề tiêu biến gradient trong các mạng RNN và nắm bắt tốt hơn sự phụ thuộc xa trong chuỗi thời gian. Tóm lại, các mạng GRU có hai tính chất nổi bật sau:
+
+\begin{itemize}
+    \item Cổng xoá giúp nắm bắt các phụ thuộc ngắn hạn trong chuỗi thời gian.
+    \item Cổng cập nhật giúp nắm bắt các phụ thuộc dài hạn trong chuỗi thời gian.
+\end{itemize}
+
+
 \begin{thebibliography}{00}
     \bibitem{b1}  P. T. Huong, "Linear regression, polynomial regression, and applications,
     master’s thesis in science," 2015.
