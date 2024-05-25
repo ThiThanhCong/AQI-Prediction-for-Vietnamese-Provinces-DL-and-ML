@@ -367,6 +367,10 @@ Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng
 
 \end{figure}
 
+\begin{equation*}
+    \tilde{\mathbf{H}}_t = \tanh (\mathbf{X}_t \mathbf{W}_{xh} + (\mathbf{R}_t \odot \mathbf{H}_{t-1}) \mathbf{W}_{hh} + \mathbf{b}_h).
+\end{equation*}
+
 \subsubsection{Hoạt động của cổng cập nhật}
 Cổng này xác định mức độ giống nhau giữa tráng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Biến cổng (gating variable) \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
 trình cập nhật cuối cho GRU.
