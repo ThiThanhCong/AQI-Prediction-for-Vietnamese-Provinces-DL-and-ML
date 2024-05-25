@@ -2,7 +2,7 @@
 
 ### Thành Viên Nhóm
 
-1. **Cao Hoai Sang**  
+1. **Cao Hoài Sang**  
    _Hệ Thống Thông Tin, TP. Hồ Chí Minh, Việt Nam_  
    [21522541@gm.uit.edu.vn](mailto:21522541@gm.uit.edu.vn)
 
