@@ -10,7 +10,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[vietnamese]{babel}
 \usepackage{float} 
-
+\usepackage{multirow}
 
 \bibliographystyle{IEEEtran}
 
@@ -295,6 +295,37 @@ Với \(\beta\) là một vector cột với các tham số được ước tín
         \end{pmatrix}
     \]
 \end{center}
+\subsection{LSMT ResCNN}
+\subsubsection{Tổng quan}
+Mô hình LSTM ResCNN là một mô hình dự đoán chuỗi thời gian, là sự kết hợp giữa LSTM và CNN 1D sử dụng kết nối bỏ qua.
+\subsubsection{1D-CNN}
+CNN phổ biến nhất được biết đến là CNN 2D, chủ yếu được sử dụng trong xử lý ảnh. Ngoài ra còn có CNN 1D được sử dụng trong xử lý ngôn ngữ tự nhiên và phân tích chuỗi thời gian, nó trích xuất các đặc trưng bằng cách di chuyển kernel dọc theo trục thời gian. Lớp CNN 1D đóng góp vào việc trích xuất các đặc trưng vốn có trong dữ liệu, và số lượng bộ lọc xác định số lượng đặc trưng cần được học, phù hợp với kích thước của không gian đầu ra.
+\subsubsection{LSTM-ResCNN được đề xuất với cách tiếp cận dựa trên độ dốc}
+\paragraph{Giới thiệu mô hình}
+Trong bài báo này, chúng tôi đề xuất một mô hình LSTM-resCNN, đó là một LSTM-CNN với một kết nối dư thêm trên các lớp CNN 1D. Lý do chúng tôi chọn thứ tự LSTM-CNN thay vì CNN-LSTM là để đặt lớp tích chập mà Grad-CAM có thể được áp dụng ở phần sau để biểu diễn các đặc trưng phức tạp hơn. Chúng tôi đã bao gồm một kết nối dư để tránh mất thông tin quan trọng trong quá trình áp dụng ba lớp tích chập 1D liên tục. Ngoài ra, các mạng dư đã chứng minh rằng chúng có thể được coi như một sự kết hợp của nhiều đường đi khác nhau với độ dài khác nhau, và các đường đi này thể hiện hành vi giống như một tổ hợp.
+\paragraph{Thiết kế mô hình}
+Mô hình LSTM-resCNN được đề xuất được mô tả trong Bảng 2. Mỗi khối CNN bao gồm ba lớp CNN 1D với kích thước bộ lọc là 64 mỗi lớp và kích thước kernel là 3, 2 và 1. Kích thước bộ lọc 64 được chọn từ giữa 32, 64 và 128 dựa trên tìm kiếm siêu tham số. Một kết nối dư được thêm vào mỗi khối CNN. Sau khi áp dụng hai khối CNN, một lớp flatten được áp dụng để chuyển đổi các đặc trưng thành các vector một chiều. Tiếp theo, một lớp dropout được sử dụng để ngăn chặn việc quá mức hóa. Cuối cùng, kết quả được chuyển đến lớp dense. Kích thước của bộ lọc là 1 và 24 cho các mô hình dự đoán một bước và nhiều bước tương ứng.
+\begin{center}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|p{2cm}|}
+            \hline
+            \textbf{Models}                       & \multicolumn{2}{c|}{\textbf{Layer}}   & \textbf{Parameters}                                                                                      \\ \hline
+            \multirow{9}{*}{\textbf{LSTM-resCNN}} & \multicolumn{2}{c|}{LSTM}             & \makebox[3cm]{Filter = 64}                                                                               \\ \cline{2-4}
+                                                  & \multirow{4}{*}{CNN-Block $\times$ 2} & 1D-CNN                     & \begin{tabular}{@{}l@{}}Filter=64,\\ kernel-size=3,\\ stride=1\end{tabular} \\ \cline{3-4}
+                                                  &                                       & 1D-CNN                     & \begin{tabular}{@{}l@{}}Filter=64,\\ kernel-size=2,\\ stride=1\end{tabular} \\ \cline{3-4}
+                                                  &                                       & 1D-CNN                     & \begin{tabular}{@{}l@{}}Filter=64,\\ kernel-size=1,\\ stride=1\end{tabular} \\ \cline{3-4}
+                                                  &                                       & Add                        &                                                                             \\ \cline{2-4}
+                                                  & \multicolumn{2}{c|}{Flatten}          &                                                                                                          \\ \cline{2-4}
+                                                  & \multicolumn{2}{c|}{Dropout}          & \makebox[3cm]{p = 0.5}                                                                                   \\ \cline{2-4}
+                                                  & \multicolumn{2}{c|}{Dense}            &                                                                                                          \\ \hline
+        \end{tabular}
+        \caption{cấu trúc model LSTM ResCNN}
+        \label{tab:lstm-rescnn}
+    \end{table}
+
+\end{center}
+
 
 
 
