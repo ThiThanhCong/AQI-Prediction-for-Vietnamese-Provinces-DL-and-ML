@@ -11,6 +11,7 @@
 \usepackage[vietnamese]{babel}
 \usepackage{float} 
 \usepackage{multirow}
+\usepackage{url}
 
 \bibliographystyle{IEEEtran}
 
@@ -84,7 +85,10 @@ Vào năm 2015, ứng dụng dự báo phục hồi sau xuất viện của Ph�
 sử dụng trong luận văn thạc sĩ khoa học [1]. Sử dụng phương pháp Gauss-Newton
 phi tuyến để ước lượng giá trị nhỏ nhất của bình phương sai số. \cite{b1}
 
+\subsection{ResCNN}
+Phân loại ECG bằng bộ Ensemble của Residual CNNs với Cơ chế Chú ý.
 
+Trong phân loại ECG, sử dụng ResNet kết hợp với cơ chế chú ý đa đầu đã chứng minh hiệu quả. Giải pháp của Đội ISIBrno-AIMT trong Cuộc thi PhysioNet 2021 đã thể hiện sự vượt trội bằng việc phân loại ECG thành 26 nhóm khác nhau. Phương pháp này tích hợp các hàm mất mát và tối ưu hóa tiến hóa, mang lại đóng góp quan trọng cho lĩnh vực này. \cite{b4}
 
 \section{Tài nguyên}
 \subsection{Bộ dữ liệu}
@@ -327,12 +331,115 @@ Mô hình LSTM-resCNN được đề xuất được mô tả trong Bảng 2. M�
 \end{center}
 
 
+\subsection{Gated Recurrent Unit (GRU)}
+\subsubsection{Đơn vị tuần hoàn trong mạng nơ-ron}
+Trước khi chúng ta đi vào chi tiết về GRU, hãy xem xét một đơn vị tuần hoàn thông thường trong mạng nơ-ron. Đơn vị này được sử dụng để xử lý dữ liệu tuần tự, chẳng hạn như chuỗi văn bản, âm thanh hoặc dữ liệu thời gian.
+
+Mỗi đơn vị tuần hoàn có một trạng thái ẩn (hidden state) và nhận đầu vào từ bước thời gian trước đó. Nó sử dụng thông tin từ trạng thái ẩn và đầu vào hiện tại để tính toán trạng thái ẩn mới.
+
+\subsubsection{GRU là gì?}
+GRU là một biến thể của đơn vị tuần hoàn, được thiết kế để giải quyết một số vấn đề của kiến trúc LSTM (Long Short-Term Memory).
+
+Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng thái ẩn và ô nhớ:
+
+\begin{itemize}
+    \item \textbf{LSTM}: Sử dụng ba cổng (input gate, output gate và forget gate) để duy trì trạng thái của ô nhớ riêng biệt.
+    \item \textbf{GRU}: Không có ô nhớ riêng biệt, thay vào đó, nó sử dụng một “vector kích hoạt ứng viên” và hai cổng (reset gate và update gate).
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Cổng đặt lại (reset gate)}: Quyết định bao nhiêu trạng thái ẩn trước đó cần quên.
+    \item \textbf{Cổng cập nhật (update gate)}: Quyết định bao nhiêu của vector kích hoạt ứng viên cần tích hợp vào trạng thái ẩn mới.
+\end{itemize}
+
+\subsubsection{Cổng xóa và cổng cập nhật}
+Đầu tiên ta giới thiệu cổng xóa và cổng cập nhật. Ta thiết kế chúng thành các vector có các phần tử trong khoảng  (0,1)
+để có thể biểu diễn các tổ hợp lồi. Chẳng hạn, một biến xóa cho phép kiểm soát bao nhiêu phần của trạng thái trước đây được giữ lại. Tương tự, một biến cập nhật cho phép kiểm soát bao nhiêu phần của trạng thái mới sẽ giống trạng thái cũ.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_1.pdf}
+        \caption{Cổng xóa và cổng cập nhật trong GRU}
+        \label{fig:gru_del_up}
+    \end{minipage}
+
+\end{figure}
+
+Ta bắt đầu bằng việc thiết kế các cổng tạo ra các biến này. Hình \ref{fig:gru_del_up}
+minh họa các đầu vào cho cả cổng xóa và cổng cập nhật trong GRU, với đầu vào ở bước thời gian hiện tại  \(\mathbf{X}_t \)
+và trạng thái ẩn ở bước thời gian trước đó  \(\mathbf{H}_{t-1} \). Đầu ra được tạo bởi một tầng kết nối đầy đủ với hàm kích hoạt sigmoid.
+
+Tại bước thời gian $t$, với đầu vào minibatch là $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (số lượng mẫu: $n$, số lượng đầu vào: $d$) và trạng thái ẩn ở bước thời gian gần nhất là $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (số lượng trạng thái ẩn: $h$), cổng xóa $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ và cổng cập nhật $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ được tính như sau:
+
+\begin{equation*}
+    \mathbf{R}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xr} + \mathbf{H}_{t-1} \mathbf{W}_{hr} + \mathbf{b}_r)
+\end{equation*}
+\begin{equation*}
+    \mathbf{Z}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xz} + \mathbf{H}_{t-1} \mathbf{W}_{hz} + \mathbf{b}_z).
+\end{equation*}
+
+Ở đây, $\mathbf{W}_{xr}, \mathbf{W}_{xz} \in \mathbb{R}^{d \times h}$ và $\mathbf{W}_{hr}, \mathbf{W}_{hz} \in \mathbb{R}^{h \times h}$ là các tham số trọng số và $\mathbf{b}_r, \mathbf{b}_z \in \mathbb{R}^{1 \times h}$ là các hệ số điều chỉnh. Ta sẽ sử dụng hàm sigmoid để biến đổi các giá trị đầu vào nằm trong khoảng $(0, 1)$.
+
+\subsubsection{Hoạt động của cổng xóa}
+Trong RNN thông thường, ta cập nhật trọng thái cổng xóa theo công thức
+\[
+    \mathbf{H}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xh} + \mathbf{H}_{t-1} \mathbf{W}_{hh} + \mathbf{b}_h).
+\]
+
+Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng xóa. Ký hiệu \(\bigodot\) biểu thị phép nhân theo từng phần tử giữa các tensor.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_2.pdf}
+        \caption{Tính toán trạng thái tiềm năng trong một GRU. Phép nhân được thực hiện theo phần tử}
+        \label{fig:gru_del}
+    \end{minipage}
+
+\end{figure}
+
+\begin{equation*}
+    \tilde{\mathbf{H}}_t = \tanh (\mathbf{X}_t \mathbf{W}_{xh} + (\mathbf{R}_t \odot \mathbf{H}_{t-1}) \mathbf{W}_{hh} + \mathbf{b}_h).
+\end{equation*}
+
+\subsubsection{Hoạt động của cổng cập nhật}
+Cổng này xác định mức độ giống nhau giữa tráng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Biến cổng (gating variable) \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
+trình cập nhật cuối cho GRU.
+
+\begin{equation*}
+    \mathbf{H}_t = \mathbf{Z}_t \circ \mathbf{H}_{t-1} + (1 - \mathbf{Z}_t) \circ \tilde{\mathbf{H}}_t.
+\end{equation*}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_3.pdf}
+        \caption{Tính toán trạng thái ẩn trong một GRU. Phép nhân được thực hiện cho từng phần tử}
+        \label{fig:gru_up}
+    \end{minipage}
+
+\end{figure}
+
+Nếu các giá trị trong cổng cập nhật $\mathbf{Z}_t$ bằng 1, chúng ta chỉ đơn giản giữ lại trạng thái cũ. Trong trường hợp này, thông tin từ $\mathbf{X}_t$ về cơ bản được bỏ qua, tương đương với việc bỏ qua bước thời gian $t$ trong chuỗi phụ thuộc. Ngược lại, nếu $\mathbf{Z}_t$ gần giá trị 0, trạng thái ẩn $\mathbf{H}_t$ sẽ gần với trạng thái ẩn tiềm năng $\tilde{\mathbf{H}}_t$. Những thiết kế trên có thể giúp chúng ta giải quyết vấn đề tiêu biến gradient trong các mạng RNN và nắm bắt tốt hơn sự phụ thuộc xa trong chuỗi thời gian. Tóm lại, các mạng GRU có hai tính chất nổi bật sau:
+
+\begin{itemize}
+    \item Cổng xoá giúp nắm bắt các phụ thuộc ngắn hạn trong chuỗi thời gian.
+    \item Cổng cập nhật giúp nắm bắt các phụ thuộc dài hạn trong chuỗi thời gian.
+\end{itemize}
 
 
 \begin{thebibliography}{00}
-    \bibitem{b1}  P. T. Huong, "Linear regression, polynomial regression, and applications,
-    master’s thesis in science," 2015.
-    \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim and I. -Y. Kwak, "Explainable Time-Series Prediction Using a Residual Network and Gradient-Based Methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
+    \bibitem{b1} P. T. Huong, "Linear regression, polynomial regression, and applications," Master’s thesis in science, 2015.
+    \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
+    \bibitem{b3} Doan Vo Duy Thanh, Nguyen Van Cuong, Vo Tan Phat, Le Khac Hong Phuc, Nguyen Duy Du, Nguyen Van Quang, Pham Minh Duc, Pham Hong Vinh, and Nguyen Canh Thuong. \textit{Gated Recurrent Unit (GRU)}. Accessed May 26, 2024. \url{https://d2l.aivivn.com/chapter_recurrent-modern/gru_vn.html}.
+    \bibitem{b4} Nejedly P, Ivora A, Viscor I, Koscova Z, Smisek R, Jurak P, Plesinger F. Classification of ECG using ensemble of residual CNNs with or without attention mechanism. Physiol Meas. 2022 Apr 28;43(4). doi: 10.1088/1361-6579/ac647c. PMID: 35381586.
+
 \end{thebibliography}
+
 
 \end{document}
