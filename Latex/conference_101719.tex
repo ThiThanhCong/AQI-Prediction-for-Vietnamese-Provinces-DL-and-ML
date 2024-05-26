@@ -10,7 +10,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[vietnamese]{babel}
 \usepackage{float} 
-
+\usepackage{multirow}
+\usepackage{url}
 
 \bibliographystyle{IEEEtran}
 
@@ -302,7 +303,7 @@ ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hì
 
 ARIMA là sự kết hợp của 3 thành phần, Auto-Regressive – AR, Integrated – I và Moving Average – MA tương ứng với các tham số p, d và q đại diện cho ba thành phần chính của mô hình, trong đó:
 \\
-\indent\textbullet\ \(p\): Tham số p đại diện cho số lượng các quá trình tự hồi quy trong thành phần tự hồi quy (AutoRegressive) của mô hình ARIMA. Nó chỉ ra số lượng ngày quá khứ của chuỗi dữ liệu mà được sử dụng để dự đoán giá trị hiện tại. Phương trình tự hồi quy AR được tổng quát như sau:\\
+\indent\textbullet\ \(p-AR(p)\): Tham số p đại diện cho số lượng các quá trình tự hồi quy trong thành phần tự hồi quy (AutoRegressive) của mô hình ARIMA. Nó chỉ ra số lượng ngày quá khứ của chuỗi dữ liệu mà được sử dụng để dự đoán giá trị hiện tại. Mỗi giá trị quá khứ được sử dụng là một hệ số trong mô hình tự hồi quy. Giá trị của p phụ thuộc vào sự phụ thuộc tạm thời trong chuỗi dữ liệu và có thể được xác định bằng cách sử dụng các phương pháp như đồ thị tự tương quan (ACF - AutoCorrelation Function) hoặc hàm tương quan một lệnh (PACF - Partial AutoCorrelation Function). Phương trình tự hồi quy AR được tổng quát như sau:\\
 \[
 Y_t = c + \varphi_1 Y_{t-1} + \varphi_2 Y_{t-2} + \ldots + \varphi_p Y_{t-p} + \epsilon_t
 \]
@@ -313,7 +314,7 @@ Trong đó: \\
 \indent -- \(\epsilon_t\) là sai số ngẫu nhiên \\
 \indent -- \(p\) là số bậc \\
 
-\indent\textbullet\ \(q\): Tham số q đại diện cho số lượng các thành phần trung bình động (Moving Average) trong mô hình ARIMA. Nó chỉ ra số lượng giá trị trung bình động được sử dụng để dự đoán giá trị hiện tại.\\
+\indent\textbullet\ \(q-MA(q)\): Tham số q đại diện cho số lượng các thành phần trung bình động (Moving Average) trong mô hình ARIMA. Nó chỉ ra số lượng giá trị trung bình động được sử dụng để dự đoán giá trị hiện tại.\\
 \[
 Y_t = c + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \ldots + \theta_p \epsilon_{t-p} + \epsilon_t
 \]
@@ -326,7 +327,7 @@ Trong đó: \\
 \indent -- \(p\) là số bậc \\
 
 
-\indent\textbullet\  \(d\): Tham số d đại diện cho số lần lấy đạo hàm-sai phân (differencing) trên chuỗi dữ liệu ban đầu để loại bỏ xu hướng (trend) và/hoặc thành phần mùa vụ (seasonality) hay chuyển đổi dữ liệu thành chuỗi dừng. Công thức tính sai phân tại thời điểm t như sau
+\indent\textbullet\  \(d-I(d)\): Tham số d đại diện cho số lần lấy đạo hàm-sai phân (differencing) trên chuỗi dữ liệu ban đầu để loại bỏ xu hướng (trend) và/hoặc thành phần mùa vụ (seasonality) hay chuyển đổi dữ liệu thành chuỗi dừng. chuỗi dừng là chuỗi có trung bình, phương sai và tự tương quan không đổi theo thời gian. Một chuỗi thời gian được coi là chuỗi dừng nếu nó có trung bình không đổi, phương sai không đổi và tự tương quan không đổi. Chuỗi dừng là Công thức tính sai phân tại thời điểm t như sau
 \[
     \Delta y_t = y_t - y_{t-1}
 \]
@@ -343,6 +344,11 @@ Trong đó: \\
 \indent -- \(\epsilon_t\) là hệ số tương quan\\
 \indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
 
-Thuật toán ARIMA kết hợp việc xác định các tham số \( p \), \( d \), \( q \) và ước lượng các hệ số \( \varphi \) và \( \theta \) thông qua các phương pháp như hàm tự tương quan (autocorrelation function - ACF) và hàm tự tương quan riêng biệt (partial autocorrelation function - PACF) của chuỗi thời gian. Sau đó, mô hình ARIMA được xây dựng và sử dụng để dự đoán giá trị trong tương lai và đánh giá độ chính xác của dự đoán.
+\begin{thebibliography}{00}
+    \bibitem{b1} P. T. Huong, "Linear regression, polynomial regression, and applications," Master’s thesis in science, 2015.
+    \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
+    \bibitem{b3} Doan Vo Duy Thanh, Nguyen Van Cuong, Vo Tan Phat, Le Khac Hong Phuc, Nguyen Duy Du, Nguyen Van Quang, Pham Minh Duc, Pham Hong Vinh, and Nguyen Canh Thuong. \textit{Gated Recurrent Unit (GRU)}. Accessed May 26, 2024. \url{https://d2l.aivivn.com/chapter_recurrent-modern/gru_vn.html}.
+    \bibitem{b4} Nejedly P, Ivora A, Viscor I, Koscova Z, Smisek R, Jurak P, Plesinger F. Classification of ECG using ensemble of residual CNNs with or without attention mechanism. Physiol Meas. 2022 Apr 28;43(4). doi: 10.1088/1361-6579/ac647c. PMID: 35381586.
+\end{thebibliography}
 
 \end{document}
