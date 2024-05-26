@@ -30,24 +30,24 @@
         21522541@gm.uit.edu.vn}
     \and
     \IEEEauthorblockN{2\textsuperscript{nd} Nguyen Tran Gia Kiet}
+    \IEEEauthorblockA{\textit{Information System} \\
+        \textit{name of organization (of Aff.)}\\
+        Ho Chi Minh City, Viet Nam \\
+        21522258@gm.uit.edu.vn}
+    \and
+    \IEEEauthorblockN{3\textsuperscript{rd} Thi Thanh Cong}
     \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
         \textit{name of organization (of Aff.)}\\
         City, Country \\
         email address or ORCID}
     \and
-    \IEEEauthorblockN{3\textsuperscript{rd} Thi Thành Công}
+    \IEEEauthorblockN{4\textsuperscript{th} Nguyen Hoang Dang Khoa}
     \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
         \textit{name of organization (of Aff.)}\\
         City, Country \\
         email address or ORCID}
     \and
-    \IEEEauthorblockN{4\textsuperscript{th} Nguyễn Hoàng Đăng Khoa}
-    \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-        \textit{name of organization (of Aff.)}\\
-        City, Country \\
-        email address or ORCID}
-    \and
-    \IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
+    \IEEEauthorblockN{5\textsuperscript{th} Cu Ngoc Hoang}
     \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
         \textit{name of organization (of Aff.)}\\
         City, Country \\
@@ -295,12 +295,54 @@ Với \(\beta\) là một vector cột với các tham số được ước tín
         \end{pmatrix}
     \]
 \end{center}
+\vspace{3mm}
+\subsection{AUTOREGRESSIVE INTEGRATED MOVING AVERAGE (ARIMA)}
+
+ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hình ARIMA thường được sử dụng để dự báo dữ liệu chuỗi thời gian đơn biến. Mô hình ARIMA có thể xử lý một chuỗi thời gian nếu chuỗi đó là dừng và không có dữ liệu bị thiếu. Phương pháp này được sử dụng trong nhiều nghiên cứu để dự báo. 
+
+ARIMA là sự kết hợp của 3 thành phần, Auto-Regressive – AR, Integrated – I và Moving Average – MA tương ứng với các tham số p, d và q đại diện cho ba thành phần chính của mô hình, trong đó:
+\\
+\indent\textbullet\ \(p\): Tham số p đại diện cho số lượng các quá trình tự hồi quy trong thành phần tự hồi quy (AutoRegressive) của mô hình ARIMA. Nó chỉ ra số lượng ngày quá khứ của chuỗi dữ liệu mà được sử dụng để dự đoán giá trị hiện tại. Phương trình tự hồi quy AR được tổng quát như sau:\\
+\[
+Y_t = c + \varphi_1 Y_{t-1} + \varphi_2 Y_{t-2} + \ldots + \varphi_p Y_{t-p} + \epsilon_t
+\]
+Trong đó: \\
+\indent -- \(Y_t\) đại diện cho giá trị dữ liệu tại thời điểm t\\
+\indent -- \(c\) là hằng số chặn\\
+\indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
+\indent -- \(\epsilon_t\) là sai số ngẫu nhiên \\
+\indent -- \(p\) là số bậc \\
+
+\indent\textbullet\ \(q\): Tham số q đại diện cho số lượng các thành phần trung bình động (Moving Average) trong mô hình ARIMA. Nó chỉ ra số lượng giá trị trung bình động được sử dụng để dự đoán giá trị hiện tại.\\
+\[
+Y_t = c + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \ldots + \theta_p \epsilon_{t-p} + \epsilon_t
+\]
+
+Trong đó: \\
+\indent -- \(Y_t\) đại diện cho giá trị dữ liệu tại thời điểm t\\
+\indent -- \(c\) là hằng số chặn\\
+\indent -- \(\theta\) là hệ số Moving Average(MA)\\
+\indent -- \(\epsilon_t\) là hệ số tương quan\\
+\indent -- \(p\) là số bậc \\
 
 
+\indent\textbullet\  \(d\): Tham số d đại diện cho số lần lấy đạo hàm-sai phân (differencing) trên chuỗi dữ liệu ban đầu để loại bỏ xu hướng (trend) và/hoặc thành phần mùa vụ (seasonality) hay chuyển đổi dữ liệu thành chuỗi dừng. Công thức tính sai phân tại thời điểm t như sau
+\[
+    \Delta y_t = y_t - y_{t-1}
+\]
 
-\begin{thebibliography}{00}
-    \bibitem{b1}  P. T. Huong, "Linear regression, polynomial regression, and applications,
-    master’s thesis in science," 2015.
-\end{thebibliography}
+Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
+\[
+    \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q}
+\]
+
+Trong đó: \\
+\indent -- \(Y_t\) đại diện cho giá trị dữ liệu tại thời điểm t\\
+\indent -- \(c\) là hằng số chặn\\
+\indent -- \(\theta\) là hệ số Moving Average(MA)\\
+\indent -- \(\epsilon_t\) là hệ số tương quan\\
+\indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
+
+Thuật toán ARIMA kết hợp việc xác định các tham số \( p \), \( d \), \( q \) và ước lượng các hệ số \( \varphi \) và \( \theta \) thông qua các phương pháp như hàm tự tương quan (autocorrelation function - ACF) và hàm tự tương quan riêng biệt (partial autocorrelation function - PACF) của chuỗi thời gian. Sau đó, mô hình ARIMA được xây dựng và sử dụng để dự đoán giá trị trong tương lai và đánh giá độ chính xác của dự đoán.
 
 \end{document}
