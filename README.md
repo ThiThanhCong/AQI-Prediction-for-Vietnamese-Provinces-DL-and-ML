@@ -7,12 +7,12 @@
    [21522541@gm.uit.edu.vn](mailto:21522541@gm.uit.edu.vn)
 
 2. **Nguyen Tran Gia Kiet**  
-   _Bộ phận, Tổ chức, Thành phố, Quốc gia_  
-   [Email hoặc ORCID]
+   _Hệ thống thông tin, TP. Hồ Chí Minh, Việt Nam_  
+   [21522258@gm.uit.edu.vn](mailto:21522258@gm.uit.edu.vn)
 
 3. **Thi Thành Công**  
-   _Bộ phận, Tổ chức, Thành phố, Quốc gia_  
-   [Email hoặc ORCID]
+   _Hệ Thống Thông Tin, TP. Hồ Chí Minh, Việt Nam_    
+   [21521897@gm.uit.edu.vn](mailto:21521897@gm.uit.edu.vn)
 
 4. **Nguyễn Hoàng Đăng Khoa**  
    _Bộ phận, Tổ chức, Thành phố, Quốc gia_  
