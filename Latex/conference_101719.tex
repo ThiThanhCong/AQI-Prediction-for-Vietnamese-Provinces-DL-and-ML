@@ -45,8 +45,8 @@
     \IEEEauthorblockN{4\textsuperscript{th} Nguyễn Hoàng Đăng Khoa}
     \IEEEauthorblockA{
         \textit{Khoa Hệ Thống Thông Tin}\\
-        City, Country \\
-        email address or ORCID}
+        Ho Chi Minh City, Viet Nam \\
+        21520999@gm.uit.edu.vn}
     \and
     \IEEEauthorblockN{5\textsuperscript{th} Cù Ngọc Hoàng}
     \IEEEauthorblockA{
@@ -473,12 +473,59 @@ Nếu các giá trị trong cổng cập nhật $\mathbf{Z}_t$ bằng 1, chúng 
     \item Cổng cập nhật giúp nắm bắt các phụ thuộc dài hạn trong chuỗi thời gian.
 \end{itemize}
 
+\subsection{Dynamic Linear Model (DLM)}
+Dynamic Linear Model là một trường hợp đặt biệt của mô hình trạng thái không gian - mô hình biểu hiện trạng thái của một hệ thống. Model mô tả hành động của một hệ thống động bằng cách sử dụng một bộ biến, được gọi là biến trạng thái để miêu tả trạng thái hiện tại của hệ thống. Những biến này thể hiện các đặc điểm bên trong của trạng thái biến đổi qua thời gian.
+Một model DLM đơn gian có hai phương trình, mô hình đầu tiên là mô hình quan sát (observation model):
+\begin{center}
+
+    \(y_t=\ X_i^T\ \theta_t+\ e_i\)
+    
+\end{center}
+
+và mô hình trạng thái (state equation) quan sát. Mô tả sự tiến hóa của trạng thái ẩn (không quan sát được) qua thời gian:
+
+\begin{center}
+
+    \(\theta_t=G_t\ \theta_(t-1)+\ w_t\)
+    
+\end{center}
+
+Trong đó:\\
+	\indent\textbullet\ \(\gamma_t\) dữ liệu quan sát tại thời điểm t.\\
+	\indent\textbullet\ \(\chi_t\) ma trận quan sát.\\
+	\indent\textbullet\ \(\theta_t\) là vector trạng thái chứa yếu tố xu hướng và mùa vụ.\\
+    \indent\textbullet\ \(\epsilon_t\) là nhiễu loạn quan sát.\\
+	\indent\textbullet\ G là ma trận giao chuyển để mô tả lại quá trình tiến hóa của trạng thái.\\
+	\indent\textbullet\ \(\omega_t\) là nhiễu loạn trạng thái.
+
+\subsection{Recurrent Neural Networks (RNN)}
+Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống tất cả các đầu vào và cả đầu ra là độc lập với nhau. Tức là chúng không liên kết thành chuỗi với nhau. Nhưng các mô hình này không phù hợp trong rất nhiều bài toán. RNN được gọi là hồi quy (Recurrent) bởi thực hiện cùng một tác vụ cho tất cả các phần tử của một chuỗi với đầu ra phụ thuộc vào cả các phép tính trước đó. Nói cách khác, RNN có khả năng nhớ các thông tin được tính toán trước đó.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/RNN/RNN.pdf}
+        \caption{Một mạng lưới thần kinh tái diễn và sự diễn ra theo thời gian của quá trình tính toán liên quan đến tính toán chuyển tiếp.}
+        \label{fig:RNN}
+    \end{minipage}
+
+\end{figure}
+
+Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển khai ở đây có thể hiểu đơn giản là ta vẽ ra một mạng nơ-ron chuỗi tuần tự. Ví dụ ta có một câu gồm 5 chữ, thì mạng nơ-ron được triển khai sẽ gồm 5 tầng nơ-ron tương ứng với mỗi chữ một tầng. Lúc đó việc tính toán bên trong RNN được thực hiện như sau:
+\begin{itemize}
+    \item x\textsubscript{t} là đầu vào tại bước t. Ví dụ, x\textsubscript{t} là một vec-tơ one-hot tương ứng với từ thứ 2 của câu.
+    \item s\textsubscript{t} à trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm \(\theta \).
+    \item o\textsubscript{t} à đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})     
+\end{itemize}
+
 \begin{thebibliography}{00}
     \bibitem{b1} P. T. Huong, "Linear regression, polynomial regression, and applications," Master’s thesis in science, 2015.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
     \bibitem{b3} Doan Vo Duy Thanh, Nguyen Van Cuong, Vo Tan Phat, Le Khac Hong Phuc, Nguyen Duy Du, Nguyen Van Quang, Pham Minh Duc, Pham Hong Vinh, and Nguyen Canh Thuong. \textit{Gated Recurrent Unit (GRU)}. Accessed May 26, 2024. \url{https://d2l.aivivn.com/chapter_recurrent-modern/gru_vn.html}.
     \bibitem{b4} Nejedly P, Ivora A, Viscor I, Koscova Z, Smisek R, Jurak P, Plesinger F. Classification of ECG using ensemble of residual CNNs with or without attention mechanism. Physiol Meas. 2022 Apr 28;43(4). doi: 10.1088/1361-6579/ac647c. PMID: 35381586.
+    \bibitem{b5} M. Chiogna and C. Gaetan, "Dynamic Generalized Linear Models with Application to Environmental Epidemiology," Journal of the Royal Statistical Society Series C: Applied Statistics, vol. 51, no. 4, pp. 453-468, 2002.
+    \bibitem{b6} D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D.Reeves and B. P. Weaver, "Dynamic linear models for forecasting of radiation beltelectrons and limitations on physical interpretationof predictive models," vol. 12, no. 6, pp. 323-446, 2014.
 \end{thebibliography}
-
 
 \end{document}
