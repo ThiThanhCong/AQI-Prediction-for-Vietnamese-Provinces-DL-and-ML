@@ -12,6 +12,11 @@
 \usepackage{float} 
 \usepackage{multirow}
 \usepackage{url}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta}
 
 \bibliographystyle{IEEEtran}
 
@@ -358,28 +363,47 @@ CNN phổ biến nhất được biết đến là CNN 2D, chủ yếu được 
 \paragraph{Giới thiệu mô hình}
 Trong bài báo này, chúng tôi đề xuất một mô hình LSTM-resCNN, đó là một LSTM-CNN với một kết nối dư thêm trên các lớp CNN 1D. Lý do chúng tôi chọn thứ tự LSTM-CNN thay vì CNN-LSTM là để đặt lớp tích chập mà Grad-CAM có thể được áp dụng ở phần sau để biểu diễn các đặc trưng phức tạp hơn. Chúng tôi đã bao gồm một kết nối dư để tránh mất thông tin quan trọng trong quá trình áp dụng ba lớp tích chập 1D liên tục. Ngoài ra, các mạng dư đã chứng minh rằng chúng có thể được coi như một sự kết hợp của nhiều đường đi khác nhau với độ dài khác nhau, và các đường đi này thể hiện hành vi giống như một tổ hợp.
 \paragraph{Thiết kế mô hình}
-Mô hình LSTM-resCNN được đề xuất được mô tả trong Bảng 2. Mỗi khối CNN bao gồm ba lớp CNN 1D với kích thước bộ lọc là 64 mỗi lớp và kích thước kernel là 3, 2 và 1. Kích thước bộ lọc 64 được chọn từ giữa 32, 64 và 128 dựa trên tìm kiếm siêu tham số. Một kết nối dư được thêm vào mỗi khối CNN. Sau khi áp dụng hai khối CNN, một lớp flatten được áp dụng để chuyển đổi các đặc trưng thành các vector một chiều. Tiếp theo, một lớp dropout được sử dụng để ngăn chặn việc quá mức hóa. Cuối cùng, kết quả được chuyển đến lớp dense. Kích thước của bộ lọc là 1 và 24 cho các mô hình dự đoán một bước và nhiều bước tương ứng.
-\begin{center}
-    \begin{table}[h!]
+Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích chập sử dụng kết nối nối bỏ qua(ResCNN), kết hợp với lSTM có thể dùng trong các bài toán chuỗi thời gian.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
         \centering
-        \begin{tabular}{|c|c|c|p{2cm}|}
-            \hline
-            \textbf{Models}                       & \multicolumn{2}{c|}{\textbf{Layer}}   & \textbf{Parameters}                                                                                      \\ \hline
-            \multirow{9}{*}{\textbf{LSTM-resCNN}} & \multicolumn{2}{c|}{LSTM}             & \makebox[3cm]{Filter = 64}                                                                               \\ \cline{2-4}
-                                                  & \multirow{4}{*}{CNN-Block $\times$ 2} & 1D-CNN                     & \begin{tabular}{@{}l@{}}Filter=64,\\ kernel-size=3,\\ stride=1\end{tabular} \\ \cline{3-4}
-                                                  &                                       & 1D-CNN                     & \begin{tabular}{@{}l@{}}Filter=64,\\ kernel-size=2,\\ stride=1\end{tabular} \\ \cline{3-4}
-                                                  &                                       & 1D-CNN                     & \begin{tabular}{@{}l@{}}Filter=64,\\ kernel-size=1,\\ stride=1\end{tabular} \\ \cline{3-4}
-                                                  &                                       & Add                        &                                                                             \\ \cline{2-4}
-                                                  & \multicolumn{2}{c|}{Flatten}          &                                                                                                          \\ \cline{2-4}
-                                                  & \multicolumn{2}{c|}{Dropout}          & \makebox[3cm]{p = 0.5}                                                                                   \\ \cline{2-4}
-                                                  & \multicolumn{2}{c|}{Dense}            &                                                                                                          \\ \hline
-        \end{tabular}
-        \caption{cấu trúc model LSTM ResCNN}
-        \label{tab:lstm-rescnn}
-    \end{table}
-\end{center}
+        \includegraphics[width=1\textwidth]{bibliography/figure/ResCNN/ResCNN_1.png}
+        \caption{Mô hình ResCNN được đề xuất}
+        \label{fig:gru_del_up}
+    \end{minipage}
 
+\end{figure}
 
+\subsection*{Các thành phần chính}
+\begin{itemize}
+    \item \textbf{Input (Đầu vào)}: Đây là nơi dữ liệu chuỗi thời gian đầu vào được đưa vào mạng. Dữ liệu đầu vào thường là các chuỗi thời gian, có thể bao gồm các đặc trưng như giá trị thời gian, chỉ số kinh tế, hoặc dữ liệu cảm biến.
+
+    \item \textbf{LSTM (Long Short-Term Memory)}: Lớp LSTM có khả năng xử lý và ghi nhớ thông tin tuần tự trong dữ liệu chuỗi thời gian. LSTM giúp nắm bắt các mối quan hệ dài hạn trong dữ liệu, là yếu tố quan trọng trong việc dự báo và nhận dạng mẫu trong chuỗi thời gian.
+
+    \item \textbf{Conv + ReLU}:
+    \begin{itemize}
+        \item \textbf{Conv (Convolution)}: Lớp tích chập giúp mạng trích xuất các đặc trưng không gian từ đầu vào đã được xử lý qua LSTM. Trong ngữ cảnh chuỗi thời gian, lớp này có thể giúp nhận diện các mẫu tuần hoàn hoặc các mối quan hệ phức tạp trong dữ liệu.
+        \item \textbf{ReLU (Rectified Linear Unit)}: Hàm kích hoạt ReLU giúp mạng học các đặc trưng phi tuyến tính bằng cách thay thế các giá trị âm bằng 0.
+    \end{itemize}
+
+    \item \textbf{Conv + BN + ReLU}:
+    \begin{itemize}
+        \item \textbf{Conv (Convolution)}: Lớp tích chập tiếp tục trích xuất các đặc trưng từ dữ liệu.
+        \item \textbf{BN (Batch Normalization)}: Lớp chuẩn hóa theo batch giúp ổn định quá trình huấn luyện và tăng tốc độ hội tụ bằng cách chuẩn hóa các đầu ra của lớp tích chập.
+        \item \textbf{ReLU}: Hàm kích hoạt ReLU giúp mạng học các đặc trưng phi tuyến tính.
+    \end{itemize}
+
+    \item \textbf{Conv (Convolution)}: Lớp tích chập khác, không có hàm kích hoạt sau đó, tiếp tục trích xuất các đặc trưng cuối cùng từ dữ liệu.
+
+    \item \textbf{Skip Connection (Kết nối tắt)}: Đường kết nối tắt từ đầu vào trực tiếp đến trước lớp tanh giúp giảm thiểu mất mát thông tin khi truyền qua nhiều lớp và giúp mạng học tốt hơn trong các mạng sâu.
+
+    \item \textbf{Tanh}: Hàm kích hoạt tanh được sử dụng để đưa đầu ra về một khoảng giá trị nhất định (ở đây là từ -1 đến 1), giúp chuẩn hóa đầu ra của mạng.
+
+    \item \textbf{Output (Đầu ra)}: Đây là nơi mạng trả về kết quả cuối cùng sau khi đã qua tất cả các lớp và các phép biến đổi. Đầu ra có thể là các giá trị dự báo hoặc các kết quả phân loại.
+\end{itemize}
+
+Tóm lại, mô hình này sử dụng lớp LSTM để xử lý và nắm bắt các thông tin tuần tự trong dữ liệu chuỗi thời gian, sau đó sử dụng các lớp tích chập (convolutional layers) để trích xuất các đặc trưng không gian phức tạp. Hàm kích hoạt ReLU và lớp chuẩn hóa theo batch giúp tăng tính phi tuyến và ổn định trong quá trình huấn luyện. Kết nối tắt và hàm kích hoạt tanh giúp cải thiện hiệu quả học tập và chuẩn hóa đầu ra.
 \subsection{Gated Recurrent Unit (GRU)}
 \subsubsection{Đơn vị tuần hoàn trong mạng nơ-ron}
 Trước khi chúng ta đi vào chi tiết về GRU, hãy xem xét một đơn vị tuần hoàn thông thường trong mạng nơ-ron. Đơn vị này được sử dụng để xử lý dữ liệu tuần tự, chẳng hạn như chuỗi văn bản, âm thanh hoặc dữ liệu thời gian.
@@ -534,6 +558,7 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
     \bibitem{b4} Nejedly P, Ivora A, Viscor I, Koscova Z, Smisek R, Jurak P, Plesinger F. Classification of ECG using ensemble of residual CNNs with or without attention mechanism. Physiol Meas. 2022 Apr 28;43(4). doi: 10.1088/1361-6579/ac647c. PMID: 35381586.
     \bibitem{b5} M. Chiogna and C. Gaetan, "Dynamic Generalized Linear Models with Application to Environmental Epidemiology," Journal of the Royal Statistical Society Series C: Applied Statistics, vol. 51, no. 4, pp. 453-468, 2002.
     \bibitem{b6} D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D.Reeves and B. P. Weaver, "Dynamic linear models for forecasting of radiation beltelectrons and limitations on physical interpretationof predictive models," vol. 12, no. 6, pp. 323-446, 2014.
+    \bibitem{b7} Wang, Junjie \& Su, Xiaohong \& Zhao, Lingling \& Zhang, Jun. (2020). Deep Reinforcement Learning for Data Association in Cell Tracking. Frontiers in Bioengineering and Biotechnology. 8. 298. 10.3389/fbioe.2020.00298. 
 \end{thebibliography}
 
 \end{document}
