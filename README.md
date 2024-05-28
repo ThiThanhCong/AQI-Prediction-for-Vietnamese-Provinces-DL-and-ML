@@ -15,8 +15,8 @@
    [21521897@gm.uit.edu.vn](mailto:21521897@gm.uit.edu.vn)
 
 4. **Nguyễn Hoàng Đăng Khoa**  
-   _Bộ phận, Tổ chức, Thành phố, Quốc gia_  
-   [Email hoặc ORCID]
+   _Hệ thống thông tin, TP. Hồ Chí Minh, Việt Nam_  
+   [21520999@gm.uit.edu.vn](mailto:21520999@gm.uit.edu.vn)
 
 5. **Given Name Surname**  
    _Bộ phận, Tổ chức, Thành phố, Quốcg gia_  
