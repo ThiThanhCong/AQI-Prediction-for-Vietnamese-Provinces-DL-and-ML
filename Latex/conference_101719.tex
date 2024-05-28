@@ -479,7 +479,7 @@ Một model DLM đơn gian có hai phương trình, mô hình đầu tiên là m
 \begin{center}
 
     \(y_t=\ X_i^T\ \theta_t+\ e_i\)
-    
+
 \end{center}
 
 và mô hình trạng thái (state equation) quan sát. Mô tả sự tiến hóa của trạng thái ẩn (không quan sát được) qua thời gian:
@@ -487,16 +487,16 @@ và mô hình trạng thái (state equation) quan sát. Mô tả sự tiến hó
 \begin{center}
 
     \(\theta_t=G_t\ \theta_(t-1)+\ w_t\)
-    
+
 \end{center}
 
 Trong đó:\\
-	\indent\textbullet\ \(\gamma_t\) dữ liệu quan sát tại thời điểm t.\\
-	\indent\textbullet\ \(\chi_t\) ma trận quan sát.\\
-	\indent\textbullet\ \(\theta_t\) là vector trạng thái chứa yếu tố xu hướng và mùa vụ.\\
-    \indent\textbullet\ \(\epsilon_t\) là nhiễu loạn quan sát.\\
-	\indent\textbullet\ G là ma trận giao chuyển để mô tả lại quá trình tiến hóa của trạng thái.\\
-	\indent\textbullet\ \(\omega_t\) là nhiễu loạn trạng thái.
+\indent\textbullet\ \(\gamma_t\) dữ liệu quan sát tại thời điểm t.\\
+\indent\textbullet\ \(\chi_t\) ma trận quan sát.\\
+\indent\textbullet\ \(\theta_t\) là vector trạng thái chứa yếu tố xu hướng và mùa vụ.\\
+\indent\textbullet\ \(\epsilon_t\) là nhiễu loạn quan sát.\\
+\indent\textbullet\ G là ma trận giao chuyển để mô tả lại quá trình tiến hóa của trạng thái.\\
+\indent\textbullet\ \(\omega_t\) là nhiễu loạn trạng thái.
 
 \subsection{Recurrent Neural Networks (RNN)}
 Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống tất cả các đầu vào và cả đầu ra là độc lập với nhau. Tức là chúng không liên kết thành chuỗi với nhau. Nhưng các mô hình này không phù hợp trong rất nhiều bài toán. RNN được gọi là hồi quy (Recurrent) bởi thực hiện cùng một tác vụ cho tất cả các phần tử của một chuỗi với đầu ra phụ thuộc vào cả các phép tính trước đó. Nói cách khác, RNN có khả năng nhớ các thông tin được tính toán trước đó.
@@ -516,7 +516,7 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
 \begin{itemize}
     \item x\textsubscript{t} là đầu vào tại bước t. Ví dụ, x\textsubscript{t} là một vec-tơ one-hot tương ứng với từ thứ 2 của câu.
     \item s\textsubscript{t} à trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm \(\theta \).
-    \item o\textsubscript{t} à đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})     
+    \item o\textsubscript{t} à đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})
 \end{itemize}
 
 \begin{thebibliography}{00}
