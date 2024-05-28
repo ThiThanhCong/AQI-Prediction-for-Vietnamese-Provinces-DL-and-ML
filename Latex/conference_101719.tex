@@ -344,7 +344,11 @@ Trong đó: \\
 
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
 \[
-    \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q}
+    \begin{split}
+        \Delta y_t &= c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} \\
+        &\quad + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} \\
+        &\quad + \ldots + \theta_q \varepsilon_{t-q}
+    \end{split}
 \]
 
 Trong đó: \\
@@ -550,6 +554,92 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
     \item s\textsubscript{t} à trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm \(\theta \).
     \item o\textsubscript{t} à đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})
 \end{itemize}
+\subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
+\vspace{1mm}
+\subsubsection{Tổng quan}
+N-BEATS được phát triển bởi một nhóm nghiên cứu của Element AI, và được giới thiệu trong bài báo "N-BEATS: Neural Basis Expansion Analysis for Time Series Forecasting" bởi Boris Oreshkin, Dmitri Carpov, Nicolas Chapados và Yoshua Bengio vào năm 2019. 
+\vspace{3mm}
+\subsubsection{Backcast và Forecast}
+Mỗi khối trong N-BEATS tạo ra hai đầu ra: một backcast và một forecast. Backcast là quá trình tái tạo dữ liệu đầu vào của mô hình, giúp network học tập bằng cách trừ phần tái tạo này khỏi đầu vào, cho phép khối tiếp theo học từ phần dư còn lại. Forecast là đầu ra của khối cho các giá trị dự đoán trong tương lai, đóng góp vào dự báo cuối cùng.
+\vspace{3mm}
+\subsubsection{Dữ liệu đầu vào}
+Xét bài toán dự báo đơn chuỗi thời gian:\\
+Từ chuỗi thời gian có độ dài $t$ là $\mathbf{x} =
+[y_{T-t+1}, y_{T-t+2}, \ldots, y_{T}] \in \mathbb{R}^T$ ta cần dự báo giá trị của $H$ bước tiếp theo là $\mathbf{y} =
+[y_{T+1}, y_{T+2}, \ldots, y_{T+H}] \in \mathbb{R}^H$. Ta kí hiệu $\hat{\mathbf{y}}$
+là dự đoán của mô hình cho vectơ $\mathbf{y}$. Kích thước của dữ liệu đầu vào là $t = nH$ ($n$
+thường nằm trong khoảng từ $[2, 7]$) được gọi là khoảng thời gian xem lại (lookback period). Mô hình N-BEATS sẽ học và tìm hiểu chuỗi thời gian từ khoảng thời gian
+xem lại để dự đoán giá trị của $\mathbf{H}$ điểm tiếp theo.
+\vspace{3mm}
+\subsubsection{Kiến trúc tổng quát của mô hình}
+Kiến trúc tổng quát của mô hình N-BEATS được mô tả như trong hình 12. Mô hình bao gồm các block được xếp chồng lên nhau. Đầu vào của block đầu tiên là đầu vào tổng thể của mô hình hay còn gọi là khoảng thời gian xem lại $\mathbf{x}$. Mỗi block có hai đầu ra. Một đầu ra (backcast) sẽ được làm đầu vào cho block tiếp theo. Đầu ra còn lại (forecast) sẽ được tổng hợp để đưa ra kết quả cuối cùng.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/N-BEATS/1.png}
+        \caption{Kiến trúc tổng quát của N-BEATS.}
+        \label{fig:N-BEATS}
+    \end{minipage}
+\end{figure}
+Chi tiết hơn, với block thứ $i$ trong mô hình:
+\begin{itemize}
+    \item Nếu $i = 1$, tức là block đầu tiên, đầu vào chính là cửa sổ dữ liệu $\mathbf{x}$;
+    \item Nếu $i > 1$, đầu vào của block thứ $i$ là:
+    \[
+    \mathbf{x}^i = \mathbf{x}^{i-1} - \hat{\mathbf{x}}^{i-1} \quad (1)
+    \]
+\end{itemize}
+
+Block thứ $i$ gồm hai đầu ra:
+\begin{itemize}
+    \item Đầu ra backcast $\hat{\mathbf{x}}^i$ được làm đầu vào cho block tiếp theo.
+    \item Đầu ra forecast $\hat{\mathbf{y}}^i$ dùng để tổng hợp cho kết quả dự đoán cuối cùng:
+    \[
+    \hat{\mathbf{y}} = \sum_{i=1}^{R} \hat{\mathbf{y}}^i \quad (2)
+    \]
+\end{itemize}
+Từ đây, ta thấy được đầu vào của block sẽ không chứa mà block trước đó đã dự đoán được. Điều này giúp các block sau tập trung vào những phần thông tin chưa được dự đoán.
+\vspace{3mm}
+\subsubsection{Kiến trúc của block}
+Hình 13 mô tả kiến trúc trong block thứ $\mathbf{i}$ của mô hình. Kiến trúc của block đơn giản chỉ bao gồm các lớp kết nối đầy đủ FC (fully connected). Các lớp kết nối đầy đủ đơn giản là một lớp ánh xạ tuyến tính với hàm kích hoạt RELU. Ví dụ:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/N-BEATS/2.png}
+        \caption{Kiến trúc của block}
+        \label{fig:N-BEATS}
+    \end{minipage}
+\end{figure}
+\[
+    FC(\mathbf{x}^i) = RELU(W\mathbf{x}^i + b) (3)
+\]
+trong đó $\mathbf{W}$ và $\mathbf{b}$ lần lượt là các ma trận sẽ được học trong quá trình huấn luyện. Hàm RELU là hàm $\mathbf{f(x) = max(0, x)}$. 
+Block bao gồm M lớp FC chung (M thường là 4). Sau đó, sẽ có hai lớp FC là M+1 và M+2 để chia đầu ra thành 2 nhánh. Đầu ra của hai lớp trên lần lượt là hai vectơ hệ số $\mathbf{\theta}^f$ và $\mathbf{\theta}^b$.
+Cuối cùng, ta sẽ ánh xạ hai vectơ trên thành các đầu ra backcast và forecast thông qua các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$. Tuỳ vào dạng hàm $\mathbf{g}$ khác nhau mà chúng ta sẽ có các loại block với vai trò khác nhau. Cụ thể, mô hình N-BEATS giới thiệu ba loại block: trend block, seasonality block, generic block.
+
+Generic block là kiến trúc không mang tính diễn giải được trong chuỗi thời gian. Generic block đơn giản đặt các ánh xạ $\mathbf{g}^f$ và $\mathbf{g}^b$ là các ánh xạ tuyến tính đối với đầu ra của lớp trước.
+
+Trend block là loại block để nhận biết và phân tích được tính xu hướng của dữ liệu. Một đặc điểm của xu hướng thường phần lớn là các hàm đơn điệu hoặc thay đổi chậm. Để tìm hiểu được tính xu hướng
+của dữ liệu, các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$ sẽ là các hàm đa thức với bậc $\mathbf{p}$ nhỏ theo thời gian. Khi đó, các hệ số $\mathbf{\theta}^f$ và $\mathbf{\theta}^b$ đóng vai trò là các hệ số của đa thức. Ví dụ đầu ra forecast của trend block thứ $\mathbf{i}$ là:
+
+
+\[
+    \hat{\mathbf{y}^i} = \sum_{j=0}^{p} {\mathbf{\theta}}^f_j{t^j} \quad (4)
+\]
+
+Trong đó $\mathbf{\theta}^f_j$ là phần tử thứ j trong vectơ hệ số $\mathbf{t} = \mathbf{\frac{[0, 1, 2, \dots, H-2, H-1]^T}{\mathbf{H}}}$
+
+Cuối cùng, loại seasonality block dùng để nhận biết tính mùa của dữ liệu. Đặc điểm chính của tính mùa là dữ liệu thường có tính chu kỳ. 
+Do đó, để mô phỏng tính mùa, các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$ sẽ là các loại hàm tuần hoàn, ví dụ $\mathbf{y}_t$ = $\mathbf{y}_{\Delta + t}$ trong đó $\mathbf{\Delta}$ là chu kỳ mùa. Sử dụng chuỗi Fourier để xây dựng các hàm tuần hoàn trên, ta có đầu ra
+forecast của seasonality block thứ $\mathbf{i}$ là:
+\[
+    \hat{y}^i = \sum_{j=0}^{|\frac{H}{2} - 1|} \theta_j^f \cos(2\pi i t) + \theta_{j+|\frac{H}{2}|}^f \sin(2\pi i t) \quad (5)
+\]
+
+Sau khi giới thiệu ba loại block trên, mô hình N-BEATS được xây dựng dựa trên số lượng và thứ tự của mỗi loại block.
+
 
 \begin{thebibliography}{00}
     \bibitem{b1} P. T. Huong, "Linear regression, polynomial regression, and applications," Master’s thesis in science, 2015.
@@ -559,6 +649,9 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
     \bibitem{b5} M. Chiogna and C. Gaetan, "Dynamic Generalized Linear Models with Application to Environmental Epidemiology," Journal of the Royal Statistical Society Series C: Applied Statistics, vol. 51, no. 4, pp. 453-468, 2002.
     \bibitem{b6} D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D.Reeves and B. P. Weaver, "Dynamic linear models for forecasting of radiation beltelectrons and limitations on physical interpretationof predictive models," vol. 12, no. 6, pp. 323-446, 2014.
     \bibitem{b7} Wang, Junjie \& Su, Xiaohong \& Zhao, Lingling \& Zhang, Jun. (2020). Deep Reinforcement Learning for Data Association in Cell Tracking. Frontiers in Bioengineering and Biotechnology. 8. 298. 10.3389/fbioe.2020.00298. 
+    \bibitem{b8} Rajnish Rakholia , Quan Le, Bang Quoc Ho, Khue Vu, Ricardo Simon Carbajo. “Multi-output machine learning model for regional air pollution forecasting in Ho Chi Minh City, Vietnam” (2023). doi: \url{https://doi.org/10.1016/j.envint.2023.107848}. URL: \url{https://www.sciencedirect.com/science/article/pii/S0160412023001216}
+    \bibitem{b9} Nguyen Anh Tuan, Le Anh Ngoc . “APPLYING N-BEATS MODEL FOR SHORT-TERM LOAD FORECASTING IN VIETNAM” (2022). URL: \url{https://khcncongthuong.vn/tin-tuc/t18804/ung-dung-mo-hinh-n-beats-cho-du-bao-phu-tai-dien-ngan-han-o-viet-nam.html}
+    \bibitem{b10} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
 \end{thebibliography}
 
 \end{document}
