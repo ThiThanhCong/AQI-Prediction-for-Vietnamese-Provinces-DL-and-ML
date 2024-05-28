@@ -1,4 +1,0 @@
-Miêu tả thuật toán
-
-[GRU](https://colab.research.google.com/drive/1ZsFyign8kpyuEX6zhjRaiyxgWVZqsatc?usp=sharing)
-[Gauss Newton Method Nonlinear]()
