@@ -639,6 +639,86 @@ forecast của seasonality block thứ $\mathbf{i}$ là:
 \]
 
 Sau khi giới thiệu ba loại block trên, mô hình N-BEATS được xây dựng dựa trên số lượng và thứ tự của mỗi loại block.
+model=Sequential()
+model.add(LSTM(50,activation='relu',return_sequences=True,input_shape=(100,1)))
+model.add(Dropout(0.3))
+
+model.add(LSTM(units=50, return_sequences=True))
+model.add(Dropout(0.3))
+
+model.add(LSTM(units=50))
+model.add(Dropout(0.3))
+model.add(Dense(1))
+model.compile(loss='mean_squared_error', optimizer='adam')
+
+\subsection{Long Short Term Memory (LSTM)}
+Mạng bộ nhớ dài-ngắn (Long Short Term Memory), thường được gọi là LSTM - là một dạng cải tiến của RNN, nó có khả năng học được các phụ thuộc xa .LSTM gồm trạng thái ẩn \(h_t\) (hidden state) và \(c_t\) (cell state). LSTM gồm 3 thành phần chính:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.25\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/LSTM/lstm.pdf}
+        \caption{Một ô LSTM ở trạng thái t.}
+        \label{fig:LSTM}
+    \end{minipage}
+
+\end{figure}
+Cổng quên(Forget gate):Quản lý việc thông tin đến từ trạng thái trước sẽ được giữ lại hoặc loại bỏ.
+\[f_t=\sigma(W_{fx}.x_t+W_{fh}.h_{t-1}+b_f)\]
+
+Cổng vào (Input gate): Quản lý việc học thông tin mới từ đầu vào.
+\[i_t=\sigma(W_{ix}.x_t+W_{ih}.h_{t-1}+b_i)\]
+\[{\widetilde{C}}_t=tanh\left(W_{cx}.x_t+W_{ch}.h_{t-1}+b_c\right)\]
+\[C_t=f_t\circ c_{t-1}+i_t\circ{\widetilde{C}}_t\]
+
+Cổng ra (Output gate): Quản lý việc đưa thông tin mới cập nhật vào trạng thái kế tiếp.
+\[o_t=\sigma(W_{ox}.x_t+W_{oh}.h_{t-1}+b_o)\]
+\[h_t=o_t\circ tanh(C_t)\]
+
+Trong đó:\\
+\indent\textbullet\ \(x_t\) : Vector đầu vào các đặc trưng tại thời điểm t.\\
+\indent\textbullet\ \(h_{t-1}\) : Trạng thái ẩn đầu ra của tại thời điểm t-1.\\
+\indent\textbullet\ \(W_{fx},W_{fh},W_{ix},W_{ih},W_{cx},W_{hx},\) : Các ma trận trọng số.\\
+\indent\textbullet\ \(b_f,b_i, b_c \) : Các hệ số bias.\\
+\indent\textbullet\ Tanh: Hàm tanh có giá trị tử -1 đến 1.\\
+\indent\textbullet\ \(i_t\) : Giá trị cổng đầu vào tại thời điểm t.\\
+\indent\textbullet\ \(\sigma\) : Hàm Sigmoid có giá trị tử 0 đến 1.\\
+\indent\textbullet\ \(f_t\) : Giá trị của cổng quên tại thời điểm t.\\
+\indent\textbullet\ \(\widetilde{C}_t \) : Ô nhớ mới.\\
+\indent\textbullet\ \(C_t \) : Ô nhớ tổng thể.\\
+\indent\textbullet\ \(\circ\) : Phép nhân Hadamard.\\
+\indent\textbullet\ \(f_t\circ c_{t-1}\) : Quyết định lượng thông tin nào từ trạng thái ô nhớ trước đó sẽ được giữ lại cho ô tiếp theo.\\
+\indent\textbullet\ \(i_t\circ{\widetilde{C}}_t\) : Quyết định lượng thông tin nào từ \({\widetilde{C}}_t\) sẽ được thêm vào \(C_t\).\\
+\indent\textbullet\ \(o_t \) : Giá trị đầu ra tại thời điểm t.
+
+\subsection{Simple Exponential Smoothing (SES)}
+Simple exponential smoothing (SES) hay san bằng hàm mũ đơn giản là một phương pháp dự đoán dữ liệu chuỗi thời gian. SES dựa vào tổng trung bình trọng số của dữ liệu thực tế gần nhất và dữ liệu được dự đoán trước đó để dự đoán dữ liệu tiếp theo trong tương lai. SES phù hợp với dữ liệu chuỗi thời gian không có xu hướng và không có tính mùa vụ.. SES có thể viết ở hai dạng: dạng trung bình trọng số và dạng đối tượng.
+
+Dạng trung bình trọng số:
+    \[\hat{y}_{t+1|t} = \alpha y_t + (1-\alpha)\hat{y}_{t|t-1}\]
+    
+Trong đó:\\
+	\indent\textbullet\ \(\hat{y}_{t+1|t} \): giá trị dự đoán ở thời điểm t+1 dựa vào giá trị thực tế ở thời điểm t.\\
+	\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
+	\indent\textbullet\ \(\hat{y}_{t|t-1} \): giá trị dự đoán ở thời điểm t dựa vào giá trị thực tế ở thời điểm  t-1.\\
+
+Giả sử tại thời điểm ban đầu \(\hat{y}_1=y_1\), công thức ở trên có thể viết lại thành:
+
+\({\hat{y}}_{t+1|t}=\alpha y_t+\alpha\left(1-\alpha\right)y_{t-1}+\alpha\left(1-\alpha\right)^2y_{t-2}+\ldots+\alpha\left(1-\alpha\right)^{t-1}y_1+{(1-\alpha)}^ty_1=\sum_{i=0}^{t-1}\alpha{(1-\alpha)}^iy_{t-i}+{(1-\alpha)}^ty_1\)\\
+
+Dạng đối tượng:\\
+    \indent\textbullet\ Phương trình dự đoán: \(\hat{y}_{t+h|t}=l_t\), h=1,2,3,\dots.\\
+    \indent\textbullet\ Phương trình làm trơn: \(l_t=\alpha y_t+(1-\alpha)l_{t-1}\)\\
+
+Trong đó:\\
+    \indent\textbullet\ \(\hat{y}_{t+h|t} \): giá trị dự đoán tại thời điểm t+h dựa trên giá trị thực tế ở thời điểm t.\\
+    \indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
+    \indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
+
+Dự báo phẳng:
+    \[\hat{y}_{t+h|t} = \hat{y}_{t+1|t}=\ell_t, h=2,3,\dots.\]
+    
+Trong SES, tất cả các giá trị dự báo không có giá trị thực tế trước đó sẽ dựa vào giá trị dự báo và giá trị thực tế cuối cùng trong tập dữ liệu. Đó gọi là dự báo "phẳng".
 
 
 \begin{thebibliography}{00}
