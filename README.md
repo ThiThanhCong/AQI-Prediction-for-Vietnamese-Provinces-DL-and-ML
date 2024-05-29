@@ -18,9 +18,9 @@
    _Hệ thống thông tin, TP. Hồ Chí Minh, Việt Nam_  
    [21520999@gm.uit.edu.vn](mailto:21520999@gm.uit.edu.vn)
 
-5. **Given Name Surname**  
-   _Bộ phận, Tổ chức, Thành phố, Quốcg gia_  
-   [Email hoặc ORCID]
+5. **Cù Ngọc Hoàng**  
+   _Hệ thống thông tin, TP. Hồ Chí Minh, Việt Nam_  
+   [21522086@gm.uit.edu.vn](mailto:21522086@gm.uit.edu.vn)
 
 ### Tóm Tắt
 
