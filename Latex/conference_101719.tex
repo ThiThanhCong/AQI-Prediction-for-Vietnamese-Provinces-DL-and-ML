@@ -104,6 +104,8 @@ Hiểu biết về động lực trong vành đai bức xạ là rất quan tr�
 \subsection{Recurrent Neural Network}
 Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana, Graham Taylora, Bahram Gharabaghia, và Jesse Thé từ Trường Kỹ thuật, Đại học Guelph, Guelph, Ontario, Canada dự báo chuỗi thời gian chất lượng không khí bằng cách sử dụng mô hình học sâu mạng nơ-ron hồi quy (RNN) với bộ nhớ dài hạn (LSTM). \cite{b11}
 
+\subsection{Linear Regression}
+Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Palraj, và Deneshkumar V đã công bố một nghiên cứu về việc sử dụng hồi quy tuyến tính để dự báo chỉ số Chất lượng không khí (AQI). Nghiên cứu tập trung vào phân tích dữ liệu AQI thu thập từ trạm giám sát ở Chennai, Ấn Độ, và xây dựng một mô hình hồi quy tuyến tính đa biến. Đánh giá về tính hợp lệ của mô hình được thực hiện thông qua phân tích dư thừa. \cite{b12}
 \section{Tài nguyên}
 \subsection{Bộ dữ liệu}
 Dự báo chất lượng không khí là rất quan trọng để giảm thiểu các tác động tiêu cực của ô nhiễm lên sức khỏe con người và môi trường. Phân tích chuỗi thời gian nổi lên như một công cụ mạnh mẽ trong lĩnh vực này, cho phép dự đoán các mức độ chất lượng không khí trong tương lai dựa trên dữ liệu lịch sử.
@@ -718,7 +720,21 @@ Dự báo phẳng:
 \[\hat{y}_{t+h|t} = \hat{y}_{t+1|t}=\ell_t, h=2,3,\dots.\]
 
 Trong SES, tất cả các giá trị dự báo không có giá trị thực tế trước đó sẽ dựa vào giá trị dự báo và giá trị thực tế cuối cùng trong tập dữ liệu. Đó gọi là dự báo "phẳng".
+\subsection{Linear Regression}
+Phân tích hồi quy là một công cụ để xây dựng các mô hình toán học và thống kê mô tả mối quan hệ giữa một biến phụ thuộc và một hoặc nhiều biến độc lập, hoặc biến giải thích, tất cả đều là các biến số. Kỹ thuật thống kê này được sử dụng để tìm một phương trình dự đoán tốt nhất cho biến \( y \) như một hàm tuyến tính của các biến \( x \).
 
+Một mô hình hồi quy tuyến tính đa biến có dạng:
+
+\[ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k + \varepsilon \]
+
+Trong đó:
+\begin{itemize}
+    \item \( Y \) là biến phụ thuộc (biến mục tiêu).
+    \item \( X_1, X_2, \ldots, X_k \) là các biến độc lập (biến giải thích).
+    \item \( \beta_0 \) là hệ số chặn.
+    \item \( \beta_1, \ldots, \beta_k \) là các hệ số hồi quy cho các biến độc lập.
+    \item \( \varepsilon \) là thuật ngữ lỗi.
+\end{itemize}
 \begin{thebibliography}{00}
     \bibitem{b1} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
@@ -731,7 +747,7 @@ Trong SES, tất cả các giá trị dự báo không có giá trị thực t�
     \bibitem{b9} Nguyen Anh Tuan, Le Anh Ngoc . “APPLYING N-BEATS MODEL FOR SHORT-TERM LOAD FORECASTING IN VIETNAM” (2022). URL: \url{https://khcncongthuong.vn/tin-tuc/t18804/ung-dung-mo-hinh-n-beats-cho-du-bao-phu-tai-dien-ngan-han-o-viet-nam.html}
     \bibitem{b10} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
     \bibitem{b11} B. S, Freemana, G. Taylora, B. Gharabaghia and J. Thé, "Forecasting air quality time series using deep learning," Journal of the air \& waste management association, vol. 68, no. 8, pp. 866-886, 2017-2018.
-
+    \bibitem{b12} Loganathan, A. \& Palraj, Sumithra \& V, Deneshkumar. (2022). Estimation of Air Quality Index Using Multiple Linear Regression. Applied Ecology and Environmental Sciences. 10. 717-722. 10.12691/aees-10-12-3.
 \end{thebibliography}
 
 \end{document}
