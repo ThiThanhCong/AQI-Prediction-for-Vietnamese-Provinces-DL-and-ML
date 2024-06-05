@@ -342,7 +342,15 @@ Trong đó: \\
 
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
 \[
+    <<<<<<< HEAD
+    \begin{split}
+        \Delta y_t & = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p}              \\
+                   & \quad + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} \\
+                   & \quad + \ldots + \theta_q \varepsilon_{t-q}
+    \end{split}
+    =======
     \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q}
+    >>>>>>> master
 \]
 
 Trong đó: \\
@@ -557,6 +565,11 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
     \bibitem{b5} M. Chiogna and C. Gaetan, "Dynamic Generalized Linear Models with Application to Environmental Epidemiology," Journal of the Royal Statistical Society Series C: Applied Statistics, vol. 51, no. 4, pp. 453-468, 2002.
     \bibitem{b6} D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D.Reeves and B. P. Weaver, "Dynamic linear models for forecasting of radiation beltelectrons and limitations on physical interpretationof predictive models," vol. 12, no. 6, pp. 323-446, 2014.
     \bibitem{b7} Wang, Junjie \& Su, Xiaohong \& Zhao, Lingling \& Zhang, Jun. (2020). Deep Reinforcement Learning for Data Association in Cell Tracking. Frontiers in Bioengineering and Biotechnology. 8. 298. 10.3389/fbioe.2020.00298.
+
+    \bibitem{b8} Rajnish Rakholia , Quan Le, Bang Quoc Ho, Khue Vu, Ricardo Simon Carbajo. “Multi-output machine learning model for regional air pollution forecasting in Ho Chi Minh City, Vietnam” (2023). doi: \url{https://doi.org/10.1016/j.envint.2023.107848}. URL: \url{https://www.sciencedirect.com/science/article/pii/S0160412023001216}
+    \bibitem{b9} Nguyen Anh Tuan, Le Anh Ngoc . “APPLYING N-BEATS MODEL FOR SHORT-TERM LOAD FORECASTING IN VIETNAM” (2022). URL: \url{https://khcncongthuong.vn/tin-tuc/t18804/ung-dung-mo-hinh-n-beats-cho-du-bao-phu-tai-dien-ngan-han-o-viet-nam.html}
+    \bibitem{b10} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
+
 \end{thebibliography}
 
 \end{document}
