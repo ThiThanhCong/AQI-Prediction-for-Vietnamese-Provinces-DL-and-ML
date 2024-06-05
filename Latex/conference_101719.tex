@@ -31,42 +31,42 @@
 
 \makeatletter
 \newcommand{\linebreakand}{%
-  \end{@IEEEauthorhalign}
-  \hfill\mbox{}\par
-  \mbox{}\hfill\begin{@IEEEauthorhalign}
+    \end{@IEEEauthorhalign}
+    \hfill\mbox{}\par
+    \mbox{}\hfill\begin{@IEEEauthorhalign}
 }
 \makeatother
 
 \author{
-  \IEEEauthorblockN{1\textsuperscript{st} Cao Hoài Sang}
-  \IEEEauthorblockA{
-    \textit{Khoa Hệ Thống Thông Tin}\\
-    TP.HCM, Việt Nam \\
-    21522541@gm.uit.edu.vn}
-  \and
-  \IEEEauthorblockN{2\textsuperscript{nd} Nguyễn Trần Gia Kiệt}
-  \IEEEauthorblockA{
-    \textit{Khoa Hệ Thống Thông Tin}\\
-    TP.HCM, Việt Nam \\
-    21522258@gm.uit.edu.vn}
-  \and
-  \IEEEauthorblockN{3\textsuperscript{rd} Thi Thành Công}
-  \IEEEauthorblockA{
-    \textit{Khoa Hệ Thống Thông Tin}\\
-    TP.HCM, Việt Nam \\
-    21521897@gm.uit.edu.vn}
-  \linebreakand 
-  \IEEEauthorblockN{4\textsuperscript{th} Nguyễn Hoàng Đăng Khoa}
-  \IEEEauthorblockA{
-    \textit{Khoa Hệ Thống Thông Tin}\\
-    TP.HCM, Việt Nam \\
-    21520999@gm.uit.edu.vn}
-  \and
-  \IEEEauthorblockN{5\textsuperscript{th} Cù Ngọc Hoàng}
-  \IEEEauthorblockA{
-    \textit{Khoa Hệ Thống Thông Tin}\\
-    TP.HCM, Việt Nam \\
-    21522086@gm.uit.edu.vn}
+    \IEEEauthorblockN{1\textsuperscript{st} Cao Hoài Sang}
+    \IEEEauthorblockA{
+        \textit{Khoa Hệ Thống Thông Tin}\\
+        TP.HCM, Việt Nam \\
+        21522541@gm.uit.edu.vn}
+    \and
+    \IEEEauthorblockN{2\textsuperscript{nd} Nguyễn Trần Gia Kiệt}
+    \IEEEauthorblockA{
+        \textit{Khoa Hệ Thống Thông Tin}\\
+        TP.HCM, Việt Nam \\
+        21522258@gm.uit.edu.vn}
+    \and
+    \IEEEauthorblockN{3\textsuperscript{rd} Thi Thành Công}
+    \IEEEauthorblockA{
+        \textit{Khoa Hệ Thống Thông Tin}\\
+        TP.HCM, Việt Nam \\
+        21521897@gm.uit.edu.vn}
+    \linebreakand
+    \IEEEauthorblockN{4\textsuperscript{th} Nguyễn Hoàng Đăng Khoa}
+    \IEEEauthorblockA{
+        \textit{Khoa Hệ Thống Thông Tin}\\
+        TP.HCM, Việt Nam \\
+        21520999@gm.uit.edu.vn}
+    \and
+    \IEEEauthorblockN{5\textsuperscript{th} Cù Ngọc Hoàng}
+    \IEEEauthorblockA{
+        \textit{Khoa Hệ Thống Thông Tin}\\
+        TP.HCM, Việt Nam \\
+        21522086@gm.uit.edu.vn}
 }
 
 \maketitle
@@ -345,9 +345,9 @@ Trong đó: \\
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
 \[
     \begin{split}
-        \Delta y_t &= c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} \\
-        &\quad + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} \\
-        &\quad + \ldots + \theta_q \varepsilon_{t-q}
+        \Delta y_t & = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p}              \\
+                   & \quad + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} \\
+                   & \quad + \ldots + \theta_q \varepsilon_{t-q}
     \end{split}
 \]
 
@@ -386,17 +386,17 @@ Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích ch
     \item \textbf{LSTM (Long Short-Term Memory)}: Lớp LSTM có khả năng xử lý và ghi nhớ thông tin tuần tự trong dữ liệu chuỗi thời gian. LSTM giúp nắm bắt các mối quan hệ dài hạn trong dữ liệu, là yếu tố quan trọng trong việc dự báo và nhận dạng mẫu trong chuỗi thời gian.
 
     \item \textbf{Conv + ReLU}:
-    \begin{itemize}
-        \item \textbf{Conv (Convolution)}: Lớp tích chập giúp mạng trích xuất các đặc trưng không gian từ đầu vào đã được xử lý qua LSTM. Trong ngữ cảnh chuỗi thời gian, lớp này có thể giúp nhận diện các mẫu tuần hoàn hoặc các mối quan hệ phức tạp trong dữ liệu.
-        \item \textbf{ReLU (Rectified Linear Unit)}: Hàm kích hoạt ReLU giúp mạng học các đặc trưng phi tuyến tính bằng cách thay thế các giá trị âm bằng 0.
-    \end{itemize}
+          \begin{itemize}
+              \item \textbf{Conv (Convolution)}: Lớp tích chập giúp mạng trích xuất các đặc trưng không gian từ đầu vào đã được xử lý qua LSTM. Trong ngữ cảnh chuỗi thời gian, lớp này có thể giúp nhận diện các mẫu tuần hoàn hoặc các mối quan hệ phức tạp trong dữ liệu.
+              \item \textbf{ReLU (Rectified Linear Unit)}: Hàm kích hoạt ReLU giúp mạng học các đặc trưng phi tuyến tính bằng cách thay thế các giá trị âm bằng 0.
+          \end{itemize}
 
     \item \textbf{Conv + BN + ReLU}:
-    \begin{itemize}
-        \item \textbf{Conv (Convolution)}: Lớp tích chập tiếp tục trích xuất các đặc trưng từ dữ liệu.
-        \item \textbf{BN (Batch Normalization)}: Lớp chuẩn hóa theo batch giúp ổn định quá trình huấn luyện và tăng tốc độ hội tụ bằng cách chuẩn hóa các đầu ra của lớp tích chập.
-        \item \textbf{ReLU}: Hàm kích hoạt ReLU giúp mạng học các đặc trưng phi tuyến tính.
-    \end{itemize}
+          \begin{itemize}
+              \item \textbf{Conv (Convolution)}: Lớp tích chập tiếp tục trích xuất các đặc trưng từ dữ liệu.
+              \item \textbf{BN (Batch Normalization)}: Lớp chuẩn hóa theo batch giúp ổn định quá trình huấn luyện và tăng tốc độ hội tụ bằng cách chuẩn hóa các đầu ra của lớp tích chập.
+              \item \textbf{ReLU}: Hàm kích hoạt ReLU giúp mạng học các đặc trưng phi tuyến tính.
+          \end{itemize}
 
     \item \textbf{Conv (Convolution)}: Lớp tích chập khác, không có hàm kích hoạt sau đó, tiếp tục trích xuất các đặc trưng cuối cùng từ dữ liệu.
 
@@ -557,7 +557,7 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
 \subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
 \vspace{1mm}
 \subsubsection{Tổng quan}
-N-BEATS được phát triển bởi một nhóm nghiên cứu của Element AI, và được giới thiệu trong bài báo "N-BEATS: Neural Basis Expansion Analysis for Time Series Forecasting" bởi Boris Oreshkin, Dmitri Carpov, Nicolas Chapados và Yoshua Bengio vào năm 2019. 
+N-BEATS được phát triển bởi một nhóm nghiên cứu của Element AI, và được giới thiệu trong bài báo "N-BEATS: Neural Basis Expansion Analysis for Time Series Forecasting" bởi Boris Oreshkin, Dmitri Carpov, Nicolas Chapados và Yoshua Bengio vào năm 2019.
 \vspace{3mm}
 \subsubsection{Backcast và Forecast}
 Mỗi khối trong N-BEATS tạo ra hai đầu ra: một backcast và một forecast. Backcast là quá trình tái tạo dữ liệu đầu vào của mô hình, giúp network học tập bằng cách trừ phần tái tạo này khỏi đầu vào, cho phép khối tiếp theo học từ phần dư còn lại. Forecast là đầu ra của khối cho các giá trị dự đoán trong tương lai, đóng góp vào dự báo cuối cùng.
@@ -565,8 +565,8 @@ Mỗi khối trong N-BEATS tạo ra hai đầu ra: một backcast và một fore
 \subsubsection{Dữ liệu đầu vào}
 Xét bài toán dự báo đơn chuỗi thời gian:\\
 Từ chuỗi thời gian có độ dài $t$ là $\mathbf{x} =
-[y_{T-t+1}, y_{T-t+2}, \ldots, y_{T}] \in \mathbb{R}^T$ ta cần dự báo giá trị của $H$ bước tiếp theo là $\mathbf{y} =
-[y_{T+1}, y_{T+2}, \ldots, y_{T+H}] \in \mathbb{R}^H$. Ta kí hiệu $\hat{\mathbf{y}}$
+    [y_{T-t+1}, y_{T-t+2}, \ldots, y_{T}] \in \mathbb{R}^T$ ta cần dự báo giá trị của $H$ bước tiếp theo là $\mathbf{y} =
+    [y_{T+1}, y_{T+2}, \ldots, y_{T+H}] \in \mathbb{R}^H$. Ta kí hiệu $\hat{\mathbf{y}}$
 là dự đoán của mô hình cho vectơ $\mathbf{y}$. Kích thước của dữ liệu đầu vào là $t = nH$ ($n$
 thường nằm trong khoảng từ $[2, 7]$) được gọi là khoảng thời gian xem lại (lookback period). Mô hình N-BEATS sẽ học và tìm hiểu chuỗi thời gian từ khoảng thời gian
 xem lại để dự đoán giá trị của $\mathbf{H}$ điểm tiếp theo.
@@ -586,18 +586,18 @@ Chi tiết hơn, với block thứ $i$ trong mô hình:
 \begin{itemize}
     \item Nếu $i = 1$, tức là block đầu tiên, đầu vào chính là cửa sổ dữ liệu $\mathbf{x}$;
     \item Nếu $i > 1$, đầu vào của block thứ $i$ là:
-    \[
-    \mathbf{x}^i = \mathbf{x}^{i-1} - \hat{\mathbf{x}}^{i-1} \quad (1)
-    \]
+          \[
+              \mathbf{x}^i = \mathbf{x}^{i-1} - \hat{\mathbf{x}}^{i-1} \quad (1)
+          \]
 \end{itemize}
 
 Block thứ $i$ gồm hai đầu ra:
 \begin{itemize}
     \item Đầu ra backcast $\hat{\mathbf{x}}^i$ được làm đầu vào cho block tiếp theo.
     \item Đầu ra forecast $\hat{\mathbf{y}}^i$ dùng để tổng hợp cho kết quả dự đoán cuối cùng:
-    \[
-    \hat{\mathbf{y}} = \sum_{i=1}^{R} \hat{\mathbf{y}}^i \quad (2)
-    \]
+          \[
+              \hat{\mathbf{y}} = \sum_{i=1}^{R} \hat{\mathbf{y}}^i \quad (2)
+          \]
 \end{itemize}
 Từ đây, ta thấy được đầu vào của block sẽ không chứa mà block trước đó đã dự đoán được. Điều này giúp các block sau tập trung vào những phần thông tin chưa được dự đoán.
 \vspace{3mm}
@@ -615,7 +615,7 @@ Hình 13 mô tả kiến trúc trong block thứ $\mathbf{i}$ của mô hình. K
 \[
     FC(\mathbf{x}^i) = RELU(W\mathbf{x}^i + b) (3)
 \]
-trong đó $\mathbf{W}$ và $\mathbf{b}$ lần lượt là các ma trận sẽ được học trong quá trình huấn luyện. Hàm RELU là hàm $\mathbf{f(x) = max(0, x)}$. 
+trong đó $\mathbf{W}$ và $\mathbf{b}$ lần lượt là các ma trận sẽ được học trong quá trình huấn luyện. Hàm RELU là hàm $\mathbf{f(x) = max(0, x)}$.
 Block bao gồm M lớp FC chung (M thường là 4). Sau đó, sẽ có hai lớp FC là M+1 và M+2 để chia đầu ra thành 2 nhánh. Đầu ra của hai lớp trên lần lượt là hai vectơ hệ số $\mathbf{\theta}^f$ và $\mathbf{\theta}^b$.
 Cuối cùng, ta sẽ ánh xạ hai vectơ trên thành các đầu ra backcast và forecast thông qua các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$. Tuỳ vào dạng hàm $\mathbf{g}$ khác nhau mà chúng ta sẽ có các loại block với vai trò khác nhau. Cụ thể, mô hình N-BEATS giới thiệu ba loại block: trend block, seasonality block, generic block.
 
@@ -631,7 +631,7 @@ của dữ liệu, các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$ sẽ là các hà
 
 Trong đó $\mathbf{\theta}^f_j$ là phần tử thứ j trong vectơ hệ số $\mathbf{t} = \mathbf{\frac{[0, 1, 2, \dots, H-2, H-1]^T}{\mathbf{H}}}$
 
-Cuối cùng, loại seasonality block dùng để nhận biết tính mùa của dữ liệu. Đặc điểm chính của tính mùa là dữ liệu thường có tính chu kỳ. 
+Cuối cùng, loại seasonality block dùng để nhận biết tính mùa của dữ liệu. Đặc điểm chính của tính mùa là dữ liệu thường có tính chu kỳ.
 Do đó, để mô phỏng tính mùa, các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$ sẽ là các loại hàm tuần hoàn, ví dụ $\mathbf{y}_t$ = $\mathbf{y}_{\Delta + t}$ trong đó $\mathbf{\Delta}$ là chu kỳ mùa. Sử dụng chuỗi Fourier để xây dựng các hàm tuần hoàn trên, ta có đầu ra
 forecast của seasonality block thứ $\mathbf{i}$ là:
 \[
@@ -640,16 +640,6 @@ forecast của seasonality block thứ $\mathbf{i}$ là:
 
 Sau khi giới thiệu ba loại block trên, mô hình N-BEATS được xây dựng dựa trên số lượng và thứ tự của mỗi loại block.
 model=Sequential()
-model.add(LSTM(50,activation='relu',return_sequences=True,input_shape=(100,1)))
-model.add(Dropout(0.3))
-
-model.add(LSTM(units=50, return_sequences=True))
-model.add(Dropout(0.3))
-
-model.add(LSTM(units=50))
-model.add(Dropout(0.3))
-model.add(Dense(1))
-model.compile(loss='mean_squared_error', optimizer='adam')
 
 \subsection{Long Short Term Memory (LSTM)}
 Mạng bộ nhớ dài-ngắn (Long Short Term Memory), thường được gọi là LSTM - là một dạng cải tiến của RNN, nó có khả năng học được các phụ thuộc xa .LSTM gồm trạng thái ẩn \(h_t\) (hidden state) và \(c_t\) (cell state). LSTM gồm 3 thành phần chính:
@@ -695,29 +685,29 @@ Trong đó:\\
 Simple exponential smoothing (SES) hay san bằng hàm mũ đơn giản là một phương pháp dự đoán dữ liệu chuỗi thời gian. SES dựa vào tổng trung bình trọng số của dữ liệu thực tế gần nhất và dữ liệu được dự đoán trước đó để dự đoán dữ liệu tiếp theo trong tương lai. SES phù hợp với dữ liệu chuỗi thời gian không có xu hướng và không có tính mùa vụ.. SES có thể viết ở hai dạng: dạng trung bình trọng số và dạng đối tượng.
 
 Dạng trung bình trọng số:
-    \[\hat{y}_{t+1|t} = \alpha y_t + (1-\alpha)\hat{y}_{t|t-1}\]
-    
+\[\hat{y}_{t+1|t} = \alpha y_t + (1-\alpha)\hat{y}_{t|t-1}\]
+
 Trong đó:\\
-	\indent\textbullet\ \(\hat{y}_{t+1|t} \): giá trị dự đoán ở thời điểm t+1 dựa vào giá trị thực tế ở thời điểm t.\\
-	\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
-	\indent\textbullet\ \(\hat{y}_{t|t-1} \): giá trị dự đoán ở thời điểm t dựa vào giá trị thực tế ở thời điểm  t-1.\\
+\indent\textbullet\ \(\hat{y}_{t+1|t} \): giá trị dự đoán ở thời điểm t+1 dựa vào giá trị thực tế ở thời điểm t.\\
+\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
+\indent\textbullet\ \(\hat{y}_{t|t-1} \): giá trị dự đoán ở thời điểm t dựa vào giá trị thực tế ở thời điểm  t-1.\\
 
 Giả sử tại thời điểm ban đầu \(\hat{y}_1=y_1\), công thức ở trên có thể viết lại thành:
 
 \({\hat{y}}_{t+1|t}=\alpha y_t+\alpha\left(1-\alpha\right)y_{t-1}+\alpha\left(1-\alpha\right)^2y_{t-2}+\ldots+\alpha\left(1-\alpha\right)^{t-1}y_1+{(1-\alpha)}^ty_1=\sum_{i=0}^{t-1}\alpha{(1-\alpha)}^iy_{t-i}+{(1-\alpha)}^ty_1\)\\
 
 Dạng đối tượng:\\
-    \indent\textbullet\ Phương trình dự đoán: \(\hat{y}_{t+h|t}=l_t\), h=1,2,3,\dots.\\
-    \indent\textbullet\ Phương trình làm trơn: \(l_t=\alpha y_t+(1-\alpha)l_{t-1}\)\\
+\indent\textbullet\ Phương trình dự đoán: \(\hat{y}_{t+h|t}=l_t\), h=1,2,3,\dots.\\
+\indent\textbullet\ Phương trình làm trơn: \(l_t=\alpha y_t+(1-\alpha)l_{t-1}\)\\
 
 Trong đó:\\
-    \indent\textbullet\ \(\hat{y}_{t+h|t} \): giá trị dự đoán tại thời điểm t+h dựa trên giá trị thực tế ở thời điểm t.\\
-    \indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
-    \indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
+\indent\textbullet\ \(\hat{y}_{t+h|t} \): giá trị dự đoán tại thời điểm t+h dựa trên giá trị thực tế ở thời điểm t.\\
+\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
+\indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
 
 Dự báo phẳng:
-    \[\hat{y}_{t+h|t} = \hat{y}_{t+1|t}=\ell_t, h=2,3,\dots.\]
-    
+\[\hat{y}_{t+h|t} = \hat{y}_{t+1|t}=\ell_t, h=2,3,\dots.\]
+
 Trong SES, tất cả các giá trị dự báo không có giá trị thực tế trước đó sẽ dựa vào giá trị dự báo và giá trị thực tế cuối cùng trong tập dữ liệu. Đó gọi là dự báo "phẳng".
 
 
@@ -728,7 +718,7 @@ Trong SES, tất cả các giá trị dự báo không có giá trị thực t�
     \bibitem{b4} Nejedly P, Ivora A, Viscor I, Koscova Z, Smisek R, Jurak P, Plesinger F. Classification of ECG using ensemble of residual CNNs with or without attention mechanism. Physiol Meas. 2022 Apr 28;43(4). doi: 10.1088/1361-6579/ac647c. PMID: 35381586.
     \bibitem{b5} M. Chiogna and C. Gaetan, "Dynamic Generalized Linear Models with Application to Environmental Epidemiology," Journal of the Royal Statistical Society Series C: Applied Statistics, vol. 51, no. 4, pp. 453-468, 2002.
     \bibitem{b6} D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D.Reeves and B. P. Weaver, "Dynamic linear models for forecasting of radiation beltelectrons and limitations on physical interpretationof predictive models," vol. 12, no. 6, pp. 323-446, 2014.
-    \bibitem{b7} Wang, Junjie \& Su, Xiaohong \& Zhao, Lingling \& Zhang, Jun. (2020). Deep Reinforcement Learning for Data Association in Cell Tracking. Frontiers in Bioengineering and Biotechnology. 8. 298. 10.3389/fbioe.2020.00298. 
+    \bibitem{b7} Wang, Junjie \& Su, Xiaohong \& Zhao, Lingling \& Zhang, Jun. (2020). Deep Reinforcement Learning for Data Association in Cell Tracking. Frontiers in Bioengineering and Biotechnology. 8. 298. 10.3389/fbioe.2020.00298.
     \bibitem{b8} Rajnish Rakholia , Quan Le, Bang Quoc Ho, Khue Vu, Ricardo Simon Carbajo. “Multi-output machine learning model for regional air pollution forecasting in Ho Chi Minh City, Vietnam” (2023). doi: \url{https://doi.org/10.1016/j.envint.2023.107848}. URL: \url{https://www.sciencedirect.com/science/article/pii/S0160412023001216}
     \bibitem{b9} Nguyen Anh Tuan, Le Anh Ngoc . “APPLYING N-BEATS MODEL FOR SHORT-TERM LOAD FORECASTING IN VIETNAM” (2022). URL: \url{https://khcncongthuong.vn/tin-tuc/t18804/ung-dung-mo-hinh-n-beats-cho-du-bao-phu-tai-dien-ngan-han-o-viet-nam.html}
     \bibitem{b10} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
