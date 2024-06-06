@@ -112,11 +112,16 @@ Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana
 \subsection{SES}
 Nhóm tác giả từ University of Karachi, Pakistan đã sử dụng mô hình ARIMA và SES để dự đoán lượng khí thải CO2 từ một số nước châu Á như Japan, Bangladesh, China, Pakistan, India, Sri Lanka, Iran, Singapore, và Nepal trong khoảng từ năm 1971 đến 2014. Dựa trên FMAE, SES phù hợp để dự đoán lượng CO2 ở Pakistan và Sri Lanka. Trong khi đó, ARIMA thì phù hợp với Japan, China, India, Iran và Singapore. Đối với Nepal và Bangladesh, cả hai mô hình đều cho kết quả tương đương nhau. \cite{b11}
 
+
+\subsection{Linear Regression}
+Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Palraj, và Deneshkumar V đã công bố một nghiên cứu về việc sử dụng hồi quy tuyến tính để dự báo chỉ số Chất lượng không khí (AQI). Nghiên cứu tập trung vào phân tích dữ liệu AQI thu thập từ trạm giám sát ở Chennai, Ấn Độ, và xây dựng một mô hình hồi quy tuyến tính đa biến. Đánh giá về tính hợp lệ của mô hình được thực hiện thông qua phân tích dư thừa. \cite{b18}
+
 \subsection{LSTM}
 Ricardo Navares và José L. Aznarte đã sử dụng mô hình LSTM để dự đoán chất lượng không khí tại thành phố Marid. Nhóm tác giả dựa vào các chỉ số không khí gây hại như CO, NO2, O3, PM10, SO2 được thu thập tại các địa điểm khác nhau của Madrid. Sau đó sử dụng các cấu hình khác nhau của mô hình LSTM để dự đoán chất lượng không khí và so sánh cấu hình LSTM nào sẽ là tốt nhất. \cite{b12}
 
 \subsection{ARIMA}
 Hiện nay, hầu hết các nghiên cứu đều dựa trên việc dự đoán xu hướng thị trường chứng khoán bằng mạng nơ-ron dựa trên ARIMA \cite{b13} ARIMA được sử dụng làm cả mô hình phân tích và dự báo trong cơ sở dữ liệu PACAP‐CCER của Trung Quốc, được phát triển bởi Trung tâm Nghiên cứu Thị trường Vốn Thái Bình Dương (PACAP) tại Đại học Rhode Island (Mỹ) và Công ty Dịch vụ Thông tin SINOFIN, liên kết với Trung tâm Nghiên cứu Kinh tế Trung Quốc (CCER) của Đại học Bắc Kinh (Trung Quốc). \cite{b14} ARIMA đã được áp dụng để giải quyết các vấn đề thực tế trong thị trường chứng khoán bằng cách dự báo giá cổ phiếu của bốn công ty hàng đầu trong chỉ số Nifty Midcap-50 bằng MATLAB kèm theo các chỉ số hiệu suất. \cite{b15} Kết hợp mô hình hồi quy mờ và mô hình ARIMA, mô hình ARIMA mờ (FARIMA) đã được phát triển để dự đoán tỷ giá đồng Đài tệ sang Đô la Mỹ. \cite{b16} Một mục đích khác mà mô hình ARIMA đã được sử dụng là để dự đoán hoặc dự báo giá cả, cụ thể là giá điện của ngày mai.
+
 \section{Tài nguyên}
 \subsection{Bộ dữ liệu}
 Dự báo chất lượng không khí là rất quan trọng để giảm thiểu các tác động tiêu cực của ô nhiễm lên sức khỏe con người và môi trường. Phân tích chuỗi thời gian nổi lên như một công cụ mạnh mẽ trong lĩnh vực này, cho phép dự đoán các mức độ chất lượng không khí trong tương lai dựa trên dữ liệu lịch sử.
@@ -723,7 +728,21 @@ Dự báo phẳng:
 \[\hat{y}_{t+h|t} = \hat{y}_{t+1|t}=\ell_t, h=2,3,\dots.\]
 
 Trong SES, tất cả các giá trị dự báo không có giá trị thực tế trước đó sẽ dựa vào giá trị dự báo và giá trị thực tế cuối cùng trong tập dữ liệu. Đó gọi là dự báo "phẳng".
+\subsection{Linear Regression}
+Phân tích hồi quy là một công cụ để xây dựng các mô hình toán học và thống kê mô tả mối quan hệ giữa một biến phụ thuộc và một hoặc nhiều biến độc lập, hoặc biến giải thích, tất cả đều là các biến số. Kỹ thuật thống kê này được sử dụng để tìm một phương trình dự đoán tốt nhất cho biến \( y \) như một hàm tuyến tính của các biến \( x \).
 
+Một mô hình hồi quy tuyến tính đa biến có dạng:
+
+\[ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k + \varepsilon \]
+
+Trong đó:
+\begin{itemize}
+    \item \( Y \) là biến phụ thuộc (biến mục tiêu).
+    \item \( X_1, X_2, \ldots, X_k \) là các biến độc lập (biến giải thích).
+    \item \( \beta_0 \) là hệ số chặn.
+    \item \( \beta_1, \ldots, \beta_k \) là các hệ số hồi quy cho các biến độc lập.
+    \item \( \varepsilon \) là thuật ngữ lỗi.
+\end{itemize}
 \begin{thebibliography}{00}
     \bibitem{b1} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
@@ -741,6 +760,8 @@ Trong SES, tất cả các giá trị dự báo không có giá trị thực t�
     \bibitem{b14} Devi, B. Uma, D. Sundar, and P. Alli. "An Effective Time Series Analysis for Stock Trend Prediction Using ARIMA Model for Nifty Midcap-50."
     \bibitem{b15} Tseng, Fang-Mei, et al. "Fuzzy ARIMA model for forecasting the foreign exchange market." Fuzzy sets and systems 118.1 (2001): 9-19
     \bibitem{b16} Contreras, J., Espinola, R., Nogales, F. J., \& Conejo, A. J. (2003). ARIMA models to predict next-day electricity prices. Power Systems, IEEE Transactions on, 18(3), 1014-1020.
+    \bibitem{b17} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
+    \bibitem{b18} Loganathan, A. \& Palraj, Sumithra \& V, Deneshkumar. (2022). Estimation of Air Quality Index Using Multiple Linear Regression. Applied Ecology and Environmental Sciences. 10. 717-722. 10.12691/aees-10-12-3.
 \end{thebibliography}
 
 \end{document}
