@@ -24,7 +24,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{DỰ BÁO MỨC ĐỘ CHỈ SỐ CHẤT LƯỢNG KHÔNG KHÍ TẠI BA TỈNH MIỀN BẮC VIỆT NAM SỬ DỤNG PHƯƠNG PHÁP HỌC MÁY VÀ HỌC SÂU\\
+\title{DỰ BÁO MỨC ĐỘ CHỈ SỐ CHẤT LƯỢNG KHÔNG KHÍ TẠI BA THÀNH PHỐ CỦA VIỆT NAM SỬ DỤNG PHƯƠNG PHÁP HỌC MÁY VÀ HỌC SÂU\\
 {\footnotesize}
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
@@ -72,7 +72,7 @@
 \maketitle
 
 \begin{abstract}
-    Mục tiêu chính của nghiên cứu này là dự đoán chất lượng không khí của ba tỉnh được chỉ định (Bắc Ninh, Hà Nội và Quảng Ninh) ở khu vực phía Bắc Việt Nam bằng cách kết hợp các thuật toán học máy và học sâu. Các mô hình bao gồm Gauss Newton Method Non-Linear, Residual Convolutional Neural Networks (ResCNN), Neural Hierarchical Interpolation for Time Series Forecasting (N-HiTS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), Long Short Term Memory (LSTM). Hiệu quả của tất cả các mô hình được đề cập trên được đo lường bằng Mean Absolute Percentage Error (MAPE), Root Mean Squared Error, nhằm đạt được độ chính xác tối đa trong dự báo chuỗi thời gian chất lượng không khí chính xác.
+    Mục tiêu chính của nghiên cứu này là dự đoán chất lượng không khí tai ba thành phố được chỉ định (Hà Nội, Việt Trì và Đà Nẵng) của Việt Nam bằng cách kết hợp các thuật toán học máy và học sâu. Các mô hình bao gồm Gauss Newton Method Non-Linear, Residual Convolutional Neural Networks (ResCNN), Neural Hierarchical Interpolation for Time Series Forecasting (N-HiTS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), Long Short Term Memory (LSTM). Hiệu quả của tất cả các mô hình được đề cập trên được đo lường bằng Mean Absolute Percentage Error (MAPE), Root Mean Squared Error, nhằm đạt được độ chính xác tối đa trong dự báo chuỗi thời gian chất lượng không khí chính xác.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -81,7 +81,7 @@
 \end{IEEEkeywords}
 
 \section{Giới Thiệu}
-Với sự gia tăng dân số nhanh chóng ở Việt Nam cùng với sự công nghiệp hóa ngày càng mạnh mẽ ở các khu vực trọng yếu, vấn đề chất lượng không khí nhanh chóng trở thành mối quan tâm chính, đặc biệt là ở các tỉnh đông dân cư ở khu vực phía Bắc Việt Nam. Sự suy giảm chất lượng không khí không chỉ gây ra những rủi ro lớn đối với sức khỏe của cư dân mà còn đe dọa sự cân bằng sinh thái mong manh của khu vực. Trong bối cảnh này, việc dự đoán chính xác và kịp thời các mức độ chất lượng không khí là rất cần thiết cho các chiến lược giảm thiểu hiệu quả và can thiệp y tế công cộng. Nghiên cứu của nhóm chúng tôi sử dụng sự kết hợp của các mô hình học máy và học sâu để dự đoán chất lượng không khí, bằng cách tận dụng sức mạnh của các thuật toán phức tạp như Gauss Newton Method Non-Linear, Resilient Convolutional Neural Networks (ResCNN), Neural Hierarchical Interpolation for Time Series Forecasting (N-HiTS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), và Long Short Term Memory (LSTM).
+Với sự gia tăng dân số nhanh chóng ở Việt Nam cùng với sự công nghiệp hóa ngày càng mạnh mẽ ở các khu vực trọng yếu, vấn đề chất lượng không khí nhanh chóng trở thành mối quan tâm chính, đặc biệt là ở các thành phố lớn của Việt Nam. Sự suy giảm chất lượng không khí không chỉ gây ra những rủi ro lớn đối với sức khỏe của cư dân mà còn đe dọa sự cân bằng sinh thái mong manh của khu vực. Trong bối cảnh này, việc dự đoán chính xác và kịp thời các mức độ chất lượng không khí là rất cần thiết cho các chiến lược giảm thiểu hiệu quả và can thiệp y tế công cộng. Nghiên cứu của nhóm chúng tôi sử dụng sự kết hợp của các mô hình học máy và học sâu để dự đoán chất lượng không khí, bằng cách tận dụng sức mạnh của các thuật toán phức tạp như Gauss Newton Method Non-Linear, Resilient Convolutional Neural Networks (ResCNN), Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), và Long Short Term Memory (LSTM).
 
 Việc bao gồm một tập hợp đa dạng các mô hình cho phép chúng tôi khám phá các khía cạnh khác nhau của dữ liệu và so sánh hiệu suất của các phương pháp khác nhau. Chẳng hạn, các mô hình thống kê truyền thống như SES, LR, và ARIMA cung cấp tính giải thích và sự đơn giản, làm cho chúng trở thành các mô hình cơ sở có giá trị để so sánh. Mặt khác, các kiến trúc học sâu như RNN, GRU, và LSTM xuất sắc trong việc nắm bắt các phụ thuộc phi tuyến tính và phụ thuộc thời gian dài hạn, những đặc điểm thường có trong dữ liệu chuỗi thời gian chất lượng không khí. Ngoài ra, các phương pháp sáng tạo như ResCNN và N-HiTS mang lại những lợi thế độc đáo trong việc xử lý các cấu trúc không gian và thứ bậc trong dữ liệu, nâng cao độ chính xác của các dự đoán.
 
@@ -101,11 +101,27 @@ Tháng 2 năm 2001, Monica Chioga cùng với Carlo Gaetan từ Università di P
 
 Hiểu biết về động lực trong vành đai bức xạ là rất quan trọng. Các electron có năng lượng cao có thể gây hại cho các vệ tinh. Do đó, việc cung cấp cho các nhà vận hành vệ tinh dự báo chính xác về cường độ dòng electron với thời gian dự báo có thể hành động là rất quan trọng. Vì vậy, vào năm 2014, D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D. Reeves, và B. P. Weaver đã sử dụng các mô hình tuyến tính động để dự báo electron trong vành đai bức xạ bằng cách so sánh độ chính xác dự báo trước 1 ngày của một mô hình tuyến tính động đơn giản với mô hình dự báo electron tương đối hiện tại (REFM). \cite{b6}
 
+\subsection{N-BEATS}
+Năm 2022, một nhóm gồm năm nhà nghiên cứu, sau khi xem xét các phương pháp dự báo chuỗi thời gian truyền thống như VAR và các biến thể của nó, nhận thấy chúng không hiệu quả do tính chất không ổn định của dữ liệu chất lượng không khí. Do đó, họ đã chọn sử dụng kiến trúc N-BEATS \cite{b8} để xây dựng mô hình dự báo cho nhiều chất ô nhiễm không khí khác nhau ở Thành phố Hồ Chí Minh, cụ thể là giá trị của NO2, SO2, CO và O3. Mô hình này đã xem xét các biến động theo thời gian, điều kiện khí tượng, và các yếu tố ảnh hưởng nội bộ giữa các chất ô nhiễm. Kết quả của nghiên cứu bao gồm phân tích không gian-thời gian và phân tích tương quan để hiểu rõ hơn về sự biến động và mối quan hệ giữa các biến liên quan.
+
+Năm 2021, một nhóm nghiên cứu tại Đại học Khoa học và Công nghệ Hà Nội và Đại học FPT đã áp dụng mô hình NBEATS để dự báo nhu cầu điện ngắn hạn ở Việt Nam \cite{b9}. Sau khi quan sát thấy mô hình hoạt động tốt với dữ liệu chuỗi thời gian trong các lĩnh vực khác nhau như công nghiệp, tài chính, và nhân khẩu học, nhóm nghiên cứu cũng đã so sánh nó với các phương pháp khác như mạng LSTM với hàm mất mát Pinball và các mô hình tự hồi quy. Tuy nhiên, những phương pháp này có nhược điểm là thời gian chạy tương đối chậm, làm cho việc triển khai chúng trong các ứng dụng thực tế gặp khó khăn.
+
 \subsection{Recurrent Neural Network}
-Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana, Graham Taylora, Bahram Gharabaghia, và Jesse Thé từ Trường Kỹ thuật, Đại học Guelph, Guelph, Ontario, Canada dự báo chuỗi thời gian chất lượng không khí bằng cách sử dụng mô hình học sâu mạng nơ-ron hồi quy (RNN) với bộ nhớ dài hạn (LSTM). \cite{b11}
+Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana, Graham Taylora, Bahram Gharabaghia, và Jesse Thé từ Trường Kỹ thuật, Đại học Guelph, Guelph, Ontario, Canada dự báo chuỗi thời gian chất lượng không khí bằng cách sử dụng mô hình học sâu mạng nơ-ron hồi quy (RNN) với bộ nhớ dài hạn (LSTM). \cite{b10}
+
+\subsection{SES}
+Nhóm tác giả từ University of Karachi, Pakistan đã sử dụng mô hình ARIMA và SES để dự đoán lượng khí thải CO2 từ một số nước châu Á như Japan, Bangladesh, China, Pakistan, India, Sri Lanka, Iran, Singapore, và Nepal trong khoảng từ năm 1971 đến 2014. Dựa trên FMAE, SES phù hợp để dự đoán lượng CO2 ở Pakistan và Sri Lanka. Trong khi đó, ARIMA thì phù hợp với Japan, China, India, Iran và Singapore. Đối với Nepal và Bangladesh, cả hai mô hình đều cho kết quả tương đương nhau. \cite{b11}
+
 
 \subsection{Linear Regression}
-Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Palraj, và Deneshkumar V đã công bố một nghiên cứu về việc sử dụng hồi quy tuyến tính để dự báo chỉ số Chất lượng không khí (AQI). Nghiên cứu tập trung vào phân tích dữ liệu AQI thu thập từ trạm giám sát ở Chennai, Ấn Độ, và xây dựng một mô hình hồi quy tuyến tính đa biến. Đánh giá về tính hợp lệ của mô hình được thực hiện thông qua phân tích dư thừa. \cite{b12}
+Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Palraj, và Deneshkumar V đã công bố một nghiên cứu về việc sử dụng hồi quy tuyến tính để dự báo chỉ số Chất lượng không khí (AQI). Nghiên cứu tập trung vào phân tích dữ liệu AQI thu thập từ trạm giám sát ở Chennai, Ấn Độ, và xây dựng một mô hình hồi quy tuyến tính đa biến. Đánh giá về tính hợp lệ của mô hình được thực hiện thông qua phân tích dư thừa. \cite{b18}
+
+\subsection{LSTM}
+Ricardo Navares và José L. Aznarte đã sử dụng mô hình LSTM để dự đoán chất lượng không khí tại thành phố Marid. Nhóm tác giả dựa vào các chỉ số không khí gây hại như CO, NO2, O3, PM10, SO2 được thu thập tại các địa điểm khác nhau của Madrid. Sau đó sử dụng các cấu hình khác nhau của mô hình LSTM để dự đoán chất lượng không khí và so sánh cấu hình LSTM nào sẽ là tốt nhất. \cite{b12}
+
+\subsection{ARIMA}
+Hiện nay, hầu hết các nghiên cứu đều dựa trên việc dự đoán xu hướng thị trường chứng khoán bằng mạng nơ-ron dựa trên ARIMA \cite{b13} ARIMA được sử dụng làm cả mô hình phân tích và dự báo trong cơ sở dữ liệu PACAP‐CCER của Trung Quốc, được phát triển bởi Trung tâm Nghiên cứu Thị trường Vốn Thái Bình Dương (PACAP) tại Đại học Rhode Island (Mỹ) và Công ty Dịch vụ Thông tin SINOFIN, liên kết với Trung tâm Nghiên cứu Kinh tế Trung Quốc (CCER) của Đại học Bắc Kinh (Trung Quốc). \cite{b14} ARIMA đã được áp dụng để giải quyết các vấn đề thực tế trong thị trường chứng khoán bằng cách dự báo giá cổ phiếu của bốn công ty hàng đầu trong chỉ số Nifty Midcap-50 bằng MATLAB kèm theo các chỉ số hiệu suất. \cite{b15} Kết hợp mô hình hồi quy mờ và mô hình ARIMA, mô hình ARIMA mờ (FARIMA) đã được phát triển để dự đoán tỷ giá đồng Đài tệ sang Đô la Mỹ. \cite{b16} Một mục đích khác mà mô hình ARIMA đã được sử dụng là để dự đoán hoặc dự báo giá cả, cụ thể là giá điện của ngày mai.
+
 \section{Tài nguyên}
 \subsection{Bộ dữ liệu}
 Dự báo chất lượng không khí là rất quan trọng để giảm thiểu các tác động tiêu cực của ô nhiễm lên sức khỏe con người và môi trường. Phân tích chuỗi thời gian nổi lên như một công cụ mạnh mẽ trong lĩnh vực này, cho phép dự đoán các mức độ chất lượng không khí trong tương lai dựa trên dữ liệu lịch sử.
@@ -352,15 +368,7 @@ Trong đó: \\
 
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
 \[
-    <<<<<<< HEAD
-    \begin{split}
-        \Delta y_t & = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p}              \\
-                   & \quad + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} \\
-                   & \quad + \ldots + \theta_q \varepsilon_{t-q}
-    \end{split}
-    =======
     \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q}
-    >>>>>>> master
 \]
 
 Trong đó: \\
@@ -745,9 +753,15 @@ Trong đó:
     \bibitem{b7} Wang, Junjie \& Su, Xiaohong \& Zhao, Lingling \& Zhang, Jun. (2020). Deep Reinforcement Learning for Data Association in Cell Tracking. Frontiers in Bioengineering and Biotechnology. 8. 298. 10.3389/fbioe.2020.00298.
     \bibitem{b8} Rajnish Rakholia , Quan Le, Bang Quoc Ho, Khue Vu, Ricardo Simon Carbajo. “Multi-output machine learning model for regional air pollution forecasting in Ho Chi Minh City, Vietnam” (2023). doi: \url{https://doi.org/10.1016/j.envint.2023.107848}. URL: \url{https://www.sciencedirect.com/science/article/pii/S0160412023001216}
     \bibitem{b9} Nguyen Anh Tuan, Le Anh Ngoc . “APPLYING N-BEATS MODEL FOR SHORT-TERM LOAD FORECASTING IN VIETNAM” (2022). URL: \url{https://khcncongthuong.vn/tin-tuc/t18804/ung-dung-mo-hinh-n-beats-cho-du-bao-phu-tai-dien-ngan-han-o-viet-nam.html}
-    \bibitem{b10} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
-    \bibitem{b11} B. S, Freemana, G. Taylora, B. Gharabaghia and J. Thé, "Forecasting air quality time series using deep learning," Journal of the air \& waste management association, vol. 68, no. 8, pp. 866-886, 2017-2018.
-    \bibitem{b12} Loganathan, A. \& Palraj, Sumithra \& V, Deneshkumar. (2022). Estimation of Air Quality Index Using Multiple Linear Regression. Applied Ecology and Environmental Sciences. 10. 717-722. 10.12691/aees-10-12-3.
+    \bibitem{b10} B. S, Freemana, G. Taylora, B. Gharabaghia and J. Thé, "Forecasting air quality time series using deep learning," Journal of the air \& waste management association, vol. 68, no. 8, pp. 866-886, 2017-2018.
+    \bibitem{b11} Fatima, Samreen \& Saad, Sayed \& Zia, Syeda \& Hussain, Ehtesham \& Fraz, Tayyab \& Shafi, Mehwish \& Khan,. (2019). Forecasting Carbon Dioxide Emission of Asian Countries Using ARIMA and Simple Exponential Smoothing Models. International Journal of Economic and Environment Geology. 10. 10.46660/ojs.v10i1.219.
+    \bibitem{b12} Navares, Ricardo \& Aznarte, José. (2019). Predicting air quality with deep learning LSTM: Towards comprehensive models. Ecological Informatics. 55. 101019. 10.1016/j.ecoinf.2019.101019. 
+    \bibitem{b13} Jarrett, Jeffrey E., and Eric Kyper. "ARIMA modeling with intervention to forecast and analyze chinese stock prices." International Journal of Engineering Business Management 3.3 (2011): 53-58.
+    \bibitem{b14} Devi, B. Uma, D. Sundar, and P. Alli. "An Effective Time Series Analysis for Stock Trend Prediction Using ARIMA Model for Nifty Midcap-50."
+    \bibitem{b15} Tseng, Fang-Mei, et al. "Fuzzy ARIMA model for forecasting the foreign exchange market." Fuzzy sets and systems 118.1 (2001): 9-19
+    \bibitem{b16} Contreras, J., Espinola, R., Nogales, F. J., \& Conejo, A. J. (2003). ARIMA models to predict next-day electricity prices. Power Systems, IEEE Transactions on, 18(3), 1014-1020.
+    \bibitem{b17} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
+    \bibitem{b18} Loganathan, A. \& Palraj, Sumithra \& V, Deneshkumar. (2022). Estimation of Air Quality Index Using Multiple Linear Regression. Applied Ecology and Environmental Sciences. 10. 717-722. 10.12691/aees-10-12-3.
 \end{thebibliography}
 
 \end{document}
