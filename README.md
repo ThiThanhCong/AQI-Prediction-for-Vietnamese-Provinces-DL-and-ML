@@ -1,4 +1,4 @@
-# Dự Báo Mức Độ Ô Nhiễm Không Khí Tại Miền Bắc Việt Nam: Phương Pháp Học Máy và Học Sâu
+# Dự Báo Mức Độ Ô Nhiễm Không Khí Tại Các Thành Phố Ở Việt Nam: Phương Pháp Học Máy và Học Sâu
 
 ### Thành Viên Nhóm
 
@@ -24,7 +24,7 @@
 
 ### Tóm Tắt
 
-Mục tiêu của nghiên cứu này là dự đoán chất lượng không khí tại ba tỉnh miền Bắc Việt Nam (Bắc Ninh, Hà Nội, và Quảng Ninh) bằng cách kết hợp các thuật toán học máy và học sâu. Các mô hình bao gồm:
+Mục tiêu của nghiên cứu này là dự đoán chất lượng không khí tại ba thành phố lớn của Việt Nam (Hà Nội, Việt Trì và Đà Nẵng) bằng cách kết hợp các thuật toán học máy và học sâu. Các mô hình bao gồm:
 
 - Gauss Newton Method Non-Linear
 - Residual Convolutional Neural Networks (ResCNN)
