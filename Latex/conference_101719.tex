@@ -133,18 +133,18 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
 
 \begin{table}[H]
     \centering
-    \caption{HaNoi, BacNinh, QuangNinh’s Descriptive Statistics}
+    \caption{HaNoi, DaNang, VietTri’s Descriptive Statistics}
     \begin{tabular}{|>{\columncolor{red!20}}c|c|c|c|}
         \hline
-        \rowcolor{red!20} & HaNoi  & BacNinh & QuangNinh \\ \hline
-        Count             & 2779   & 1190    & 929       \\ \hline
-        Mean              & 75.283 & 86.87   & 32.117    \\ \hline
-        Std               & 42.635 & 43.484  & 25.576    \\ \hline
-        Min               & 11     & 10.0    & 5.0       \\ \hline
-        25\%              & 42.0   & 59.0    & 19.0      \\ \hline
-        50\%              & 66.0   & 72.0    & 25.0      \\ \hline
-        75\%              & 101.0  & 111.0   & 38.0      \\ \hline
-        Max               & 498    & 275.0   & 500.0     \\ \hline
+        \rowcolor{red!20} & HaNoi  & DaNang & VietTri \\ \hline
+        Count             & 2840   & 3136   & 2348    \\ \hline
+        Mean              & 75.351 & 78.721 & 60.160  \\ \hline
+        Std               & 42.285 & 73.749 & 41.381  \\ \hline
+        Min               & 11     & 13     & 15      \\ \hline
+        25\%              & 43.0   & 43.0   & 31.0    \\ \hline
+        50\%              & 66.0   & 59.0   & 47.0    \\ \hline
+        75\%              & 101.0  & 88.0   & 81.0    \\ \hline
+        Max               & 498    & 500    & 828     \\ \hline
     \end{tabular}
 \end{table}
 
@@ -152,32 +152,15 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
     \centering
     \begin{minipage}{0.23\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/bn_box.png}
-        \caption{BacNinh AQI's boxplot}
-        \label{fig:1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.23\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/bn_his.png}
-        \caption{BacNinh AQI's hostogram}
-        \label{fig:2}
-    \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.23\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/hn_box.png}
+        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/BoxplotHaNoi.png}
         \caption{HaNoi AQI's boxplot}
         \label{fig:1}
     \end{minipage}
     \hfill
     \begin{minipage}{0.23\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/hn_his.png}
-        \caption{HaNoi AQI's hostogram}
+        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/histogramHaNoi.png}
+        \caption{HaNoi AQI's histogram}
         \label{fig:2}
     \end{minipage}
 \end{figure}
@@ -186,15 +169,32 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
     \centering
     \begin{minipage}{0.23\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/qn_box.png}
-        \caption{QuangNinh AQI's boxplot}
+        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/BoxplotDaNang.png}
+        \caption{DaNang AQI's boxplot}
         \label{fig:1}
     \end{minipage}
     \hfill
     \begin{minipage}{0.23\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/qn_his.png}
-        \caption{QuangNinh AQI's hostogram}
+        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/histogramDaNang.png}
+        \caption{DaNang AQI's histogram}
+        \label{fig:2}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/BoxplotVietTri.png}
+        \caption{VietTri AQI's boxplot}
+        \label{fig:1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/histogramVietTri.png}
+        \caption{VietTri AQI's histogram}
         \label{fig:2}
     \end{minipage}
 \end{figure}
@@ -755,7 +755,7 @@ Trong đó:
     \bibitem{b9} Nguyen Anh Tuan, Le Anh Ngoc . “APPLYING N-BEATS MODEL FOR SHORT-TERM LOAD FORECASTING IN VIETNAM” (2022). URL: \url{https://khcncongthuong.vn/tin-tuc/t18804/ung-dung-mo-hinh-n-beats-cho-du-bao-phu-tai-dien-ngan-han-o-viet-nam.html}
     \bibitem{b10} B. S, Freemana, G. Taylora, B. Gharabaghia and J. Thé, "Forecasting air quality time series using deep learning," Journal of the air \& waste management association, vol. 68, no. 8, pp. 866-886, 2017-2018.
     \bibitem{b11} Fatima, Samreen \& Saad, Sayed \& Zia, Syeda \& Hussain, Ehtesham \& Fraz, Tayyab \& Shafi, Mehwish \& Khan,. (2019). Forecasting Carbon Dioxide Emission of Asian Countries Using ARIMA and Simple Exponential Smoothing Models. International Journal of Economic and Environment Geology. 10. 10.46660/ojs.v10i1.219.
-    \bibitem{b12} Navares, Ricardo \& Aznarte, José. (2019). Predicting air quality with deep learning LSTM: Towards comprehensive models. Ecological Informatics. 55. 101019. 10.1016/j.ecoinf.2019.101019. 
+    \bibitem{b12} Navares, Ricardo \& Aznarte, José. (2019). Predicting air quality with deep learning LSTM: Towards comprehensive models. Ecological Informatics. 55. 101019. 10.1016/j.ecoinf.2019.101019.
     \bibitem{b13} Jarrett, Jeffrey E., and Eric Kyper. "ARIMA modeling with intervention to forecast and analyze chinese stock prices." International Journal of Engineering Business Management 3.3 (2011): 53-58.
     \bibitem{b14} Devi, B. Uma, D. Sundar, and P. Alli. "An Effective Time Series Analysis for Stock Trend Prediction Using ARIMA Model for Nifty Midcap-50."
     \bibitem{b15} Tseng, Fang-Mei, et al. "Fuzzy ARIMA model for forecasting the foreign exchange market." Fuzzy sets and systems 118.1 (2001): 9-19
