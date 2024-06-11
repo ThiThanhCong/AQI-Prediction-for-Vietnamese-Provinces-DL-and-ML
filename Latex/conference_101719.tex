@@ -381,13 +381,12 @@ Trong đó: \\
 \subsection{LSMT ResCNN}
 \subsubsection{Tổng quan}
 Mô hình LSTM ResCNN là một mô hình dự đoán chuỗi thời gian, là sự kết hợp giữa LSTM và CNN 1D sử dụng kết nối bỏ qua.
-\subsubsection{1D-CNN}
-CNN phổ biến nhất được biết đến là CNN 2D, chủ yếu được sử dụng trong xử lý ảnh. Ngoài ra còn có CNN 1D được sử dụng trong xử lý ngôn ngữ tự nhiên và phân tích chuỗi thời gian, nó trích xuất các đặc trưng bằng cách di chuyển kernel dọc theo trục thời gian. Lớp CNN 1D đóng góp vào việc trích xuất các đặc trưng vốn có trong dữ liệu, và số lượng bộ lọc xác định số lượng đặc trưng cần được học, phù hợp với kích thước của không gian đầu ra.
-\subsubsection{LSTM-ResCNN được đề xuất với cách tiếp cận dựa trên độ dốc}
+
+\subsubsection{ResCNN được đề xuất với cách tiếp cận dựa trên độ dốc}
 \paragraph{Giới thiệu mô hình}
-Trong bài báo này, chúng tôi đề xuất một mô hình LSTM-resCNN, đó là một LSTM-CNN với một kết nối dư thêm trên các lớp CNN 1D. Lý do chúng tôi chọn thứ tự LSTM-CNN thay vì CNN-LSTM là để đặt lớp tích chập mà Grad-CAM có thể được áp dụng ở phần sau để biểu diễn các đặc trưng phức tạp hơn. Chúng tôi đã bao gồm một kết nối dư để tránh mất thông tin quan trọng trong quá trình áp dụng ba lớp tích chập 1D liên tục. Ngoài ra, các mạng dư đã chứng minh rằng chúng có thể được coi như một sự kết hợp của nhiều đường đi khác nhau với độ dài khác nhau, và các đường đi này thể hiện hành vi giống như một tổ hợp.
+Trong bài báo này, chúng tôi đề xuất một mô hình ResCNN, đó là mô hình với một kết nối dư thêm trên các lớp CNN 1D. Chúng tôi đã bao gồm một kết nối dư để tránh mất thông tin quan trọng trong quá trình áp dụng nhiều lớp tích chập 1D liên tục. 
 \paragraph{Thiết kế mô hình}
-Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích chập sử dụng kết nối nối bỏ qua(ResCNN), kết hợp với lSTM có thể dùng trong các bài toán chuỗi thời gian.
+Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích chập sử dụng kết nối nối bỏ qua(ResCNN) có thể dùng trong các bài toán chuỗi thời gian.
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.23\textwidth}
@@ -399,7 +398,7 @@ Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích ch
 
 \end{figure}
 
-\subsubsection{Các thành phần chính}
+\paragraph{Các thành phần chính}
 \begin{itemize}
     \item \textbf{Input (Đầu vào)}: Đây là nơi dữ liệu chuỗi thời gian đầu vào được đưa vào mạng. Dữ liệu đầu vào thường là các chuỗi thời gian, có thể bao gồm các đặc trưng như giá trị thời gian, chỉ số kinh tế, hoặc dữ liệu cảm biến.
 
@@ -420,14 +419,69 @@ Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích ch
 
     \item \textbf{Conv (Convolution)}: Lớp tích chập khác, không có hàm kích hoạt sau đó, tiếp tục trích xuất các đặc trưng cuối cùng từ dữ liệu.
 
-    \item \textbf{Skip Connection (Kết nối tắt)}: Đường kết nối tắt từ đầu vào trực tiếp đến trước lớp tanh giúp giảm thiểu mất mát thông tin khi truyền qua nhiều lớp và giúp mạng học tốt hơn trong các mạng sâu.
+    \item \textbf{Skip Connection}: Sử dụng phép cộng để thêm đầu vào ban đầu vào kết quả của lớp tích chập cuối cùng. Đây là một dạng kết nối còn lại (Residual Connection) giúp bảo toàn thông tin từ đầu vào ban đầu và cải thiện quá trình huấn luyện.
 
     \item \textbf{Tanh}: Hàm kích hoạt tanh được sử dụng để đưa đầu ra về một khoảng giá trị nhất định (ở đây là từ -1 đến 1), giúp chuẩn hóa đầu ra của mạng.
 
     \item \textbf{Output (Đầu ra)}: Đây là nơi mạng trả về kết quả cuối cùng sau khi đã qua tất cả các lớp và các phép biến đổi. Đầu ra có thể là các giá trị dự báo hoặc các kết quả phân loại.
 \end{itemize}
 
-Tóm lại, mô hình này sử dụng lớp LSTM để xử lý và nắm bắt các thông tin tuần tự trong dữ liệu chuỗi thời gian, sau đó sử dụng các lớp tích chập (convolutional layers) để trích xuất các đặc trưng không gian phức tạp. Hàm kích hoạt ReLU và lớp chuẩn hóa theo batch giúp tăng tính phi tuyến và ổn định trong quá trình huấn luyện. Kết nối tắt và hàm kích hoạt tanh giúp cải thiện hiệu quả học tập và chuẩn hóa đầu ra.
+Tóm lại, mô hình này sử dụng các lớp tích chập (convolutional layers) để trích xuất các đặc trưng không gian phức tạp. Hàm kích hoạt ReLU và lớp chuẩn hóa theo batch giúp tăng tính phi tuyến và ổn định trong quá trình huấn luyện. Kết nối tắt và hàm kích hoạt tanh giúp cải thiện hiệu quả học tập và chuẩn hóa đầu ra.
+
+\subsubsection{1D-CNN}
+CNN phổ biến nhất được biết đến là CNN 2D, chủ yếu được sử dụng trong xử lý ảnh. Ngoài ra còn có CNN 1D được sử dụng trong xử lý ngôn ngữ tự nhiên và phân tích chuỗi thời gian, nó trích xuất các đặc trưng bằng cách di chuyển kernel dọc theo trục thời gian. Lớp CNN 1D đóng góp vào việc trích xuất các đặc trưng vốn có trong dữ liệu, và số lượng bộ lọc xác định số lượng đặc trưng cần được học, phù hợp với kích thước của không gian đầu ra.\\
+Mỗi lớp tích chập áp dụng các bộ lọc lên đầu vào, sau đó là một hàm kích hoạt. Công thức tổng quát cho một lớp tích chập một chiều là:
+
+\begin{scriptsize}
+\[
+\text{out}(N_i, C_{out_j}, L_{out_l}) = \text{bias}(C_{out_j}) + \sum_{k=0}^{C_{in}-1} \text{weight}(C_{out_j}, k) \ast \text{input}(N_i, k, L_{l-k})
+\]
+\end{scriptsize}
+Trong đó: 
+\begin{itemize}
+    \item \textbf{\(\text{out}(N_i, C_{out_j}, L_{out_l})\)}: Giá trị đầu ra của mẫu thứ \(N_i\) tại kênh đầu ra \(C_{out_j}\) và vị trí \(L_{out_l}\).
+    \item \textbf{\(\text{bias}(C_{out_j})\)}: Giá trị bias tương ứng với kênh đầu ra \(C_{out_j}\).
+    \item \textbf{\(\text{weight}(C_{out_j}, k)\)}: Trọng số của bộ lọc tương ứng với kênh đầu ra \(C_{out_j}\) và kênh đầu vào \(k\).
+    \item \textbf{\(\text{input}(N_i, k, L_{l-k})\)}: Giá trị đầu vào của mẫu thứ \(N_i\) tại kênh đầu vào \(k\) và vị trí \(L_{l-k}\).
+    \item \textbf{\(\ast\)}: Đại diện cho phép tích chập.
+\end{itemize}
+
+\subsubsection{Lớp Chuẩn hóa Theo Batch}
+Chuẩn hóa đầu ra của lớp tích chập để cải thiện quá trình huấn luyện. Công thức cho một lớp chuẩn hóa là:
+
+\[
+\hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}
+\]
+
+Trong đó:
+\begin{itemize}
+    \item \textbf{\(x\)} là đầu vào của lớp chuẩn hóa.
+    \item \textbf{\(\mu\)} là giá trị trung bình của đầu vào.
+    \item \textbf{\(\sigma^2\)} là phương sai của đầu vào.
+    \item \textbf{\(\epsilon\)} là một giá trị rất nhỏ để tránh chia cho 0.
+    \item \textbf{\(\gamma\)} và \textbf{\(\beta\)} là các tham số học được (scale và shift).
+\end{itemize}
+
+\subsubsection{Lớp kích hoạt cuối cùng}
+Lớp kích hoạt cuối cùng sử dụng hàm kích hoạt \texttt{tanh} để biến đổi đầu ra thành khoảng \((-1, 1)\). Công thức của hàm \texttt{tanh} là:
+
+\[
+\text{tanh}(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\]
+
+\subsubsection{Kết nối còn lại}
+Kết nối còn lại thêm đầu vào ban đầu vào đầu ra của lớp tích chập cuối cùng:
+
+\[
+\textbf{out}_{res}(x) = x + \text{Conv}(x)
+\]
+
+Trong đó:
+\begin{itemize}
+    \item \textbf{\(\text{out}_{res}(x)\)} là đầu ra của kết nối còn lại.
+    \item \textbf{\(x\)} là đầu vào ban đầu.
+    \item \textbf{\(\text{Conv}(x)\)} là đầu ra của lớp tích chập cuối cùng.
+\end{itemize}
 
 
 \subsection{Gated Recurrent Unit (GRU)}
@@ -741,7 +795,40 @@ Trong đó:
     \item \( \varepsilon \) là thuật ngữ lỗi.
 \end{itemize}
 
-
+\section{Kết quả}
+\subsection{HaNoi dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Training:Testing & RMSE & MAPE (\%) & MAE\\
+         \hline
+         \multirow{2}{*}{ARIMA} & 7:3 & 5690.9 & 13.03 & 0.021 \\ & 8:2 & 4904.44 & 10.28 & 0.016 \\ & \textbf{9:1} & \textbf{2859.97} & \textbf{5.49} & \textbf{0.004} \\
+         \hline
+         \multirow{2}{*}{DLM} & 7:3 & 5212.21 & 7.55 & 0.016 \\ & 8:2 & 1014.97 & 1.62 & 0.0005 \\ & \textbf{9:1} & \textbf{822.63} & \textbf{1.26} & \textbf{0.0003}\\
+         \hline
+         \multirow{2}{*}{GNN} & 7:3 & 916.692 & 1.67 & 0.00055 \\ &  8:2 & 948.341 & 1.74 & 0.00057 \\ & \textbf{9:1} &. \textbf{761.754} & \textbf{1.21} & \textbf{0.0003}\\
+         \hline
+         \multirow{2}{*}{GRU} & 7:3 & 7847.594 & 15.278 & 0.041 \\ & 8:2 & 7501.223 & 15.14 & 0.036 \\ & \textbf{9:1} & \textbf{3371.058} & \textbf{6.414} & \textbf{0.006}\\
+         \hline
+         \multirow{2}{*}{NBEATS} & 7:3 & 7849.75 & 15.29 & 0.04 \\ &8:2 &7501.73 & 15.15 & 0.04 \\ &  \textbf{9:1} & \textbf{3373.34} & \textbf{6.43} & \textbf{0.006}\\
+         \hline
+         \multirow{2}{*}{ResCNN} & 7:3 & 28.739 & 31.41 & 20.543\\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
+         \hline
+         \multirow{2}{*}{RNN} & 7:3 &  7849.6833 & 15.2872 & 0.0407 \\ & 8:2 & 7502.4992 & 15.1483 & 0.0357 \\ & \textbf{9:1} &  \textbf{3342.8102} &	\textbf{6.3561} & 	\textbf{0.0057} \\
+         \hline
+         \multirow{2}{*}{SES} & 7:3 & 941.7588 &  1.7384 &  0.0005 \\ & 8:2 & 939.7588 &  1.6546 &  0.0005 \\ & \textbf{9:1} & \textbf{936.8374} & \textbf{1.6273} & \textbf{0.0005}\\
+         \hline
+         \multirow{2}{*}{LN} & 7:3 & 64.77 &  59.609 &  51.019 \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
+         \hline
+         \multirow{2}{*}{LSTM} & 7:3 & 941.7588 &  1.7384 &  0.0005 \\ & 8:2 & 939.7588 &  1.6546 &  0.0005 \\ & \textbf{9:1} & \textbf{936.8374} & \textbf{1.6273} & \textbf{0.0005}\\
+         \hline
+    \end{tabular}
+    \caption{HaNoi Dataset's Evaluation}
+    \label{mbbresult}
+\end{table}
 \begin{thebibliography}{00}
     \bibitem{b1} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
