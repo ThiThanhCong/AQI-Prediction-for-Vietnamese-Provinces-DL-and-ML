@@ -428,14 +428,11 @@ Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích ch
 \end{itemize}
 
 Tóm lại, mô hình này sử dụng lớp LSTM để xử lý và nắm bắt các thông tin tuần tự trong dữ liệu chuỗi thời gian, sau đó sử dụng các lớp tích chập (convolutional layers) để trích xuất các đặc trưng không gian phức tạp. Hàm kích hoạt ReLU và lớp chuẩn hóa theo batch giúp tăng tính phi tuyến và ổn định trong quá trình huấn luyện. Kết nối tắt và hàm kích hoạt tanh giúp cải thiện hiệu quả học tập và chuẩn hóa đầu ra.
+
+
 \subsection{Gated Recurrent Unit (GRU)}
-\subsubsection{Đơn vị tuần hoàn trong mạng nơ-ron}
-Trước khi chúng ta đi vào chi tiết về GRU, hãy xem xét một đơn vị tuần hoàn thông thường trong mạng nơ-ron. Đơn vị này được sử dụng để xử lý dữ liệu tuần tự, chẳng hạn như chuỗi văn bản, âm thanh hoặc dữ liệu thời gian.
-
-Mỗi đơn vị tuần hoàn có một trạng thái ẩn (hidden state) và nhận đầu vào từ bước thời gian trước đó. Nó sử dụng thông tin từ trạng thái ẩn và đầu vào hiện tại để tính toán trạng thái ẩn mới.
-
 \subsubsection{GRU là gì?}
-GRU là một biến thể của đơn vị tuần hoàn, được thiết kế để giải quyết một số vấn đề của kiến trúc LSTM (Long Short-Term Memory).
+GRU là một biến thể của LSTM
 
 Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng thái ẩn và ô nhớ:
 
@@ -445,12 +442,12 @@ Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng th
 \end{itemize}
 
 \begin{itemize}
-    \item \textbf{Cổng đặt lại (reset gate)}: Quyết định bao nhiêu trạng thái ẩn trước đó cần quên.
+    \item \textbf{Cổng thiết lập lại (reset gate)}: Quyết định bao nhiêu trạng thái ẩn trước đó cần quên.
     \item \textbf{Cổng cập nhật (update gate)}: Quyết định bao nhiêu của vector kích hoạt ứng viên cần tích hợp vào trạng thái ẩn mới.
 \end{itemize}
 
-\subsubsection{Cổng xóa và cổng cập nhật}
-Đầu tiên ta giới thiệu cổng xóa và cổng cập nhật. Ta thiết kế chúng thành các vector có các phần tử trong khoảng  (0,1)
+\subsubsection{Cổng thiết lập lại và cổng cập nhật}
+Đầu tiên ta giới thiệu thiết lập lại và cổng cập nhật. Ta thiết kế chúng thành các vector có các phần tử trong khoảng  (0,1)
 để có thể biểu diễn các tổ hợp lồi. Chẳng hạn, một biến xóa cho phép kiểm soát bao nhiêu phần của trạng thái trước đây được giữ lại. Tương tự, một biến cập nhật cho phép kiểm soát bao nhiêu phần của trạng thái mới sẽ giống trạng thái cũ.
 
 
@@ -459,16 +456,16 @@ Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng th
     \begin{minipage}{0.23\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_1.pdf}
-        \caption{Cổng xóa và cổng cập nhật trong GRU}
+        \caption{Cổng thiết lập lại và cổng cập nhật trong GRU}
         \label{fig:gru_del_up}
     \end{minipage}
 \end{figure}
 
 Ta bắt đầu bằng việc thiết kế các cổng tạo ra các biến này. Hình \ref{fig:gru_del_up}
-minh họa các đầu vào cho cả cổng xóa và cổng cập nhật trong GRU, với đầu vào ở bước thời gian hiện tại  \(\mathbf{X}_t \)
+minh họa các đầu vào cho cả cổng thiết lập lại và cổng cập nhật trong GRU, với đầu vào ở bước thời gian hiện tại  \(\mathbf{X}_t \)
 và trạng thái ẩn ở bước thời gian trước đó  \(\mathbf{H}_{t-1} \). Đầu ra được tạo bởi một tầng kết nối đầy đủ với hàm kích hoạt sigmoid.
 
-Tại bước thời gian $t$, với đầu vào minibatch là $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (số lượng mẫu: $n$, số lượng đầu vào: $d$) và trạng thái ẩn ở bước thời gian gần nhất là $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (số lượng trạng thái ẩn: $h$), cổng xóa $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ và cổng cập nhật $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ được tính như sau:
+Tại bước thời gian $t$, với đầu vào minibatch là $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (số lượng mẫu: $n$, số lượng đầu vào: $d$) và trạng thái ẩn ở bước thời gian gần nhất là $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (số lượng trạng thái ẩn: $h$), cổng thiết lập lại $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ và cổng cập nhật $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ được tính như sau:
 
 \begin{equation*}
     \mathbf{R}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xr} + \mathbf{H}_{t-1} \mathbf{W}_{hr} + \mathbf{b}_r)
@@ -477,15 +474,15 @@ Tại bước thời gian $t$, với đầu vào minibatch là $\mathbf{X}_t \in
     \mathbf{Z}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xz} + \mathbf{H}_{t-1} \mathbf{W}_{hz} + \mathbf{b}_z).
 \end{equation*}
 
-Ở đây, $\mathbf{W}_{xr}, \mathbf{W}_{xz} \in \mathbb{R}^{d \times h}$ và $\mathbf{W}_{hr}, \mathbf{W}_{hz} \in \mathbb{R}^{h \times h}$ là các tham số trọng số và $\mathbf{b}_r, \mathbf{b}_z \in \mathbb{R}^{1 \times h}$ là các hệ số điều chỉnh. Ta sẽ sử dụng hàm sigmoid để biến đổi các giá trị đầu vào nằm trong khoảng $(0, 1)$.
+Ở đây, $\mathbf{W}_{xr}, \mathbf{W}_{xz} \in \mathbb{R}^{d \times h}$ và $\mathbf{W}_{hr}, \mathbf{W}_{hz} \in \mathbb{R}^{h \times h}$ là các ma trận trọng số và $\mathbf{b}_r, \mathbf{b}_z \in \mathbb{R}^{1 \times h}$ là các hệ số điều chỉnh. Ta sẽ sử dụng hàm sigmoid để biến đổi các giá trị đầu vào nằm trong khoảng $(0, 1)$.
 
-\subsubsection{Hoạt động của cổng xóa}
-Trong RNN thông thường, ta cập nhật trọng thái cổng xóa theo công thức
+\subsubsection{Hoạt động của cổng thiết lập lại}
+Trong RNN thông thường, ta cập nhật trọng thái cổng thiết lập lại theo công thức
 \[
     \mathbf{H}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xh} + \mathbf{H}_{t-1} \mathbf{W}_{hh} + \mathbf{b}_h).
 \]
 
-Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng xóa. Ký hiệu \(\bigodot\) biểu thị phép nhân theo từng phần tử giữa các tensor.
+Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng thiết lập lại. Ký hiệu \(\bigodot\) biểu thị phép nhân theo từng phần tử giữa các tensor.
 
 \begin{figure}[H]
     \centering
@@ -503,7 +500,7 @@ Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng
 \end{equation*}
 
 \subsubsection{Hoạt động của cổng cập nhật}
-Cổng này xác định mức độ giống nhau giữa tráng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Biến cổng (gating variable) \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
+Cổng này xác định mức độ giống nhau giữa trạng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Cổng cập nhật \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
 trình cập nhật cuối cho GRU.
 
 \begin{equation*}
@@ -743,6 +740,8 @@ Trong đó:
     \item \( \beta_1, \ldots, \beta_k \) là các hệ số hồi quy cho các biến độc lập.
     \item \( \varepsilon \) là thuật ngữ lỗi.
 \end{itemize}
+
+
 \begin{thebibliography}{00}
     \bibitem{b1} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
