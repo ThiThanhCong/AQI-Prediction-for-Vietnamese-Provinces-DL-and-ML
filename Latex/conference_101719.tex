@@ -384,7 +384,7 @@ Mô hình LSTM ResCNN là một mô hình dự đoán chuỗi thời gian, là s
 
 \subsubsection{ResCNN được đề xuất với cách tiếp cận dựa trên độ dốc}
 \paragraph{Giới thiệu mô hình}
-Trong bài báo này, chúng tôi đề xuất một mô hình ResCNN, đó là mô hình với một kết nối dư thêm trên các lớp CNN 1D. Chúng tôi đã bao gồm một kết nối dư để tránh mất thông tin quan trọng trong quá trình áp dụng nhiều lớp tích chập 1D liên tục. 
+Trong bài báo này, chúng tôi đề xuất một mô hình ResCNN, đó là mô hình với một kết nối dư thêm trên các lớp CNN 1D. Chúng tôi đã bao gồm một kết nối dư để tránh mất thông tin quan trọng trong quá trình áp dụng nhiều lớp tích chập 1D liên tục.
 \paragraph{Thiết kế mô hình}
 Hình dưới đây mô tả cấu trúc của mô hình mạng nơ-ron tích chập sử dụng kết nối nối bỏ qua(ResCNN) có thể dùng trong các bài toán chuỗi thời gian.
 \begin{figure}[H]
@@ -433,11 +433,11 @@ CNN phổ biến nhất được biết đến là CNN 2D, chủ yếu được 
 Mỗi lớp tích chập áp dụng các bộ lọc lên đầu vào, sau đó là một hàm kích hoạt. Công thức tổng quát cho một lớp tích chập một chiều là:
 
 \begin{scriptsize}
-\[
-\text{out}(N_i, C_{out_j}, L_{out_l}) = \text{bias}(C_{out_j}) + \sum_{k=0}^{C_{in}-1} \text{weight}(C_{out_j}, k) \ast \text{input}(N_i, k, L_{l-k})
-\]
+    \[
+        \text{out}(N_i, C_{out_j}, L_{out_l}) = \text{bias}(C_{out_j}) + \sum_{k=0}^{C_{in}-1} \text{weight}(C_{out_j}, k) \ast \text{input}(N_i, k, L_{l-k})
+    \]
 \end{scriptsize}
-Trong đó: 
+Trong đó:
 \begin{itemize}
     \item \textbf{\(\text{out}(N_i, C_{out_j}, L_{out_l})\)}: Giá trị đầu ra của mẫu thứ \(N_i\) tại kênh đầu ra \(C_{out_j}\) và vị trí \(L_{out_l}\).
     \item \textbf{\(\text{bias}(C_{out_j})\)}: Giá trị bias tương ứng với kênh đầu ra \(C_{out_j}\).
@@ -450,7 +450,7 @@ Trong đó:
 Chuẩn hóa đầu ra của lớp tích chập để cải thiện quá trình huấn luyện. Công thức cho một lớp chuẩn hóa là:
 
 \[
-\hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}
+    \hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}
 \]
 
 Trong đó:
@@ -466,14 +466,14 @@ Trong đó:
 Lớp kích hoạt cuối cùng sử dụng hàm kích hoạt \texttt{tanh} để biến đổi đầu ra thành khoảng \((-1, 1)\). Công thức của hàm \texttt{tanh} là:
 
 \[
-\text{tanh}(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+    \text{tanh}(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 \]
 
 \subsubsection{Kết nối còn lại}
 Kết nối còn lại thêm đầu vào ban đầu vào đầu ra của lớp tích chập cuối cùng:
 
 \[
-\textbf{out}_{res}(x) = x + \text{Conv}(x)
+    \textbf{out}_{res}(x) = x + \text{Conv}(x)
 \]
 
 Trong đó:
@@ -799,14 +799,14 @@ Trong đó:
 \subsection{Phương pháp đánh giá}
 \textbf{Mean Percentage Absolute Error (MAPE)}: là một phép đo đánh giá mức độ sai lệch tương đối giữa các giá trị dự đoán và giá trị thực tế trong dự đoán
 \[
-    MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\% 
+    MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%
 \]
 
 \textbf{Mean Absolute Error (MAE)}: được tính bằng trung bình của sai số tuyệt đối giữa giá trị thực tế và giá trị dự đoán trong tập dữ liệu.
 \[
     MAE = \frac{1}{n}\sum_{i=1}^{n}\left|y_i-{\hat{y}}_i\right|
 \]
-\subsection{HaNoi dataset} 
+\subsection{HaNoi dataset}
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
