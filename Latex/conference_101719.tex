@@ -627,89 +627,52 @@ Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển 
 
 \subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
 \vspace{1mm}
-\subsubsection{Tổng quan}
-N-BEATS được phát triển bởi một nhóm nghiên cứu của Element AI, và được giới thiệu trong bài báo "N-BEATS: Neural Basis Expansion Analysis for Time Series Forecasting" bởi Boris Oreshkin, Dmitri Carpov, Nicolas Chapados và Yoshua Bengio vào năm 2019.
-\vspace{3mm}
-\subsubsection{Backcast và Forecast}
-Mỗi khối trong N-BEATS tạo ra hai đầu ra: một backcast và một forecast. Backcast là quá trình tái tạo dữ liệu đầu vào của mô hình, giúp network học tập bằng cách trừ phần tái tạo này khỏi đầu vào, cho phép khối tiếp theo học từ phần dư còn lại. Forecast là đầu ra của khối cho các giá trị dự đoán trong tương lai, đóng góp vào dự báo cuối cùng.
-\vspace{3mm}
-\subsubsection{Dữ liệu đầu vào}
-Xét bài toán dự báo đơn chuỗi thời gian:\\
-Từ chuỗi thời gian có độ dài $t$ là $\mathbf{x} =
-    [y_{T-t+1}, y_{T-t+2}, \ldots, y_{T}] \in \mathbb{R}^T$ ta cần dự báo giá trị của $H$ bước tiếp theo là $\mathbf{y} =
-    [y_{T+1}, y_{T+2}, \ldots, y_{T+H}] \in \mathbb{R}^H$. Ta kí hiệu $\hat{\mathbf{y}}$
-là dự đoán của mô hình cho vectơ $\mathbf{y}$. Kích thước của dữ liệu đầu vào là $t = nH$ ($n$
-thường nằm trong khoảng từ $[2, 7]$) được gọi là khoảng thời gian xem lại (lookback period). Mô hình N-BEATS sẽ học và tìm hiểu chuỗi thời gian từ khoảng thời gian
-xem lại để dự đoán giá trị của $\mathbf{H}$ điểm tiếp theo.
-\vspace{3mm}
-\subsubsection{Kiến trúc tổng quát của mô hình}
-Kiến trúc tổng quát của mô hình N-BEATS được mô tả như trong hình 12. Mô hình bao gồm các block được xếp chồng lên nhau. Đầu vào của block đầu tiên là đầu vào tổng thể của mô hình hay còn gọi là khoảng thời gian xem lại $\mathbf{x}$. Mỗi block có hai đầu ra. Một đầu ra (backcast) sẽ được làm đầu vào cho block tiếp theo. Đầu ra còn lại (forecast) sẽ được tổng hợp để đưa ra kết quả cuối cùng.
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.23\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/N-BEATS/1.png}
-        \caption{Kiến trúc tổng quát của N-BEATS.}
-        \label{fig:N-BEATS}
-    \end{minipage}
-\end{figure}
-Chi tiết hơn, với block thứ $i$ trong mô hình:
+\subsection{Tổng quan}
+Mô hình N-BEATS, viết tắt của "Neural Basis Expansion Analysis for Time Series Forecasting," được phát triển bởi nhóm nghiên cứu từ Element AI và được công bố trong bài báo năm 2019 bởi Boris Oreshkin và cộng sự.
+
+\subsection{Backcast và Forecast}
+Trong N-BEATS, mỗi khối (block) tạo ra hai đầu ra: backcast và forecast. Backcast tái tạo lại dữ liệu đầu vào để mô hình có thể học từ phần dư sau khi trừ đi phần tái tạo này, giúp khối tiếp theo xử lý thông tin còn lại. Forecast là đầu ra dự báo các giá trị tương lai, góp phần vào kết quả cuối cùng.
+
+\subsection{Dữ liệu đầu vào}
+N-BEATS làm việc với chuỗi thời gian đơn biến. Đầu vào là một chuỗi thời gian có độ dài $t$:
+\[
+x = [y_{T-t+1}, y_{T-t+2}, \ldots, y_T]
+\]
+Mục tiêu là dự báo giá trị cho $H$ bước tiếp theo:
+\[
+y = [y_{T+1}, y_{T+2}, \ldots, y_{T+H}]
+\]
+Khoảng thời gian xem lại (lookback period) thường có độ dài $t = nH$ với $n$ từ 2 đến 7.
+
+\subsection{Kiến trúc tổng quát}
+Mô hình N-BEATS gồm nhiều block xếp chồng lên nhau. Đầu vào của block đầu tiên là dữ liệu $x$. Mỗi block tạo ra hai đầu ra: backcast làm đầu vào cho block kế tiếp, và forecast dùng để tổng hợp dự đoán cuối cùng. Đầu vào của block thứ $i$ (với $i > 1$) là:
+\[
+x_i = x_{i-1} - \hat{x}_{i-1}
+\]
+Dự đoán cuối cùng là tổng hợp các đầu ra forecast của tất cả các block:
+\[
+\hat{y} = \sum_{i=1}^{R} \hat{y}_i
+\]
+
+\subsection{Kiến trúc của block}
+Mỗi block gồm các lớp kết nối đầy đủ (fully connected, FC) với hàm kích hoạt ReLU:
+\[
+FC(x_i) = ReLU(Wx_i + b)
+\]
+Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ lớp FC chung, sau đó có hai lớp FC để chia đầu ra thành hai nhánh với các hệ số $\theta_f$ và $\theta_b$. Các hệ số này được ánh xạ thành đầu ra backcast và forecast qua các hàm $g_f$ và $g_b$.
+
+\subsection{Các loại block}
 \begin{itemize}
-    \item Nếu $i = 1$, tức là block đầu tiên, đầu vào chính là cửa sổ dữ liệu $\mathbf{x}$;
-    \item Nếu $i > 1$, đầu vào của block thứ $i$ là:
-          \[
-              \mathbf{x}^i = \mathbf{x}^{i-1} - \hat{\mathbf{x}}^{i-1} \quad (1)
-          \]
+    \item \textbf{Generic Block}: Sử dụng các ánh xạ tuyến tính.
+    \item \textbf{Trend Block}: Phân tích xu hướng dữ liệu bằng các hàm đa thức bậc thấp:
+    \[
+    \hat{y}_i = \sum_{j=0}^{p} \theta_{f,j} t^j
+    \]
+    \item \textbf{Seasonality Block}: Nhận diện tính mùa vụ qua các hàm tuần hoàn, sử dụng chuỗi Fourier:
+    \[
+    \hat{y}_i = \sum_{j=0}^{H/2 - 1} \theta_{f,j} \cos(2\pi j t) + \theta_{f,j + H/2} \sin(2\pi j t)
+    \]
 \end{itemize}
-
-Block thứ $i$ gồm hai đầu ra:
-\begin{itemize}
-    \item Đầu ra backcast $\hat{\mathbf{x}}^i$ được làm đầu vào cho block tiếp theo.
-    \item Đầu ra forecast $\hat{\mathbf{y}}^i$ dùng để tổng hợp cho kết quả dự đoán cuối cùng:
-          \[
-              \hat{\mathbf{y}} = \sum_{i=1}^{R} \hat{\mathbf{y}}^i \quad (2)
-          \]
-\end{itemize}
-Từ đây, ta thấy được đầu vào của block sẽ không chứa mà block trước đó đã dự đoán được. Điều này giúp các block sau tập trung vào những phần thông tin chưa được dự đoán.
-\vspace{3mm}
-\subsubsection{Kiến trúc của block}
-Hình 13 mô tả kiến trúc trong block thứ $\mathbf{i}$ của mô hình. Kiến trúc của block đơn giản chỉ bao gồm các lớp kết nối đầy đủ FC (fully connected). Các lớp kết nối đầy đủ đơn giản là một lớp ánh xạ tuyến tính với hàm kích hoạt RELU. Ví dụ:
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.23\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/N-BEATS/2.png}
-        \caption{Kiến trúc của block}
-        \label{fig:N-BEATS}
-    \end{minipage}
-\end{figure}
-\[
-    FC(\mathbf{x}^i) = RELU(W\mathbf{x}^i + b) (3)
-\]
-trong đó $\mathbf{W}$ và $\mathbf{b}$ lần lượt là các ma trận sẽ được học trong quá trình huấn luyện. Hàm RELU là hàm $\mathbf{f(x) = max(0, x)}$.
-Block bao gồm M lớp FC chung (M thường là 4). Sau đó, sẽ có hai lớp FC là M+1 và M+2 để chia đầu ra thành 2 nhánh. Đầu ra của hai lớp trên lần lượt là hai vectơ hệ số $\mathbf{\theta}^f$ và $\mathbf{\theta}^b$.
-Cuối cùng, ta sẽ ánh xạ hai vectơ trên thành các đầu ra backcast và forecast thông qua các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$. Tuỳ vào dạng hàm $\mathbf{g}$ khác nhau mà chúng ta sẽ có các loại block với vai trò khác nhau. Cụ thể, mô hình N-BEATS giới thiệu ba loại block: trend block, seasonality block, generic block.
-
-Generic block là kiến trúc không mang tính diễn giải được trong chuỗi thời gian. Generic block đơn giản đặt các ánh xạ $\mathbf{g}^f$ và $\mathbf{g}^b$ là các ánh xạ tuyến tính đối với đầu ra của lớp trước.
-
-Trend block là loại block để nhận biết và phân tích được tính xu hướng của dữ liệu. Một đặc điểm của xu hướng thường phần lớn là các hàm đơn điệu hoặc thay đổi chậm. Để tìm hiểu được tính xu hướng
-của dữ liệu, các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$ sẽ là các hàm đa thức với bậc $\mathbf{p}$ nhỏ theo thời gian. Khi đó, các hệ số $\mathbf{\theta}^f$ và $\mathbf{\theta}^b$ đóng vai trò là các hệ số của đa thức. Ví dụ đầu ra forecast của trend block thứ $\mathbf{i}$ là:
-
-
-\[
-    \hat{\mathbf{y}^i} = \sum_{j=0}^{p} {\mathbf{\theta}}^f_j{t^j} \quad (4)
-\]
-
-Trong đó $\mathbf{\theta}^f_j$ là phần tử thứ j trong vectơ hệ số $\mathbf{t} = \mathbf{\frac{[0, 1, 2, \dots, H-2, H-1]^T}{\mathbf{H}}}$
-
-Cuối cùng, loại seasonality block dùng để nhận biết tính mùa của dữ liệu. Đặc điểm chính của tính mùa là dữ liệu thường có tính chu kỳ.
-Do đó, để mô phỏng tính mùa, các hàm $\mathbf{g}^f$ và $\mathbf{g}^b$ sẽ là các loại hàm tuần hoàn, ví dụ $\mathbf{y}_t$ = $\mathbf{y}_{\Delta + t}$ trong đó $\mathbf{\Delta}$ là chu kỳ mùa. Sử dụng chuỗi Fourier để xây dựng các hàm tuần hoàn trên, ta có đầu ra
-forecast của seasonality block thứ $\mathbf{i}$ là:
-\[
-    \hat{y}^i = \sum_{j=0}^{|\frac{H}{2} - 1|} \theta_j^f \cos(2\pi i t) + \theta_{j+|\frac{H}{2}|}^f \sin(2\pi i t) \quad (5)
-\]
-
-Sau khi giới thiệu ba loại block trên, mô hình N-BEATS được xây dựng dựa trên số lượng và thứ tự của mỗi loại block.
 
 \subsection{Long Short Term Memory (LSTM)}
 Mạng bộ nhớ dài-ngắn (Long Short Term Memory), thường được gọi là LSTM - là một dạng cải tiến của RNN, nó có khả năng học được các phụ thuộc xa .LSTM gồm trạng thái ẩn \(h_t\) (hidden state) và \(c_t\) (cell state). LSTM gồm 3 thành phần chính:
