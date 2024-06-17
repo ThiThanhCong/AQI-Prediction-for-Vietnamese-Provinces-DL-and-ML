@@ -806,6 +806,10 @@ Trong đó:
 \[
     MAE = \frac{1}{n}\sum_{i=1}^{n}\left|y_i-{\hat{y}}_i\right|
 \]
+\textbf{Root Mean Square Error (RMSE)}: cho biết mức độ chênh lệch trung bình giữa giá trị dự đoán của mô hình và giá trị thực tế.
+\[
+    RMSE = \sqrt{\frac{\sum_{i=0}^{N - 1} (y_i - \hat{y}_i)^2}{N}}
+\] 
 \subsection{HaNoi dataset}
 \begin{table}[H]
     \centering
@@ -817,7 +821,7 @@ Trong đó:
         \hline
         \multirow{2}{*}{ARIMA}  & 7:3              & 49.32     & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
         \hline
-        \multirow{2}{*}{DLM}    & 7:3              & 5212.21   & 7.55           & 0.016   \\ & 8:2 & 1014.97 & 1.62 & 0.0005 \\ & \textbf{9:1} & \textbf{822.63} & \textbf{1.26} & \textbf{0.0003}\\
+        \multirow{2}{*}{DLM}    & 7:3              & 61.12     & 114.34         & 52.26   \\ & 8:2 & 42.51 & 38.64 & 32.04 \\ & \textbf{9:1} & \textbf{76.20} & \textbf{69.34} & \textbf{61.13}\\
         \hline
         \multirow{2}{*}{GNN}    & 7:3              & 99.755    & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
         \hline
@@ -827,7 +831,7 @@ Trong đó:
         \hline
         \multirow{2}{*}{ResCNN} & 7:3              & 28.739    & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
         \hline
-        \multirow{2}{*}{RNN}    & 7:3              & 7849.6833 & 15.2872        & 0.0407  \\ & 8:2 & 7502.4992 & 15.1483 & 0.0357 \\ & \textbf{9:1} &  \textbf{3342.8102} &	\textbf{6.3561} & 	\textbf{0.0057} \\
+        \multirow{2}{*}{RNN}    & 7:3              & 24.9188   & 29.3465        & 10.0873 \\ & 8:2 & 25.7266 & 24.468 & 19.4329 \\ & \textbf{9:1} &  \textbf{27.6262} &	\textbf{29.4822} & 	\textbf{22.0334} \\
         \hline
         \multirow{2}{*}{SES}    & 7:3              & 57.6650   & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
         \hline
