@@ -201,22 +201,6 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
 
 \section{Phương pháp luận}
 \subsection{Gauss newton method nonlinear}
-\subsubsection{Least Squares}
-Khoảng cách giữa một đường cong được khớp và một quan sát được gọi là sai số dư, hoặc lỗi.
-
-\begin{center}
-    $Residuals = y_i - \widehat{y}_i$
-\end{center}
-
-Tổng của các sai số bình phương được tính bằng phương trình sau:
-
-\begin{center}
-    $SSE = \sum_{i=1}^{n}(y_i - \widehat{y}_i)^2$
-\end{center}
-
-Trong đó: \\
-\indent\textbullet\ \(y_i\) là các giá trị quan sát được\\
-\indent\textbullet\ \(\widehat{y}_i\) là các giá trị khớp\\
 
 \subsubsection{Phương pháp Newton}
 Với hàm \( y = y_0 e^{-kt} \), chúng ta tìm giá trị nhỏ nhất của SSE. Chúng ta tìm giá trị \(k\) bằng phương pháp Newton.
@@ -519,7 +503,7 @@ Ta bắt đầu bằng việc thiết kế các cổng tạo ra các biến này
 minh họa các đầu vào cho cả cổng thiết lập lại và cổng cập nhật trong GRU, với đầu vào ở bước thời gian hiện tại  \(\mathbf{X}_t \)
 và trạng thái ẩn ở bước thời gian trước đó  \(\mathbf{H}_{t-1} \). Đầu ra được tạo bởi một tầng kết nối đầy đủ với hàm kích hoạt sigmoid.
 
-Tại bước thời gian $t$, với đầu vào minibatch là $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (số lượng mẫu: $n$, số lượng đầu vào: $d$) và trạng thái ẩn ở bước thời gian gần nhất là $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (số lượng trạng thái ẩn: $h$), cổng thiết lập lại $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ và cổng cập nhật $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ được tính như sau:
+Tại bước thời gian $t$, với đầu vào là $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (số lượng mẫu: $n$, số lượng đầu vào: $d$) và trạng thái ẩn ở bước thời gian gần nhất là $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (số lượng trạng thái ẩn: $h$), cổng thiết lập lại $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ và cổng cập nhật $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ được tính như sau:
 
 \begin{equation*}
     \mathbf{R}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xr} + \mathbf{H}_{t-1} \mathbf{W}_{hr} + \mathbf{b}_r)
@@ -573,11 +557,6 @@ trình cập nhật cuối cho GRU.
 \end{figure}
 
 Nếu các giá trị trong cổng cập nhật $\mathbf{Z}_t$ bằng 1, chúng ta chỉ đơn giản giữ lại trạng thái cũ. Trong trường hợp này, thông tin từ $\mathbf{X}_t$ về cơ bản được bỏ qua, tương đương với việc bỏ qua bước thời gian $t$ trong chuỗi phụ thuộc. Ngược lại, nếu $\mathbf{Z}_t$ gần giá trị 0, trạng thái ẩn $\mathbf{H}_t$ sẽ gần với trạng thái ẩn tiềm năng $\tilde{\mathbf{H}}_t$. Những thiết kế trên có thể giúp chúng ta giải quyết vấn đề tiêu biến gradient trong các mạng RNN và nắm bắt tốt hơn sự phụ thuộc xa trong chuỗi thời gian. Tóm lại, các mạng GRU có hai tính chất nổi bật sau:
-
-\begin{itemize}
-    \item Cổng xoá giúp nắm bắt các phụ thuộc ngắn hạn trong chuỗi thời gian.
-    \item Cổng cập nhật giúp nắm bắt các phụ thuộc dài hạn trong chuỗi thời gian.
-\end{itemize}
 
 \subsection{Dynamic Linear Model (DLM)}
 Dynamic Linear Model là một trường hợp đặt biệt của mô hình trạng thái không gian - mô hình biểu hiện trạng thái của một hệ thống. Model mô tả hành động của một hệ thống động bằng cách sử dụng một bộ biến, được gọi là biến trạng thái để miêu tả trạng thái hiện tại của hệ thống. Những biến này thể hiện các đặc điểm bên trong của trạng thái biến đổi qua thời gian.
@@ -636,28 +615,28 @@ Trong N-BEATS, mỗi khối (block) tạo ra hai đầu ra: backcast và forecas
 \subsection{Dữ liệu đầu vào}
 N-BEATS làm việc với chuỗi thời gian đơn biến. Đầu vào là một chuỗi thời gian có độ dài $t$:
 \[
-x = [y_{T-t+1}, y_{T-t+2}, \ldots, y_T]
+    x = [y_{T-t+1}, y_{T-t+2}, \ldots, y_T]
 \]
 Mục tiêu là dự báo giá trị cho $H$ bước tiếp theo:
 \[
-y = [y_{T+1}, y_{T+2}, \ldots, y_{T+H}]
+    y = [y_{T+1}, y_{T+2}, \ldots, y_{T+H}]
 \]
 Khoảng thời gian xem lại (lookback period) thường có độ dài $t = nH$ với $n$ từ 2 đến 7.
 
 \subsection{Kiến trúc tổng quát}
 Mô hình N-BEATS gồm nhiều block xếp chồng lên nhau. Đầu vào của block đầu tiên là dữ liệu $x$. Mỗi block tạo ra hai đầu ra: backcast làm đầu vào cho block kế tiếp, và forecast dùng để tổng hợp dự đoán cuối cùng. Đầu vào của block thứ $i$ (với $i > 1$) là:
 \[
-x_i = x_{i-1} - \hat{x}_{i-1}
+    x_i = x_{i-1} - \hat{x}_{i-1}
 \]
 Dự đoán cuối cùng là tổng hợp các đầu ra forecast của tất cả các block:
 \[
-\hat{y} = \sum_{i=1}^{R} \hat{y}_i
+    \hat{y} = \sum_{i=1}^{R} \hat{y}_i
 \]
 
 \subsection{Kiến trúc của block}
 Mỗi block gồm các lớp kết nối đầy đủ (fully connected, FC) với hàm kích hoạt ReLU:
 \[
-FC(x_i) = ReLU(Wx_i + b)
+    FC(x_i) = ReLU(Wx_i + b)
 \]
 Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ lớp FC chung, sau đó có hai lớp FC để chia đầu ra thành hai nhánh với các hệ số $\theta_f$ và $\theta_b$. Các hệ số này được ánh xạ thành đầu ra backcast và forecast qua các hàm $g_f$ và $g_b$.
 
@@ -665,13 +644,13 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \begin{itemize}
     \item \textbf{Generic Block}: Sử dụng các ánh xạ tuyến tính.
     \item \textbf{Trend Block}: Phân tích xu hướng dữ liệu bằng các hàm đa thức bậc thấp:
-    \[
-    \hat{y}_i = \sum_{j=0}^{p} \theta_{f,j} t^j
-    \]
+          \[
+              \hat{y}_i = \sum_{j=0}^{p} \theta_{f,j} t^j
+          \]
     \item \textbf{Seasonality Block}: Nhận diện tính mùa vụ qua các hàm tuần hoàn, sử dụng chuỗi Fourier:
-    \[
-    \hat{y}_i = \sum_{j=0}^{H/2 - 1} \theta_{f,j} \cos(2\pi j t) + \theta_{f,j + H/2} \sin(2\pi j t)
-    \]
+          \[
+              \hat{y}_i = \sum_{j=0}^{H/2 - 1} \theta_{f,j} \cos(2\pi j t) + \theta_{f,j + H/2} \sin(2\pi j t)
+          \]
 \end{itemize}
 
 \subsection{Long Short Term Memory (LSTM)}
@@ -772,35 +751,35 @@ Trong đó:
 \textbf{Root Mean Square Error (RMSE)}: cho biết mức độ chênh lệch trung bình giữa giá trị dự đoán của mô hình và giá trị thực tế.
 \[
     RMSE = \sqrt{\frac{\sum_{i=0}^{N - 1} (y_i - \hat{y}_i)^2}{N}}
-\] 
+\]
 \subsection{HaNoi dataset}
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}                               \\
+        \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}                             \\
         \hline
-        \centering Model        & Training:Testing & RMSE      & MAPE (\%)      & MAE     \\
+        \centering Model        & Training:Testing & RMSE    & MAPE (\%)      & MAE     \\
         \hline
-        \multirow{2}{*}{ARIMA}  & 7:3              & 49.32     & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
+        \multirow{2}{*}{ARIMA}  & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
         \hline
-        \multirow{2}{*}{DLM}    & 7:3              & 61.12     & 114.34         & 52.26   \\ & 8:2 & 42.51 & 38.64 & 32.04 \\ & \textbf{9:1} & \textbf{76.20} & \textbf{69.34} & \textbf{61.13}\\
+        \multirow{2}{*}{DLM}    & 7:3              & 61.12   & 114.34         & 52.26   \\ & 8:2 & 42.51 & 38.64 & 32.04 \\ & \textbf{9:1} & \textbf{76.20} & \textbf{69.34} & \textbf{61.13}\\
         \hline
-        \multirow{2}{*}{GNN}    & 7:3              & 99.755    & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
+        \multirow{2}{*}{GNN}    & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
         \hline
-        \multirow{2}{*}{GRU}    & 7:3              & 81.263    & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
+        \multirow{2}{*}{GRU}    & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
         \hline
-        \multirow{2}{*}{NBEATS} & 7:3              & 28.31     & 31.20          & 21.95   \\ &8:2 & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  \textbf{9:1} & 34.99 & 29.10 & 27.17\\
+        \multirow{2}{*}{NBEATS} & 7:3              & 28.31   & 31.20          & 21.95   \\ &8:2 & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  \textbf{9:1} & 34.99 & 29.10 & 27.17\\
         \hline
-        \multirow{2}{*}{ResCNN} & 7:3              & 28.739    & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
+        \multirow{2}{*}{ResCNN} & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
         \hline
-        \multirow{2}{*}{RNN}    & 7:3              & 24.9188   & 29.3465        & 10.0873 \\ & 8:2 & 25.7266 & 24.468 & 19.4329 \\ & \textbf{9:1} &  \textbf{27.6262} &	\textbf{29.4822} & 	\textbf{22.0334} \\
+        \multirow{2}{*}{RNN}    & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & 8:2 & 25.7266 & 24.468 & 19.4329 \\ & \textbf{9:1} &  \textbf{27.6262} &	\textbf{29.4822} & 	\textbf{22.0334} \\
         \hline
-        \multirow{2}{*}{SES}    & 7:3              & 57.6650   & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
+        \multirow{2}{*}{SES}    & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
         \hline
-        \multirow{2}{*}{LN}     & 7:3              & 64.77     & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
+        \multirow{2}{*}{LN}     & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
         \hline
-        \multirow{2}{*}{LSTM}   & 7:3              & 26.6116   & 31.6805        & 19.8217 \\ & 8:2 & 28.0331 &  24.7388 &  20.8787 \\ & \textbf{9:1} & \textbf{25.2593} & \textbf{26.8360} & \textbf{19.3049}\\
+        \multirow{2}{*}{LSTM}   & 7:3              & 26.6116 & 31.6805        & 19.8217 \\ & 8:2 & 28.0331 &  24.7388 &  20.8787 \\ & \textbf{9:1} & \textbf{25.2593} & \textbf{26.8360} & \textbf{19.3049}\\
         \hline
     \end{tabular}
     \vspace{5px}
