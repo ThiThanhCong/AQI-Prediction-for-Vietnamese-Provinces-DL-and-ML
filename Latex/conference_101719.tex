@@ -104,7 +104,7 @@ Vào năm 2014, D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D. Reeves, 
 \subsection{N-BEATS}
 Năm 2022, một nhóm gồm năm nhà nghiên cứu, sau khi xem xét các phương pháp dự báo chuỗi thời gian truyền thống như VAR và các biến thể của nó, nhận thấy chúng không hiệu quả do tính chất không ổn định của dữ liệu chất lượng không khí. Do đó, họ đã chọn sử dụng kiến trúc N-BEATS \cite{b8} để xây dựng mô hình dự báo cho nhiều chất ô nhiễm không khí khác nhau ở Thành phố Hồ Chí Minh, cụ thể là giá trị của NO2, SO2, CO và O3.
 
-Năm 2021, một nhóm nghiên cứu tại Đại học Khoa học và Công nghệ Hà Nội và Đại học FPT đã áp dụng mô hình NBEATS để dự báo nhu cầu điện ngắn hạn ở Việt Nam \cite{b9}. 
+Năm 2021, một nhóm nghiên cứu tại Đại học Khoa học và Công nghệ Hà Nội và Đại học FPT đã áp dụng mô hình NBEATS để dự báo nhu cầu điện ngắn hạn ở Việt Nam \cite{b9}.
 
 \subsection{Recurrent Neural Network}
 Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana, Graham Taylora, Bahram Gharabaghia, và Jesse Thé từ Trường Kỹ thuật, Đại học Guelph, Guelph, Ontario, Canada dự báo chuỗi thời gian chất lượng không khí bằng cách sử dụng mô hình học sâu mạng nơ-ron hồi quy (RNN) với bộ nhớ dài hạn (LSTM). \cite{b10}
@@ -152,14 +152,14 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/BoxplotHaNoi.png}
         \caption{HaNoi AQI's boxplot}
         \label{fig:1}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/histogramHaNoi.png}
         \caption{HaNoi AQI's histogram}
@@ -169,14 +169,14 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/BoxplotDaNang.png}
         \caption{DaNang AQI's boxplot}
         \label{fig:1}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/histogramDaNang.png}
         \caption{DaNang AQI's histogram}
@@ -186,14 +186,14 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/BoxplotVietTri.png}
         \caption{VietTri AQI's boxplot}
         \label{fig:1}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/Analysis-Dataset/histogramVietTri.png}
         \caption{VietTri AQI's histogram}
@@ -374,7 +374,7 @@ Chúng tôi đề xuất một mô hình ResCNN với kết nối dư trên các
 \paragraph{Thiết kế mô hình}
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/ResCNN/ResCNN_1.png}
         \caption{Mô hình ResCNN được đề xuất}
@@ -456,7 +456,7 @@ Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng th
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_1.pdf}
         \caption{Cổng thiết lập lại và cổng cập nhật trong GRU}
@@ -489,7 +489,7 @@ Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_2.pdf}
         \caption{Tính toán trạng thái tiềm năng trong một GRU. Phép nhân được thực hiện theo phần tử}
@@ -512,7 +512,7 @@ trình cập nhật cuối cho GRU.
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_3.pdf}
         \caption{Tính toán trạng thái ẩn trong một GRU. Phép nhân được thực hiện cho từng phần tử}
@@ -553,7 +553,7 @@ Trong đó:\\
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.23\textwidth}
+    \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/RNN/RNN.pdf}
         \caption{Một mạng lưới thần kinh tái diễn và sự diễn ra theo thời gian của quá trình tính toán liên quan đến tính toán chuyển tiếp.}
@@ -622,7 +622,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 Mạng bộ nhớ dài-ngắn (Long Short Term Memory), thường được gọi là LSTM - là một dạng cải tiến của RNN, nó có khả năng học được các phụ thuộc xa .LSTM gồm trạng thái ẩn \(h_t\) (hidden state) và \(c_t\) (cell state). LSTM gồm 3 thành phần chính:
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.25\textwidth}
+    \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/LSTM/lstm.pdf}
         \caption{Một ô LSTM ở trạng thái t.}
@@ -713,29 +713,29 @@ Trong đó:
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}                             \\
+        \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}                                           \\
         \hline
-        \centering Model        & Training:Testing & RMSE    & MAPE (\%)      & MAE     \\
+        \centering Model                      & Training:Testing & RMSE    & MAPE (\%)      & MAE     \\
         \hline
-        \multirow{2}{*}{ARIMA}  & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
+        \multirow{2}{*}{ARIMA}                & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
         \hline
-        \multirow{2}{*}{DLM}    & 7:3              & 61.12   & 114.34         & 52.26   \\ & \textbf{8:2} & \textbf{42.51} & \textbf{38.64} & \textbf{32.04} \\ & 9:1 & 76.20 &  69.34 & 61.13\\
+        \multirow{2}{*}{DLM}                  & 7:3              & 61.12   & 114.34         & 52.26   \\ & \textbf{8:2} & \textbf{42.51} & \textbf{38.64} & \textbf{32.04} \\ & 9:1 & 76.20 &  69.34 & 61.13\\
         \hline
-        \multirow{2}{*}{GaussNewtonNonlinear}    & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
+        \multirow{2}{*}{GaussNewtonNonlinear} & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
         \hline
-        \multirow{2}{*}{GRU}    & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
+        \multirow{2}{*}{GRU}                  & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
         \hline
-        \multirow{2}{*}{NBEATS} & 7:3              & 28.31   & 31.20          & 21.95   \\ & \textbf{8:2} & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  9:1 & 34.99 & 29.10 & 27.17\\
+        \multirow{2}{*}{NBEATS}               & 7:3              & 28.31   & 31.20          & 21.95   \\ & \textbf{8:2} & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  9:1 & 34.99 & 29.10 & 27.17\\
         \hline
-        \multirow{2}{*}{ResCNN} & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
+        \multirow{2}{*}{ResCNN}               & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
         \hline
-        \multirow{2}{*}{RNN}    & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & \textbf{8:2} & \textbf{25.7266} & \textbf{24.468} & \textbf{19.4329} \\ & 9:1 &  27.6262 &	29.4822 & 	22.0334 \\
+        \multirow{2}{*}{RNN}                  & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & \textbf{8:2} & \textbf{25.7266} & \textbf{24.468} & \textbf{19.4329} \\ & 9:1 &  27.6262 &	29.4822 & 	22.0334 \\
         \hline
-        \multirow{2}{*}{SES}    & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
+        \multirow{2}{*}{SES}                  & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
         \hline
-        \multirow{2}{*}{LN}     & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
+        \multirow{2}{*}{LN}                   & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
         \hline
-        \multirow{2}{*}{LSTM}   & 7:3              & 26.4712 & 29.8561        & 19.4630 \\ & 8:2 & 27.6927 &  27.0804 &  21.2096 \\ & \textbf{9:1} & \textbf{25.2623} & \textbf{26.7261} & \textbf{19.2388}\\
+        \multirow{2}{*}{LSTM}                 & 7:3              & 26.4712 & 29.8561        & 19.4630 \\ & 8:2 & 27.6927 &  27.0804 &  21.2096 \\ & \textbf{9:1} & \textbf{25.2623} & \textbf{26.7261} & \textbf{19.2388}\\
         \hline
     \end{tabular}
     \vspace{5px}
@@ -751,15 +751,15 @@ RNN
 \begin{figure}[H]
     \centering
     \subfigure[Tỉ lệ 9:1]{
-    \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/9_1.png}
+        \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/9_1.png}
     }
     \hspace{0.01\textwidth}
     \subfigure[Tỉ lệ 8:2]{
-    \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/8_2.png}
+        \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/8_2.png}
     }
     \hspace{0.01\textwidth}
     \subfigure[Tỉ lệ 7:3]{
-    \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/7_3.png}
+        \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/7_3.png}
     }
     \caption{Kết quả chạy mô hình RNN}
     \label{fig
@@ -771,15 +771,15 @@ LSTM
 \begin{figure}[H]
     \centering
     \subfigure[Tỉ lệ 9:1]{
-    \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/9_1.png}
+        \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/9_1.png}
     }
     \hspace{0.01\textwidth}
     \subfigure[Tỉ lệ 8:2]{
-    \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/8_2.png}
+        \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/8_2.png}
     }
     \hspace{0.01\textwidth}
     \subfigure[Tỉ lệ 7:3]{
-    \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/7_3.png}
+        \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/7_3.png}
     }
     \caption{Kết quả chạy mô hình LSTM}
     \label{fig
@@ -791,18 +791,18 @@ LSTM
 9:1
 
 \begin{figure}[htbp]
-   
+
     \centering
     \subfigure[Kết quả dự đoán 30 ngày kết tiếp]{
-    \includegraphics[width=0.2\textwidth]{bibliography/figure/RNN/predict_30_days.jpg}
+        \includegraphics[width=0.4\textwidth]{bibliography/figure/RNN/predict_30_days.jpg}
     }
     \hspace{0.01\textwidth}
     \subfigure[Kết quả dự đoán 60 ngày kết tiếp]{
-    \includegraphics[width=0.2\textwidth]{bibliography/figure/RNN/predict_60_days.jpg}
+        \includegraphics[width=0.4\textwidth]{bibliography/figure/RNN/predict_60_days.jpg}
     }
     \hspace{0.01\textwidth}
     \subfigure[Kết quả dự đoán 90 ngày kết tiếp]{
-    \includegraphics[width=0.2\textwidth]{bibliography/figure/RNN/predict_90_days.jpg}
+        \includegraphics[width=0.4\textwidth]{bibliography/figure/RNN/predict_90_days.jpg}
     }
     \caption{Kết quả dự đoán giá trị AQI 30, 60 và 90 ngày kết tiếp của mô hình RNN}
     \label{fig
@@ -814,26 +814,26 @@ LSTM
 \begin{figure}[htbp]
     \centering
     \subfigure[Kết quả dự đoán 30 ngày kết tiếp]{
-    \includegraphics[width=0.2\textwidth]{bibliography/figure/LSTM/predict_30_days.png}
+        \includegraphics[width=0.4\textwidth]{bibliography/figure/LSTM/predict_30_days.png}
     }
     \hspace{0.01\textwidth}
     \subfigure[Kết quả dự đoán 60 ngày kết tiếp]{
-    \includegraphics[width=0.2\textwidth]{bibliography/figure/LSTM/predict_60_days.png}
+        \includegraphics[width=0.4\textwidth]{bibliography/figure/LSTM/predict_60_days.png}
     }
     \hspace{0.01\textwidth}
     \subfigure[Kết quả dự đoán 90 ngày kết tiếp]{
-    \includegraphics[width=0.2\textwidth]{bibliography/figure/LSTM/predict_90_days.png}
+        \includegraphics[width=0.4\textwidth]{bibliography/figure/LSTM/predict_90_days.png}
     }
     \caption{Kết quả dự đoán giá trị AQI 30, 60 và 90 ngày kết tiếp của mô hình LSTM}
     \label{fig
     }
-    \end{figure}
+\end{figure}
 
 \section{Tổng kết}
 \subsection{Tổng quan}
 Trong bài báo nghiên cứu khoa học của nhóm, chúng tôi đã sử dụng 10mô hình khác nhau—Gauss Newton Non-Linear, ResCNN, N-BEATS, DLM, SES, hồi quy tuyến tính, ARIMA, RNN, GRU và LSTM—để dự báo chất lượng không khí ở ba thành phố lớn của Việt Nam.
 
-Phân tích toàn diện của chúng tôi cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, N-BEATS, RNN, GRU và LSTM cho kết quả vượt trội hơn các mô hình thống kê truyền thống như Gauss Newton Non-Linear, hồi quy tuyến tính và ARIMA về độ chính xác và độ tin cậy. Các mô hình học sâu thể hiện hiệu suất vượt trội nhờ khả năng nắm bắt các phức tạp và các mối quan hệ phi tuyến tính vốn có trong dữ liệu chất lượng không khí. Trong số này, mô hình LSTM và RNN cung cấp các dự báo nhất quán và đáng tin cậy nhất trên cả ba thành phố. 
+Phân tích toàn diện của chúng tôi cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, N-BEATS, RNN, GRU và LSTM cho kết quả vượt trội hơn các mô hình thống kê truyền thống như Gauss Newton Non-Linear, hồi quy tuyến tính và ARIMA về độ chính xác và độ tin cậy. Các mô hình học sâu thể hiện hiệu suất vượt trội nhờ khả năng nắm bắt các phức tạp và các mối quan hệ phi tuyến tính vốn có trong dữ liệu chất lượng không khí. Trong số này, mô hình LSTM và RNN cung cấp các dự báo nhất quán và đáng tin cậy nhất trên cả ba thành phố.
 \subsection{Định hướng phát triển tương lai}
 Mặc dù kết quả nghiên cứu của nhóm mang lại hứa hẹn, song phần dự báo vẫn còn dấu hiệu không chính xác với chỉ số đánh giá thấp, và ngoài ra vẫn còn nhiều hướng nghiên cứu trong tương lai để nâng cao khả năng dự báo chất lượng không khí:\\
 \indent\textbullet\ Thứ nhất, việc kết hợp, chọn lọc các nguồn dữ liệu bổ sung như dữ liệu khí tượng, lưu lượng giao thông và hoạt động công nghiệp có thể cải thiện độ chính xác của mô hình.\\
