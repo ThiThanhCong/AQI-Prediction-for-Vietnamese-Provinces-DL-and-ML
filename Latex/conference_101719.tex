@@ -99,7 +99,7 @@ Trong phân loại ECG, sử dụng ResNet kết hợp với cơ chế chú ý �
 \subsection{Dynamic linear models}
 Tháng 2 năm 2001, Monica Chioga cùng với Carlo Gaetan từ Università di Padova, Ý đã đề xuất mô hình hóa các tác động của phơi nhiễm chất ô nhiễm ngắn hạn lên sức khỏe bằng cách sử dụng các mô hình tuyến tính tổng quát động, nhằm tìm ra mối quan hệ giữa số ca tử vong không do tai nạn hàng ngày và ô nhiễm không khí ở thành phố Birmingham, Alabama. \cite{b5}
 
-Hiểu biết về động lực trong vành đai bức xạ là rất quan trọng. Các electron có năng lượng cao có thể gây hại cho các vệ tinh. Do đó, việc cung cấp cho các nhà vận hành vệ tinh dự báo chính xác về cường độ dòng electron với thời gian dự báo có thể hành động là rất quan trọng. Vì vậy, vào năm 2014, D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D. Reeves, và B. P. Weaver đã sử dụng các mô hình tuyến tính động để dự báo electron trong vành đai bức xạ bằng cách so sánh độ chính xác dự báo trước 1 ngày của một mô hình tuyến tính động đơn giản với mô hình dự báo electron tương đối hiện tại (REFM). \cite{b6}
+Vào năm 2014, D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D. Reeves, và B. P. Weaver đã sử dụng các mô hình tuyến tính động để dự báo electron trong vành đai bức xạ bằng cách so sánh độ chính xác dự báo trước 1 ngày của một mô hình tuyến tính động đơn giản với mô hình dự báo electron tương đối hiện tại (REFM). \cite{b6}
 
 \subsection{N-BEATS}
 Năm 2022, một nhóm gồm năm nhà nghiên cứu, sau khi xem xét các phương pháp dự báo chuỗi thời gian truyền thống như VAR và các biến thể của nó, nhận thấy chúng không hiệu quả do tính chất không ổn định của dữ liệu chất lượng không khí. Do đó, họ đã chọn sử dụng kiến trúc N-BEATS \cite{b8} để xây dựng mô hình dự báo cho nhiều chất ô nhiễm không khí khác nhau ở Thành phố Hồ Chí Minh, cụ thể là giá trị của NO2, SO2, CO và O3.
@@ -742,6 +742,20 @@ Trong đó:
     \caption{HaNoi Dataset's Evaluation}
     \label{mbbresult}
 \end{table}
+\section{Tổng kết}
+\subsection{Tổng quan}
+Trong bài báo nghiên cứu khoa học của nhóm, chúng tôi đã sử dụng 10mô hình khác nhau—Gauss Newton Non-Linear, ResCNN, N-BEATS, DLM, SES, hồi quy tuyến tính, ARIMA, RNN, GRU và LSTM—để dự báo chất lượng không khí ở ba thành phố lớn của Việt Nam.
+
+Phân tích toàn diện của chúng tôi cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, N-BEATS, RNN, GRU và LSTM cho kết quả vượt trội hơn các mô hình thống kê truyền thống như Gauss Newton Non-Linear, hồi quy tuyến tính và ARIMA về độ chính xác và độ tin cậy. Các mô hình học sâu thể hiện hiệu suất vượt trội nhờ khả năng nắm bắt các phức tạp và các mối quan hệ phi tuyến tính vốn có trong dữ liệu chất lượng không khí. Trong số này, mô hình LSTM và RNN cung cấp các dự báo nhất quán và đáng tin cậy nhất trên cả ba thành phố. 
+\subsection{Định hướng phát triển tương lai}
+Mặc dù kết quả nghiên cứu của nhóm mang lại hứa hẹn, song phần dự báo vẫn còn dấu hiệu không chính xác với chỉ số đánh giá thấp, và ngoài ra vẫn còn nhiều hướng nghiên cứu trong tương lai để nâng cao khả năng dự báo chất lượng không khí:\\
+\indent\textbullet\ Thứ nhất, việc kết hợp, chọn lọc các nguồn dữ liệu bổ sung như dữ liệu khí tượng, lưu lượng giao thông và hoạt động công nghiệp có thể cải thiện độ chính xác của mô hình.\\
+\indent\textbullet\ Thứ hai, khám phá các mô hình lai kết hợp các điểm mạnh của các phương pháp mô hình hóa khác nhau có thể mang lại hiệu suất dự báo tốt hơn là việc sử dụng riêng lẽ để cho từng dự báo, đặc biệt rõ ràng ở việc sử dụng RNN + LSTM.
+
+Cuối cùng nhóm vẫn cần phải xem sét lại việc chọn lọc bộ dữ liệu và hiểu rõ các thuật toán do một số mô hình cho kết quả so sánh giữa train và test cùng chỉ số RMSE, MAPE and MSE không được khả quan.
+\section*{Lời cảm ơn}
+\addcontentsline{toc}{section}{Acknowledgment}
+Nhóm xin gửi lời cảm ơn đến phó giáo sư tiến sĩ Nguyễn Đình Thuân cùng giảng viên hướng dẫn Nguyễn Minh Nhực cho sự hướng dẫn tận tình, kiến thức bỗ trợ và phản hồi giúp nhóm đạt được kết quả mong muốn. Ngoài ra chúng tôi cũng chân thành đến Viện Môi trường và Tài Nguyên đã cung cấp dữ liệu chất lượng không khí cần thiết. Đặc biệt cảm ơn các thành viên của nhóm nghiên cứu vì những nỗ lực siêng năng và đóng góp sáng tạo trong suốt dự án này.
 \begin{thebibliography}{00}
     \bibitem{b1} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
