@@ -205,6 +205,24 @@ Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 
 
 
 \section{Phương pháp luận}
+
+\subsection{Linear Regression}
+Phân tích hồi quy là một công cụ để xây dựng các mô hình toán học và thống kê mô tả mối quan hệ giữa một biến phụ thuộc và một hoặc nhiều biến độc lập, hoặc biến giải thích, tất cả đều là các biến số. Kỹ thuật thống kê này được sử dụng để tìm một phương trình dự đoán tốt nhất cho biến \( y \) như một hàm tuyến tính của các biến \( x \).
+
+Một mô hình hồi quy tuyến tính đa biến có dạng:
+
+\[ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k + \varepsilon \]
+
+Trong đó:
+\begin{itemize}
+    \item \( Y \) là biến phụ thuộc (biến mục tiêu).
+    \item \( X_1, X_2, \ldots, X_k \) là các biến độc lập (biến giải thích).
+    \item \( \beta_0 \) là hệ số chặn.
+    \item \( \beta_1, \ldots, \beta_k \) là các hệ số hồi quy cho các biến độc lập.
+    \item \( \varepsilon \) là thuật ngữ lỗi.
+\end{itemize}
+
+
 \subsection{Gauss newton method nonlinear}
 
 \subsubsection{Phương pháp Newton}
@@ -321,7 +339,30 @@ Với \(\beta\) là một vector cột với các tham số được ước tín
     \]
 \end{center}
 \vspace{3mm}
-\subsection{AUTOREGRESSIVE INTEGRATED MOVING AVERAGE (ARIMA)}
+
+
+\subsection{Simple Exponential Smoothing (SES)}
+Simple exponential smoothing (SES) hay san bằng hàm mũ đơn giản là một phương pháp dự đoán dữ liệu chuỗi thời gian. SES dựa vào tổng trung bình trọng số của dữ liệu thực tế gần nhất và dữ liệu được dự đoán trước đó để dự đoán dữ liệu tiếp theo trong tương lai. SES phù hợp với dữ liệu chuỗi thời gian không có xu hướng và không có tính mùa vụ.. SES có thể viết ở hai dạng: dạng trung bình trọng số và dạng đối tượng.
+
+Dạng trung bình trọng số:
+\[\hat{y}_{t+1|t} = \alpha y_t + (1-\alpha)\hat{y}_{t|t-1}\]
+
+Trong đó:\\
+\indent\textbullet\ \(\hat{y}_{t+1|t} \): giá trị dự đoán ở thời điểm t+1 dựa vào giá trị thực tế ở thời điểm t.\\
+\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
+\indent\textbullet\ \(\hat{y}_{t|t-1} \): giá trị dự đoán ở thời điểm t dựa vào giá trị thực tế ở thời điểm  t-1.\\
+
+Dạng đối tượng:\\
+\indent\textbullet\ Phương trình dự đoán: \(\hat{y}_{t+h|t}=l_t\), h=1,2,3,\dots.\\
+\indent\textbullet\ Phương trình làm trơn: \(l_t=\alpha y_t+(1-\alpha)l_{t-1}\)\\
+
+Trong đó:\\
+\indent\textbullet\ \(\hat{y}_{t+h|t} \): giá trị dự đoán tại thời điểm t+h dựa trên giá trị thực tế ở thời điểm t.\\
+\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
+\indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
+
+
+\subsection{Autoregressive Integrated Moving Average (ARIMA)}
 
 ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hình ARIMA thường được sử dụng để dự báo dữ liệu chuỗi thời gian đơn biến. Mô hình ARIMA có thể xử lý một chuỗi thời gian nếu chuỗi đó là dừng và không có dữ liệu bị thiếu. Phương pháp này được sử dụng trong nhiều nghiên cứu để dự báo.
 
@@ -366,7 +407,31 @@ Trong đó: \\
 \indent -- \(\theta\) là hệ số Moving Average(MA)\\
 \indent -- \(\epsilon_t\) là hệ số tương quan\\
 \indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
-\subsection{ResCNN}
+
+
+\subsection{Recurrent Neural Networks (RNN)}
+Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống tất cả các đầu vào và cả đầu ra là độc lập với nhau. Tức là chúng không liên kết thành chuỗi với nhau. Nhưng các mô hình này không phù hợp trong rất nhiều bài toán. RNN được gọi là hồi quy (Recurrent) bởi thực hiện cùng một tác vụ cho tất cả các phần tử của một chuỗi với đầu ra phụ thuộc vào cả các phép tính trước đó. Nói cách khác, RNN có khả năng nhớ các thông tin được tính toán trước đó.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.43\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/RNN/RNN.pdf}
+        \caption{Một mạng lưới thần kinh tái diễn và sự diễn ra theo thời gian của quá trình tính toán liên quan đến tính toán chuyển tiếp.}
+        \label{fig:RNN}
+    \end{minipage}
+
+\end{figure}
+
+Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển khai ở đây có thể hiểu đơn giản là ta vẽ ra một mạng nơ-ron chuỗi tuần tự. Ví dụ ta có một câu gồm 5 chữ, thì mạng nơ-ron được triển khai sẽ gồm 5 tầng nơ-ron tương ứng với mỗi chữ một tầng. Lúc đó việc tính toán bên trong RNN được thực hiện như sau:
+\begin{itemize}
+    \item x\textsubscript{t} là đầu vào tại bước t. Ví dụ, x\textsubscript{t} là một vec-tơ one-hot tương ứng với từ thứ 2 của câu.
+    \item s\textsubscript{t} à trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm \(\theta \).
+    \item o\textsubscript{t} à đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})
+\end{itemize}
+
+
+\subsection{Residual Controversial Neural Network (ResCNN)}
 \subsubsection{Tổng quan}
 Mô hình ResCNN là một mô hình dự đoán chuỗi thời gian kết hợp giữa LSTM và CNN 1D sử dụng kết nối bỏ qua.
 
@@ -434,6 +499,47 @@ Kết nối còn lại thêm đầu vào ban đầu vào đầu ra của lớp t
 \[
     \textbf{out}_{res}(x) = x + \text{Conv}(x)
 \]
+
+
+\subsection{Long Short Term Memory (LSTM)}
+Mạng bộ nhớ dài-ngắn (Long Short Term Memory), thường được gọi là LSTM - là một dạng cải tiến của RNN, nó có khả năng học được các phụ thuộc xa .LSTM gồm trạng thái ẩn \(h_t\) (hidden state) và \(c_t\) (cell state). LSTM gồm 3 thành phần chính:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/figure/LSTM/lstm.pdf}
+        \caption{Một ô LSTM ở trạng thái t.}
+        \label{fig:LSTM}
+    \end{minipage}
+
+\end{figure}
+Cổng quên(Forget gate):Quản lý việc thông tin đến từ trạng thái trước sẽ được giữ lại hoặc loại bỏ.
+\[f_t=\sigma(W_{fx}.x_t+W_{fh}.h_{t-1}+b_f)\]
+
+Cổng vào (Input gate): Quản lý việc học thông tin mới từ đầu vào.
+\[i_t=\sigma(W_{ix}.x_t+W_{ih}.h_{t-1}+b_i)\]
+\[{\widetilde{C}}_t=tanh\left(W_{cx}.x_t+W_{ch}.h_{t-1}+b_c\right)\]
+\[C_t=f_t\circ c_{t-1}+i_t\circ{\widetilde{C}}_t\]
+
+Cổng ra (Output gate): Quản lý việc đưa thông tin mới cập nhật vào trạng thái kế tiếp.
+\[o_t=\sigma(W_{ox}.x_t+W_{oh}.h_{t-1}+b_o)\]
+\[h_t=o_t\circ tanh(C_t)\]
+
+Trong đó:\\
+\indent\textbullet\ \(x_t\) : Vector đầu vào các đặc trưng tại thời điểm t.\\
+\indent\textbullet\ \(h_{t-1}\) : Trạng thái ẩn đầu ra của tại thời điểm t-1.\\
+\indent\textbullet\ \(W_{fx},W_{fh},W_{ix},W_{ih},W_{cx},W_{hx},\) : Các ma trận trọng số.\\
+\indent\textbullet\ \(b_f,b_i, b_c \) : Các hệ số bias.\\
+\indent\textbullet\ Tanh: Hàm tanh có giá trị tử -1 đến 1.\\
+\indent\textbullet\ \(i_t\) : Giá trị cổng đầu vào tại thời điểm t.\\
+\indent\textbullet\ \(\sigma\) : Hàm Sigmoid có giá trị tử 0 đến 1.\\
+\indent\textbullet\ \(f_t\) : Giá trị của cổng quên tại thời điểm t.\\
+\indent\textbullet\ \(\widetilde{C}_t \) : Ô nhớ mới.\\
+\indent\textbullet\ \(C_t \) : Ô nhớ tổng thể.\\
+\indent\textbullet\ \(\circ\) : Phép nhân Hadamard.\\
+\indent\textbullet\ \(f_t\circ c_{t-1}\) : Quyết định lượng thông tin nào từ trạng thái ô nhớ trước đó sẽ được giữ lại cho ô tiếp theo.\\
+\indent\textbullet\ \(i_t\circ{\widetilde{C}}_t\) : Quyết định lượng thông tin nào từ \({\widetilde{C}}_t\) sẽ được thêm vào \(C_t\).\\
+\indent\textbullet\ \(o_t \) : Giá trị đầu ra tại thời điểm t.
 
 
 \subsection{Gated Recurrent Unit (GRU)}
@@ -551,36 +657,15 @@ Trong đó:\\
 \indent\textbullet\ G là ma trận giao chuyển để mô tả lại quá trình tiến hóa của trạng thái.\\
 \indent\textbullet\ \(\omega_t\) là nhiễu loạn trạng thái.
 
-\subsection{Recurrent Neural Networks (RNN)}
-Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống tất cả các đầu vào và cả đầu ra là độc lập với nhau. Tức là chúng không liên kết thành chuỗi với nhau. Nhưng các mô hình này không phù hợp trong rất nhiều bài toán. RNN được gọi là hồi quy (Recurrent) bởi thực hiện cùng một tác vụ cho tất cả các phần tử của một chuỗi với đầu ra phụ thuộc vào cả các phép tính trước đó. Nói cách khác, RNN có khả năng nhớ các thông tin được tính toán trước đó.
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.43\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/RNN/RNN.pdf}
-        \caption{Một mạng lưới thần kinh tái diễn và sự diễn ra theo thời gian của quá trình tính toán liên quan đến tính toán chuyển tiếp.}
-        \label{fig:RNN}
-    \end{minipage}
-
-\end{figure}
-
-Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển khai ở đây có thể hiểu đơn giản là ta vẽ ra một mạng nơ-ron chuỗi tuần tự. Ví dụ ta có một câu gồm 5 chữ, thì mạng nơ-ron được triển khai sẽ gồm 5 tầng nơ-ron tương ứng với mỗi chữ một tầng. Lúc đó việc tính toán bên trong RNN được thực hiện như sau:
-\begin{itemize}
-    \item x\textsubscript{t} là đầu vào tại bước t. Ví dụ, x\textsubscript{t} là một vec-tơ one-hot tương ứng với từ thứ 2 của câu.
-    \item s\textsubscript{t} à trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm \(\theta \).
-    \item o\textsubscript{t} à đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})
-\end{itemize}
-
 \subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
 \vspace{1mm}
-\subsection{Tổng quan}
+\subsubsection{Tổng quan}
 Mô hình N-BEATS, viết tắt của "Neural Basis Expansion Analysis for Time Series Forecasting," được phát triển bởi nhóm nghiên cứu từ Element AI và được công bố trong bài báo năm 2019 bởi Boris Oreshkin và cộng sự.
 
-\subsection{Backcast và Forecast}
+\subsubsection{Backcast và Forecast}
 Trong N-BEATS, mỗi khối (block) tạo ra hai đầu ra: backcast và forecast. Backcast tái tạo lại dữ liệu đầu vào để mô hình có thể học từ phần dư sau khi trừ đi phần tái tạo này, giúp khối tiếp theo xử lý thông tin còn lại. Forecast là đầu ra dự báo các giá trị tương lai, góp phần vào kết quả cuối cùng.
 
-\subsection{Dữ liệu đầu vào}
+\subsubsection{Dữ liệu đầu vào}
 N-BEATS làm việc với chuỗi thời gian đơn biến. Đầu vào là một chuỗi thời gian có độ dài $t$:
 \[
     x = [y_{T-t+1}, y_{T-t+2}, \ldots, y_T]
@@ -591,7 +676,7 @@ Mục tiêu là dự báo giá trị cho $H$ bước tiếp theo:
 \]
 Khoảng thời gian xem lại (lookback period) thường có độ dài $t = nH$ với $n$ từ 2 đến 7.
 
-\subsection{Kiến trúc tổng quát}
+\subsubsection{Kiến trúc tổng quát}
 Mô hình N-BEATS gồm nhiều block xếp chồng lên nhau. Đầu vào của block đầu tiên là dữ liệu $x$. Mỗi block tạo ra hai đầu ra: backcast làm đầu vào cho block kế tiếp, và forecast dùng để tổng hợp dự đoán cuối cùng. Đầu vào của block thứ $i$ (với $i > 1$) là:
 \[
     x_i = x_{i-1} - \hat{x}_{i-1}
@@ -601,14 +686,14 @@ Dự đoán cuối cùng là tổng hợp các đầu ra forecast của tất c�
     \hat{y} = \sum_{i=1}^{R} \hat{y}_i
 \]
 
-\subsection{Kiến trúc của block}
+\subsubsection{Kiến trúc của block}
 Mỗi block gồm các lớp kết nối đầy đủ (fully connected, FC) với hàm kích hoạt ReLU:
 \[
     FC(x_i) = ReLU(Wx_i + b)
 \]
 Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ lớp FC chung, sau đó có hai lớp FC để chia đầu ra thành hai nhánh với các hệ số $\theta_f$ và $\theta_b$. Các hệ số này được ánh xạ thành đầu ra backcast và forecast qua các hàm $g_f$ và $g_b$.
 
-\subsection{Các loại block}
+\subsubsection{Các loại block}
 \begin{itemize}
     \item \textbf{Generic Block}: Sử dụng các ánh xạ tuyến tính.
     \item \textbf{Trend Block}: Phân tích xu hướng dữ liệu bằng các hàm đa thức bậc thấp:
@@ -619,81 +704,6 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
           \[
               \hat{y}_i = \sum_{j=0}^{H/2 - 1} \theta_{f,j} \cos(2\pi j t) + \theta_{f,j + H/2} \sin(2\pi j t)
           \]
-\end{itemize}
-
-\subsection{Long Short Term Memory (LSTM)}
-Mạng bộ nhớ dài-ngắn (Long Short Term Memory), thường được gọi là LSTM - là một dạng cải tiến của RNN, nó có khả năng học được các phụ thuộc xa .LSTM gồm trạng thái ẩn \(h_t\) (hidden state) và \(c_t\) (cell state). LSTM gồm 3 thành phần chính:
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{bibliography/figure/LSTM/lstm.pdf}
-        \caption{Một ô LSTM ở trạng thái t.}
-        \label{fig:LSTM}
-    \end{minipage}
-
-\end{figure}
-Cổng quên(Forget gate):Quản lý việc thông tin đến từ trạng thái trước sẽ được giữ lại hoặc loại bỏ.
-\[f_t=\sigma(W_{fx}.x_t+W_{fh}.h_{t-1}+b_f)\]
-
-Cổng vào (Input gate): Quản lý việc học thông tin mới từ đầu vào.
-\[i_t=\sigma(W_{ix}.x_t+W_{ih}.h_{t-1}+b_i)\]
-\[{\widetilde{C}}_t=tanh\left(W_{cx}.x_t+W_{ch}.h_{t-1}+b_c\right)\]
-\[C_t=f_t\circ c_{t-1}+i_t\circ{\widetilde{C}}_t\]
-
-Cổng ra (Output gate): Quản lý việc đưa thông tin mới cập nhật vào trạng thái kế tiếp.
-\[o_t=\sigma(W_{ox}.x_t+W_{oh}.h_{t-1}+b_o)\]
-\[h_t=o_t\circ tanh(C_t)\]
-
-Trong đó:\\
-\indent\textbullet\ \(x_t\) : Vector đầu vào các đặc trưng tại thời điểm t.\\
-\indent\textbullet\ \(h_{t-1}\) : Trạng thái ẩn đầu ra của tại thời điểm t-1.\\
-\indent\textbullet\ \(W_{fx},W_{fh},W_{ix},W_{ih},W_{cx},W_{hx},\) : Các ma trận trọng số.\\
-\indent\textbullet\ \(b_f,b_i, b_c \) : Các hệ số bias.\\
-\indent\textbullet\ Tanh: Hàm tanh có giá trị tử -1 đến 1.\\
-\indent\textbullet\ \(i_t\) : Giá trị cổng đầu vào tại thời điểm t.\\
-\indent\textbullet\ \(\sigma\) : Hàm Sigmoid có giá trị tử 0 đến 1.\\
-\indent\textbullet\ \(f_t\) : Giá trị của cổng quên tại thời điểm t.\\
-\indent\textbullet\ \(\widetilde{C}_t \) : Ô nhớ mới.\\
-\indent\textbullet\ \(C_t \) : Ô nhớ tổng thể.\\
-\indent\textbullet\ \(\circ\) : Phép nhân Hadamard.\\
-\indent\textbullet\ \(f_t\circ c_{t-1}\) : Quyết định lượng thông tin nào từ trạng thái ô nhớ trước đó sẽ được giữ lại cho ô tiếp theo.\\
-\indent\textbullet\ \(i_t\circ{\widetilde{C}}_t\) : Quyết định lượng thông tin nào từ \({\widetilde{C}}_t\) sẽ được thêm vào \(C_t\).\\
-\indent\textbullet\ \(o_t \) : Giá trị đầu ra tại thời điểm t.
-
-\subsection{Simple Exponential Smoothing (SES)}
-Simple exponential smoothing (SES) hay san bằng hàm mũ đơn giản là một phương pháp dự đoán dữ liệu chuỗi thời gian. SES dựa vào tổng trung bình trọng số của dữ liệu thực tế gần nhất và dữ liệu được dự đoán trước đó để dự đoán dữ liệu tiếp theo trong tương lai. SES phù hợp với dữ liệu chuỗi thời gian không có xu hướng và không có tính mùa vụ.. SES có thể viết ở hai dạng: dạng trung bình trọng số và dạng đối tượng.
-
-Dạng trung bình trọng số:
-\[\hat{y}_{t+1|t} = \alpha y_t + (1-\alpha)\hat{y}_{t|t-1}\]
-
-Trong đó:\\
-\indent\textbullet\ \(\hat{y}_{t+1|t} \): giá trị dự đoán ở thời điểm t+1 dựa vào giá trị thực tế ở thời điểm t.\\
-\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
-\indent\textbullet\ \(\hat{y}_{t|t-1} \): giá trị dự đoán ở thời điểm t dựa vào giá trị thực tế ở thời điểm  t-1.\\
-
-Dạng đối tượng:\\
-\indent\textbullet\ Phương trình dự đoán: \(\hat{y}_{t+h|t}=l_t\), h=1,2,3,\dots.\\
-\indent\textbullet\ Phương trình làm trơn: \(l_t=\alpha y_t+(1-\alpha)l_{t-1}\)\\
-
-Trong đó:\\
-\indent\textbullet\ \(\hat{y}_{t+h|t} \): giá trị dự đoán tại thời điểm t+h dựa trên giá trị thực tế ở thời điểm t.\\
-\indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
-\indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
-\subsection{Linear Regression}
-Phân tích hồi quy là một công cụ để xây dựng các mô hình toán học và thống kê mô tả mối quan hệ giữa một biến phụ thuộc và một hoặc nhiều biến độc lập, hoặc biến giải thích, tất cả đều là các biến số. Kỹ thuật thống kê này được sử dụng để tìm một phương trình dự đoán tốt nhất cho biến \( y \) như một hàm tuyến tính của các biến \( x \).
-
-Một mô hình hồi quy tuyến tính đa biến có dạng:
-
-\[ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k + \varepsilon \]
-
-Trong đó:
-\begin{itemize}
-    \item \( Y \) là biến phụ thuộc (biến mục tiêu).
-    \item \( X_1, X_2, \ldots, X_k \) là các biến độc lập (biến giải thích).
-    \item \( \beta_0 \) là hệ số chặn.
-    \item \( \beta_1, \ldots, \beta_k \) là các hệ số hồi quy cho các biến độc lập.
-    \item \( \varepsilon \) là thuật ngữ lỗi.
 \end{itemize}
 
 \section{Kết quả}
