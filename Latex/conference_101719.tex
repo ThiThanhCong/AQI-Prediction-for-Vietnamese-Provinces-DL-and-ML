@@ -15,7 +15,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{tikz}
-
+\usepackage{subfigure}
 \usetikzlibrary{positioning, shapes.geometric, arrows.meta}
 
 \bibliographystyle{IEEEtran}
@@ -719,17 +719,17 @@ Trong đó:
         \hline
         \multirow{2}{*}{ARIMA}  & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
         \hline
-        \multirow{2}{*}{DLM}    & 7:3              & 61.12   & 114.34         & 52.26   \\ & 8:2 & 42.51 & 38.64 & 32.04 \\ & \textbf{9:1} & \textbf{76.20} & \textbf{69.34} & \textbf{61.13}\\
+        \multirow{2}{*}{DLM}    & 7:3              & 61.12   & 114.34         & 52.26   \\ & \textbf{8:2} & \textbf{42.51} & \textbf{38.64} & \textbf{32.04} \\ & 9:1 & 76.20 &  69.34 & 61.13\\
         \hline
         \multirow{2}{*}{GaussNewtonNonlinear}    & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
         \hline
         \multirow{2}{*}{GRU}    & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
         \hline
-        \multirow{2}{*}{NBEATS} & 7:3              & 28.31   & 31.20          & 21.95   \\ &8:2 & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  \textbf{9:1} & 34.99 & 29.10 & 27.17\\
+        \multirow{2}{*}{NBEATS} & 7:3              & 28.31   & 31.20          & 21.95   \\ & \textbf{8:2} & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  9:1 & 34.99 & 29.10 & 27.17\\
         \hline
         \multirow{2}{*}{ResCNN} & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
         \hline
-        \multirow{2}{*}{RNN}    & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & 8:2 & 25.7266 & 24.468 & 19.4329 \\ & \textbf{9:1} &  \textbf{27.6262} &	\textbf{29.4822} & 	\textbf{22.0334} \\
+        \multirow{2}{*}{RNN}    & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & \textbf{8:2} & \textbf{25.7266} & \textbf{24.468} & \textbf{19.4329} \\ & 9:1 &  27.6262 &	29.4822 & 	22.0334 \\
         \hline
         \multirow{2}{*}{SES}    & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
         \hline
@@ -742,6 +742,93 @@ Trong đó:
     \caption{HaNoi Dataset's Evaluation}
     \label{mbbresult}
 \end{table}
+
+
+\subsection{Kết quả chạy các mô hình với bộ dữ liệu HaNoi's AQI}
+
+\subsubsection{Kết quả chạy mô hình}
+RNN
+\begin{figure}[H]
+    \centering
+    \subfigure[Tỉ lệ 9:1]{
+    \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/9_1.png}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Tỉ lệ 8:2]{
+    \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/8_2.png}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Tỉ lệ 7:3]{
+    \includegraphics[width=0.3\textwidth]{bibliography/figure/RNN/7_3.png}
+    }
+    \caption{Kết quả chạy mô hình RNN}
+    \label{fig
+    }
+\end{figure}
+
+\subsubsection{Kết quả chạy mô hình}
+LSTM
+\begin{figure}[H]
+    \centering
+    \subfigure[Tỉ lệ 9:1]{
+    \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/9_1.png}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Tỉ lệ 8:2]{
+    \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/8_2.png}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Tỉ lệ 7:3]{
+    \includegraphics[width=0.3\textwidth, height=2cm]{bibliography/figure/LSTM/7_3.png}
+    }
+    \caption{Kết quả chạy mô hình LSTM}
+    \label{fig
+    }
+\end{figure}
+
+\subsection{Dự đoán giá trị AQI trong 30, 60 và 90 ngày kế tiếp của bộ dữ liệu HaNoi's AQI}
+\subsubsection{Kết quả của mô hình RNN với tỉ lệ chia tập kiểm tra và huấn luyện là}
+9:1
+
+\begin{figure}[htbp]
+   
+    \centering
+    \subfigure[Kết quả dự đoán 30 ngày kết tiếp]{
+    \includegraphics[width=0.2\textwidth]{bibliography/figure/RNN/predict_30_days.jpg}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Kết quả dự đoán 60 ngày kết tiếp]{
+    \includegraphics[width=0.2\textwidth]{bibliography/figure/RNN/predict_60_days.jpg}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Kết quả dự đoán 90 ngày kết tiếp]{
+    \includegraphics[width=0.2\textwidth]{bibliography/figure/RNN/predict_90_days.jpg}
+    }
+    \caption{Kết quả dự đoán giá trị AQI 30, 60 và 90 ngày kết tiếp của mô hình RNN}
+    \label{fig
+    }
+\end{figure}
+
+\subsubsection{Kết quả của mô hình LSTM với tỉ lệ chia tập kiểm tra và huấn luyện là}
+9:1
+\begin{figure}[htbp]
+    \centering
+    \subfigure[Kết quả dự đoán 30 ngày kết tiếp]{
+    \includegraphics[width=0.2\textwidth]{bibliography/figure/LSTM/predict_30_days.png}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Kết quả dự đoán 60 ngày kết tiếp]{
+    \includegraphics[width=0.2\textwidth]{bibliography/figure/LSTM/predict_60_days.png}
+    }
+    \hspace{0.01\textwidth}
+    \subfigure[Kết quả dự đoán 90 ngày kết tiếp]{
+    \includegraphics[width=0.2\textwidth]{bibliography/figure/LSTM/predict_90_days.png}
+    }
+    \caption{Kết quả dự đoán giá trị AQI 30, 60 và 90 ngày kết tiếp của mô hình LSTM}
+    \label{fig
+    }
+    \end{figure}
+
 \section{Tổng kết}
 \subsection{Tổng quan}
 Trong bài báo nghiên cứu khoa học của nhóm, chúng tôi đã sử dụng 10mô hình khác nhau—Gauss Newton Non-Linear, ResCNN, N-BEATS, DLM, SES, hồi quy tuyến tính, ARIMA, RNN, GRU và LSTM—để dự báo chất lượng không khí ở ba thành phố lớn của Việt Nam.
