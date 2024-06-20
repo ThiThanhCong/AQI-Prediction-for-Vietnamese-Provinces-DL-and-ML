@@ -89,7 +89,7 @@ Việc bao gồm một tập hợp đa dạng các mô hình cho phép chúng t�
 
 \subsection{Gauss-Newton nonlinear method}
 
-Vào năm 2023 , Gauss-Newton được ứng dụng để tối ưu hóa một biến thể của sai phân bình phương trung bình Bellman (MSBE). Cụ thể, Gauss-Newton được sử dụng trong mỗi vòng lặp của phương pháp học Tăng Cường Sai Phân Gauss-Newton (Gauss-Newton Temporal Difference - GNTD) để thực hiện các bước cập nhật tham số của mô hình xấp xỉ hàm phi tuyến.\cite{b1}
+Vào năm 2023 , Gauss-Newton được Zhifa Ke, Junyu Zhang và Zaiwen Wen ứng dụng để tối ưu hóa một biến thể của sai phân bình phương trung bình Bellman (MSBE). Cụ thể, Gauss-Newton được sử dụng trong mỗi vòng lặp của phương pháp học Tăng Cường Sai Phân Gauss-Newton (Gauss-Newton Temporal Difference - GNTD) để thực hiện các bước cập nhật tham số của mô hình xấp xỉ hàm phi tuyến.\cite{gaussnewtonrelated}. Hạn chế của phương pháp này là đòi hỏi tính toán gradient và ma trận Jacobi tại mỗi bước lặp, làm tăng tải tính toán và cần một lượng dữ liệu lớn để đạt độ chính xác mong muốn
 
 \subsection{ResCNN}
 Phân loại ECG bằng bộ Ensemble của Residual CNNs với Cơ chế Chú ý.
@@ -113,7 +113,7 @@ Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana
 Nhóm tác giả từ University of Karachi, Pakistan đã sử dụng mô hình ARIMA và SES để dự đoán lượng khí thải CO2 từ một số nước châu Á như Japan, Bangladesh, China, Pakistan, India, Sri Lanka, Iran, Singapore, và Nepal trong khoảng từ năm 1971 đến 2014. Dựa trên FMAE, SES phù hợp để dự đoán lượng CO2 ở Pakistan và Sri Lanka. Trong khi đó, ARIMA thì phù hợp với Japan, China, India, Iran và Singapore. Đối với Nepal và Bangladesh, cả hai mô hình đều cho kết quả tương đương nhau. \cite{b11}
 
 \subsection{GRU}
-Nhóm tác giả Zhengping Che, Sanjay Purushotham, Kyunghyun Cho, David Sontag và Yan Liu đã cải tiến GRU dành cho đa biến ở bài toán thiếu dữ liệu cho Time Series \cite{che2016recurrent}
+Nhóm tác giả Zhengping Che, Sanjay Purushotham, Kyunghyun Cho, David Sontag và Yan Liu đã cải tiến GRU dành cho đa biến ở bài toán thiếu dữ liệu cho Time Series \cite{che2016recurrent}. Tuy nhiên, mô hình GRU-D gặp hạn chế trong việc đòi hỏi tài nguyên tính toán lớn, khó khăn trong việc điều chỉnh siêu tham số và khả năng tổng quát hóa chưa tốt khi dữ liệu bị thiếu không tuân theo các mô hình dự đoán được xác định sẵn
 
 \subsection{Linear Regression}
 Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Palraj, và Deneshkumar V đã công bố một nghiên cứu về việc sử dụng hồi quy tuyến tính để dự báo chỉ số Chất lượng không khí (AQI). Nghiên cứu tập trung vào phân tích dữ liệu AQI thu thập từ trạm giám sát ở Chennai, Ấn Độ, và xây dựng một mô hình hồi quy tuyến tính đa biến. Đánh giá về tính hợp lệ của mô hình được thực hiện thông qua phân tích dư thừa. \cite{b18}
@@ -853,11 +853,12 @@ Mặc dù kết quả nghiên cứu của nhóm mang lại hứa hẹn, song ph�
 \indent\textbullet\ Thứ hai, khám phá các mô hình lai kết hợp các điểm mạnh của các phương pháp mô hình hóa khác nhau có thể mang lại hiệu suất dự báo tốt hơn là việc sử dụng riêng lẽ để cho từng dự báo, đặc biệt rõ ràng ở việc sử dụng RNN + LSTM.
 
 Cuối cùng nhóm vẫn cần phải xem sét lại việc chọn lọc bộ dữ liệu và hiểu rõ các thuật toán do một số mô hình cho kết quả so sánh giữa train và test cùng chỉ số RMSE, MAPE and MAE không được khả quan.
+
 \section*{Lời cảm ơn}
 \addcontentsline{toc}{section}{Acknowledgment}
 Nhóm xin gửi lời cảm ơn đến phó giáo sư tiến sĩ Nguyễn Đình Thuân cùng giảng viên hướng dẫn Nguyễn Minh Nhực cho sự hướng dẫn tận tình, kiến thức bỗ trợ và phản hồi giúp nhóm đạt được kết quả mong muốn. Ngoài ra chúng tôi cũng chân thành đến Viện Môi trường và Tài Nguyên đã cung cấp dữ liệu chất lượng không khí cần thiết. Đặc biệt cảm ơn các thành viên của nhóm nghiên cứu vì những nỗ lực siêng năng và đóng góp sáng tạo trong suốt dự án này.
 \begin{thebibliography}{00}
-    \bibitem{b1} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
+    \bibitem{gaussnewtonrelated} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
     \bibitem{b3} Doan Vo Duy Thanh, Nguyen Van Cuong, Vo Tan Phat, Le Khac Hong Phuc, Nguyen Duy Du, Nguyen Van Quang, Pham Minh Duc, Pham Hong Vinh, and Nguyen Canh Thuong. \textit{Gated Recurrent Unit (GRU)}. Accessed May 26, 2024. \url{https://d2l.aivivn.com/chapter_recurrent-modern/gru_vn.html}.
     \bibitem{b4} Nejedly P, Ivora A, Viscor I, Koscova Z, Smisek R, Jurak P, Plesinger F. Classification of ECG using ensemble of residual CNNs with or without attention mechanism. Physiol Meas. 2022 Apr 28;43(4). doi: 10.1088/1361-6579/ac647c. PMID: 35381586.
