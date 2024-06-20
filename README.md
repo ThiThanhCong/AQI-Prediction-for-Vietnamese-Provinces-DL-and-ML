@@ -39,7 +39,6 @@ Với sự gia tăng dân số và công nghiệp hóa tại Việt Nam, vấn �
 - Gated Recurrent Unit (GRU)
 - Long Short Term Memory (LSTM)
 
-- 
 ## Dữ Liệu
 Bộ dữ liệu được thu thập từ ba thành phố Hà Nội, Việt Trì và Đà Nẵng từ năm 2019 đến năm 2024, bao gồm các chỉ số PM2.5, PM10, O3, NO2, SO2 và CO.
 
