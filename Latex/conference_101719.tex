@@ -16,7 +16,10 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{subfigure}
+\usepackage{titlesec}
 \usetikzlibrary{positioning, shapes.geometric, arrows.meta}
+
+\setcounter{secnumdepth}{4}
 
 \bibliographystyle{IEEEtran}
 
@@ -635,30 +638,121 @@ trình cập nhật cuối cho GRU.
 Nếu các giá trị trong cổng cập nhật $\mathbf{Z}_t$ bằng 1, chúng ta chỉ đơn giản giữ lại trạng thái cũ. Trong trường hợp này, thông tin từ $\mathbf{X}_t$ về cơ bản được bỏ qua, tương đương với việc bỏ qua bước thời gian $t$ trong chuỗi phụ thuộc. Ngược lại, nếu $\mathbf{Z}_t$ gần giá trị 0, trạng thái ẩn $\mathbf{H}_t$ sẽ gần với trạng thái ẩn tiềm năng $\tilde{\mathbf{H}}_t$. Những thiết kế trên có thể giúp chúng ta giải quyết vấn đề tiêu biến gradient trong các mạng RNN và nắm bắt tốt hơn sự phụ thuộc xa trong chuỗi thời gian. Tóm lại, các mạng GRU có hai tính chất nổi bật sau:
 
 \subsection{Dynamic Linear Model (DLM)}
+\subsubsection{Tổng quan:}
 Dynamic Linear Model là một trường hợp đặt biệt của mô hình trạng thái không gian - mô hình biểu hiện trạng thái của một hệ thống. Model mô tả hành động của một hệ thống động bằng cách sử dụng một bộ biến, được gọi là biến trạng thái để miêu tả trạng thái hiện tại của hệ thống. Những biến này thể hiện các đặc điểm bên trong của trạng thái biến đổi qua thời gian.
-Một model DLM đơn gian có hai phương trình, mô hình đầu tiên là mô hình quan sát (observation model):
+
+Đây là một mô hình hồi quy tuyến tính cơ bản:
 \begin{center}
 
-    \(y_t=\ X_i^T\ \theta_t+\ e_i\)
+    \(y_{t} = \alpha + \beta x_{i} + e_{i}\) \ với \ \(e_{i} \sim N(0,\sigma^{2})\)
 
 \end{center}
 
-và mô hình trạng thái (state equation) quan sát. Mô tả sự tiến hóa của trạng thái ẩn (không quan sát được) qua thời gian:
+Từ đây ta có thể viết lại dưới dạng ma trận:
 
 \begin{center}
 
-    \(\theta_t=G_t\ \theta_(t-1)+\ w_t\)
+    \(y_{t} = \begin{bmatrix}
+        1 & x_{i} 
+       \end{bmatrix}\begin{bmatrix}
+        \alpha\\\beta
+       \end{bmatrix} + e_{i}\) \ => \ \(y_{t} = \mathrm{X}_{i}^{T}\theta + e_{i}\)
 
 \end{center}
+Với \(\mathrm{X}_{i}^{T} = \begin{bmatrix} 1 & x_{i} \end{bmatrix} \) và \(\theta = \begin{bmatrix} \alpha & \beta \end{bmatrix}^T\).\\
 
-Trong đó:\\
-\indent\textbullet\ \(\gamma_t\) dữ liệu quan sát tại thời điểm t.\\
-\indent\textbullet\ \(\chi_t\) ma trận quan sát.\\
-\indent\textbullet\ \(\theta_t\) là vector trạng thái chứa yếu tố xu hướng và mùa vụ.\\
-\indent\textbullet\ \(\epsilon_t\) là nhiễu loạn quan sát.\\
-\indent\textbullet\ G là ma trận giao chuyển để mô tả lại quá trình tiến hóa của trạng thái.\\
-\indent\textbullet\ \(\omega_t\) là nhiễu loạn trạng thái.
+Và vì trong một mô hình tuyến tính động, tham số hồi quy thay đổi liên tục nên ta viết lại:
+\begin{center}
+    \(y_{t} = \mathrm{X}_{i}^{T}\theta + e_{i}\) \ (tĩnh)
+\end{center}
+thành:
+\begin{center}
+    \(y_{t} = \mathrm{X}_{i}^{T}\theta_{t} + e_{i}\) \ (động)
+\end{center}
+Từ đó chúng ta có thể nhận thấy:\\
+\indent\textbullet\ Chỉ số t thể hiện thông tin về thời gian thứ tự của các nút dữ liệu trong y.\\
+\indent\textbullet\ Mối quan hệ giữa y và X là riêng biệt với mỗi t khác nhau.\\
+Tuy nhiên, quan sát kỹ hơn, ta có một vấn đề lớn cho việc ước lượng tham số:
+\begin{center}
+    \(y_{t} = \mathrm{X}_{i}^{T}\theta_{t} + e_{i}\) 
+\end{center}
 
+Ta chỉ có 1 điểm dữ liệu cho mỗi bước thời gian (tức là \(y_{t}\) là vô hướng) => mô hình liên hệ dữ liệu được quan sát với các biến trạng thái ẩn, nhưng nó không nắm bắt được động lực thời gian của hệ thống. Do đó, về cơ bản, mô hình sẽ ước tính một tập hợp tham số mô tả mối quan hệ giữa dữ liệu được quan sát và các biến trạng thái tiềm ẩn tại một thời điểm cố định.
+
+Để có thể giải quyết vấn đề này, ta có thể thêm một phương trình để giới hạn lại tham số hồi quy phụ thuộc vào khoảng thời gian từ t tới t + 1:
+\begin{center}
+    \(\theta_{t} = G_{t}\theta_{t-1} + w_{t}\) \ với \ \(w_{t}\sim N(0,W_{t})\)
+\end{center}
+Với \(G_{t}\) là ma trận chuyển trạng thái tại thời điểm t và \(w_{t}\) là nhiễu đại diện cho vector nhiễu trạng thái tại thời điểm t.
+
+Kết hợp cả hai lại ta có được một mô hình tuyến tính động cơ bản (Dynamic Linear Model) trong dạng không gian trạng thái bao gồm hai mô hình:\\
+\indent\textbullet\ Mô hình quan sât liên hệ giữa các biến số và dữ liệu.
+\begin{center}
+    \(y_{t} = \mathrm{X}_{i}^{T}\theta_{t} + e_{i}\)
+\end{center}
+
+\indent\textbullet\ Mô hình trạng thái xác định tham số "tiến hóa" theo thời gian.
+\begin{center}
+    \(\theta_{t} = G_{t}\theta_{t-1} + w_{t}\) 
+\end{center}
+\subsubsection{Ma trận trạng thái G:}
+Ma trận G, hay ma trận chuyển trạng thái, trong mô hình tuyến tính động được thiết kế để phản ánh tham số thay đổi như thế nào theo thời gian. Cấu trúc của ma trận G tùy thuộc vào thành phần có trong mô hình, như xu hướng, tính mùa màng, etc...
+\paragraph{Thành phần xu hướng và ảnh hưởng mùa:}
+Mới một mô hình có xu hướng tuyến tính và tính mùa vụ với giai đoạn S:\\
+\indent\textbullet\ Mức độ (\(\mu\)): Đại diện cho mức độ cơ sở của chuỗi thời gian.\\
+\indent\textbullet\ Đô dốc (\(\beta_{t}\)): Đại diện cho tốc độ thay đổi (xu hướng).\\
+\indent\textbullet\ Tính thời vụ (\(\gamma\)): Đại diện cho tính thời vụ.
+\begin{center}
+    \(\mu_{t} = \mu_{t-1} + \beta_{t-1} + \omega_{\mu,t}\) \ với \ \(\omega_{\mu,t}\sim N(0,W_{\mu})\)
+\end{center}
+    
+\begin{center}
+    \(\beta_{t} = \beta_{t-1} + \omega_{\beta,t}\) \ với \ \(\omega_{\beta,t}\sim N(0,W_{\beta})\)
+\end{center}
+
+\begin{center}
+    \(\gamma_{t} = \gamma_{t-S} + u_{t}\) \ với \ \(u_{t}\sim N(0,W_{\gamma})\)
+\end{center}
+\paragraph{Xây dựng ma trận G:}
+Để có thể có được ma trận chuyển trạng thái G, trước tiên cần có vector trạng thái \(\theta_{t}\) tại thời điểm t, ví dụ ta có thể xây dựng vector trạng thái với S = 4 như sau:
+\begin{center}
+    \(\theta_{t} = \begin{bmatrix}
+        \mu_{t} \\ \beta_{t}
+         \\ \gamma_{t}
+         \\ \gamma_{t-1}
+         \\ \gamma_{t-2}
+         \\ \gamma_{t-3}
+        \end{bmatrix}\)
+\end{center}
+Sau đó ma trận chuyển trạng thái sẽ 'mô tả' từng thành phần trong \(\theta_{t}\) thay đổi theo thời gian. Cụ thể, thành phần xu hướng (mức độ và độ dốc):\\
+\indent\textbullet\ Mức độ \(\mu_{t}\) tại thời điểm t phụ thuộc vào mức độ trước \(\mu_{t-1}\) và độ dốc trước \(\beta_{t-1}\).\\
+\indent\textbullet\ Độ dốc \(\beta_{t}\) tại thời điểm t chỉ phụ thuộc vào mức độ trước \(\beta_{t-1}\).
+
+Thành phần mùa vụ:\\
+\indent\textbullet\ Tính thời vụ \(\gamma_{t}\) phụ thuộc vào tính mùa vụ tại thời điểm t-S từ S giai đoạn trước. Để cho dễ hiểu, trong ví dụ ta chọn S = 4 (\(\gamma_{t}, \gamma_{t-1}, \gamma_{t-2}, \gamma_{t-3}\)) để dại diện cho các quý của một năm, nghĩa là mô hình sẽ thay đổi trạng thái mùa sử dụng ma trận vòng để thể hiện.
+
+Với những quan hệ ràng buộc trên, ma trận G có thể được xây dựng như sau:\\
+\begin{center}
+    \(G=\begin{bmatrix}
+        1 & 1 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 1 \\
+        0 & 0 & 1 & 0 & 0 & 0
+        \end{bmatrix}\)
+\end{center}
+\begin{itemize}
+    \item Hàng đầu tiên: Mức độ mới \(\mu_{t}\) là mức độ trước \(\mu_{t-1}\) cộng với độ dốc trước \(\beta_{t-1}\) phản ánh xu hướng tuyến tính.
+    \item Hàng thứ hai: Độ dốc mới \(\beta_{t}\) là giống với độ dốc trước \(\beta_{t-1}\), chỉ ra sự không thay đổi của độ dốc.
+    \item Hàng thứ ba tới hàng thứ sáu: Những hàng này thay đổi trạng thái mùa. Mỗi trạng thái mùa và phiên bản thay đổi của trạng thái mùa trước:
+    \begin{itemize}
+        \item \(\gamma_{t}\) đặt thành \(\gamma_{t-1}\).
+        \item \(\gamma_{t-1}\) đặt thành \(\gamma_{t-2}\).
+        \item \(\gamma_{t-2}\) đặt thành \(\gamma_{t-3}\).
+        \item \(\gamma_{t-3}\) sẽ quay trở lại đâu chu kỳ, giống như việc sang năm mới nên đặt thành \(\gamma_{t}\).
+    \end{itemize}
+\end{itemize}
 \subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
 \vspace{1mm}
 \subsubsection{Tổng quan}
