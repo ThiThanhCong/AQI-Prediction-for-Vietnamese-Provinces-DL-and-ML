@@ -397,10 +397,12 @@ Trong đó: \\
 \]
 
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
-\[
-    \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q}
-\]
 
+\begin{multline}
+    \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} \\
+    + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2}
+    + \ldots + \theta_q \varepsilon_{t-q}
+\end{multline}
 Trong đó: \\
 \indent -- \(Y_t\) đại diện cho giá trị dữ liệu tại thời điểm t\\
 \indent -- \(c\) là hằng số chặn\\
@@ -746,7 +748,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
         \hline
         \multirow{2}{*}{SES}                  & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
         \hline
-        \multirow{2}{*}{LN}                   & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
+        \multirow{2}{*}{LinearRegression}     & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
         \hline
         \multirow{2}{*}{LSTM}                 & 7:3              & 26.5599 & 31.3548        & 19.7605 \\ & 8:2 & 27.8466 &  27.5532 &  21.4331 \\ & \textbf{9:1} & \textbf{25.2374} & \textbf{26.7950} & \textbf{19.2224}\\
         \hline
