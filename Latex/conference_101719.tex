@@ -653,10 +653,10 @@ Từ đây ta có thể viết lại dưới dạng ma trận:
 \begin{center}
 
     \(y_{t} = \begin{bmatrix}
-        1 & x_{i} 
-       \end{bmatrix}\begin{bmatrix}
-        \alpha\\\beta
-       \end{bmatrix} + e_{i}\) \ => \ \(y_{t} = \mathrm{X}_{i}^{T}\theta + e_{i}\)
+        1 & x_{i}
+    \end{bmatrix}\begin{bmatrix}
+        \alpha \\\beta
+    \end{bmatrix} + e_{i}\) \ => \ \(y_{t} = \mathrm{X}_{i}^{T}\theta + e_{i}\)
 
 \end{center}
 Với \(\mathrm{X}_{i}^{T} = \begin{bmatrix} 1 & x_{i} \end{bmatrix} \) và \(\theta = \begin{bmatrix} \alpha & \beta \end{bmatrix}^T\).\\
@@ -674,7 +674,7 @@ Từ đó chúng ta có thể nhận thấy:\\
 \indent\textbullet\ Mối quan hệ giữa y và X là riêng biệt với mỗi t khác nhau.\\
 Tuy nhiên, quan sát kỹ hơn, ta có một vấn đề lớn cho việc ước lượng tham số:
 \begin{center}
-    \(y_{t} = \mathrm{X}_{i}^{T}\theta_{t} + e_{i}\) 
+    \(y_{t} = \mathrm{X}_{i}^{T}\theta_{t} + e_{i}\)
 \end{center}
 
 Ta chỉ có 1 điểm dữ liệu cho mỗi bước thời gian (tức là \(y_{t}\) là vô hướng) => mô hình liên hệ dữ liệu được quan sát với các biến trạng thái ẩn, nhưng nó không nắm bắt được động lực thời gian của hệ thống. Do đó, về cơ bản, mô hình sẽ ước tính một tập hợp tham số mô tả mối quan hệ giữa dữ liệu được quan sát và các biến trạng thái tiềm ẩn tại một thời điểm cố định.
@@ -693,7 +693,7 @@ Kết hợp cả hai lại ta có được một mô hình tuyến tính động
 
 \indent\textbullet\ Mô hình trạng thái xác định tham số "tiến hóa" theo thời gian.
 \begin{center}
-    \(\theta_{t} = G_{t}\theta_{t-1} + w_{t}\) 
+    \(\theta_{t} = G_{t}\theta_{t-1} + w_{t}\)
 \end{center}
 \subsubsection{Ma trận trạng thái G:}
 Ma trận G, hay ma trận chuyển trạng thái, trong mô hình tuyến tính động được thiết kế để phản ánh tham số thay đổi như thế nào theo thời gian. Cấu trúc của ma trận G tùy thuộc vào thành phần có trong mô hình, như xu hướng, tính mùa màng, etc...
@@ -705,7 +705,7 @@ Mới một mô hình có xu hướng tuyến tính và tính mùa vụ với gi
 \begin{center}
     \(\mu_{t} = \mu_{t-1} + \beta_{t-1} + \omega_{\mu,t}\) \ với \ \(\omega_{\mu,t}\sim N(0,W_{\mu})\)
 \end{center}
-    
+
 \begin{center}
     \(\beta_{t} = \beta_{t-1} + \omega_{\beta,t}\) \ với \ \(\omega_{\beta,t}\sim N(0,W_{\beta})\)
 \end{center}
@@ -718,11 +718,11 @@ Mới một mô hình có xu hướng tuyến tính và tính mùa vụ với gi
 \begin{center}
     \(\theta_{t} = \begin{bmatrix}
         \mu_{t} \\ \beta_{t}
-         \\ \gamma_{t}
-         \\ \gamma_{t-1}
-         \\ \gamma_{t-2}
-         \\ \gamma_{t-3}
-        \end{bmatrix}\)
+        \\ \gamma_{t}
+        \\ \gamma_{t-1}
+        \\ \gamma_{t-2}
+        \\ \gamma_{t-3}
+    \end{bmatrix}\)
 \end{center}
 Sau đó ma trận chuyển trạng thái sẽ 'mô tả' từng thành phần trong \(\theta_{t}\) thay đổi theo thời gian. Cụ thể, thành phần xu hướng (mức độ và độ dốc):\\
 \indent\textbullet\ Mức độ \(\mu_{t}\) tại thời điểm t phụ thuộc vào mức độ trước \(\mu_{t-1}\) và độ dốc trước \(\beta_{t-1}\).\\
@@ -740,18 +740,18 @@ Với những quan hệ ràng buộc trên, ma trận G có thể được xây 
         0 & 0 & 0 & 0 & 1 & 0 \\
         0 & 0 & 0 & 0 & 0 & 1 \\
         0 & 0 & 1 & 0 & 0 & 0
-        \end{bmatrix}\)
+    \end{bmatrix}\)
 \end{center}
 \begin{itemize}
     \item Hàng đầu tiên: Mức độ mới \(\mu_{t}\) là mức độ trước \(\mu_{t-1}\) cộng với độ dốc trước \(\beta_{t-1}\) phản ánh xu hướng tuyến tính.
     \item Hàng thứ hai: Độ dốc mới \(\beta_{t}\) là giống với độ dốc trước \(\beta_{t-1}\), chỉ ra sự không thay đổi của độ dốc.
     \item Hàng thứ ba tới hàng thứ sáu: Những hàng này thay đổi trạng thái mùa. Mỗi trạng thái mùa và phiên bản thay đổi của trạng thái mùa trước:
-    \begin{itemize}
-        \item \(\gamma_{t}\) đặt thành \(\gamma_{t-1}\).
-        \item \(\gamma_{t-1}\) đặt thành \(\gamma_{t-2}\).
-        \item \(\gamma_{t-2}\) đặt thành \(\gamma_{t-3}\).
-        \item \(\gamma_{t-3}\) sẽ quay trở lại đâu chu kỳ, giống như việc sang năm mới nên đặt thành \(\gamma_{t}\).
-    \end{itemize}
+          \begin{itemize}
+              \item \(\gamma_{t}\) đặt thành \(\gamma_{t-1}\).
+              \item \(\gamma_{t-1}\) đặt thành \(\gamma_{t-2}\).
+              \item \(\gamma_{t-2}\) đặt thành \(\gamma_{t-3}\).
+              \item \(\gamma_{t-3}\) sẽ quay trở lại đâu chu kỳ, giống như việc sang năm mới nên đặt thành \(\gamma_{t}\).
+          \end{itemize}
 \end{itemize}
 \subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
 \vspace{1mm}
@@ -817,125 +817,177 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \[
     RMSE = \sqrt{\frac{\sum_{i=0}^{N - 1} (y_i - \hat{y}_i)^2}{N}}
 \]
-\subsection{HaNoi dataset}
-\begin{table}[H]
+% \subsection{HaNoi dataset}
+% \begin{table}[H]
+%     \centering
+%     \begin{tabular}{|c|c|c|c|c|}
+%         \hline
+%         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}                                           \\
+%         \hline
+%         \centering Model                      & Training:Testing & RMSE    & MAPE (\%)      & MAE     \\
+%         \hline
+%         \multirow{2}{*}{ARIMA}                & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
+%         \hline
+%         \multirow{2}{*}{DLM}                  & 7:3              & 61.12   & 114.34         & 52.26   \\ & \textbf{8:2} & \textbf{42.51} & \textbf{38.64} & \textbf{32.04} \\ & 9:1 & 76.20 &  69.34 & 61.13\\
+%         \hline
+%         \multirow{2}{*}{GaussNewtonNonlinear} & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
+%         \hline
+%         \multirow{2}{*}{GRU}                  & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
+%         \hline
+%         \multirow{2}{*}{NBEATS}               & 7:3              & 28.31   & 31.20          & 21.95   \\ & \textbf{8:2} & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  9:1 & 34.99 & 29.10 & 27.17\\
+%         \hline
+%         \multirow{2}{*}{ResCNN}               & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
+%         \hline
+%         \multirow{2}{*}{RNN}                  & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & \textbf{8:2} & \textbf{25.7266} & \textbf{24.468} & \textbf{19.4329} \\ & 9:1 &  27.6262 &	29.4822 & 	22.0334 \\
+%         \hline
+%         \multirow{2}{*}{SES}                  & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
+%         \hline
+%         \multirow{2}{*}{LinearRegression}     & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
+%         \hline
+%         \multirow{2}{*}{LSTM}                 & 7:3              & 26.5599 & 31.3548        & 19.7605 \\ & 8:2 & 27.8466 &  27.5532 &  21.4331 \\ & \textbf{9:1} & \textbf{25.2374} & \textbf{26.7950} & \textbf{19.2224}\\
+%         \hline
+%     \end{tabular}
+%     \vspace{5px}
+%     \caption{HaNoi Dataset's Evaluation}
+%     \label{mbbresult}
+% \end{table}
+
+
+\subsection{Kết quả chạy các mô hình với 3 bộ dữ liệu HaNoi, DaNang và VietTri}
+
+\subsubsection{Kết quả chạy mô hình RNN}
+\begin{figure}[h]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
-        \hline
-        \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}                                           \\
-        \hline
-        \centering Model                      & Training:Testing & RMSE    & MAPE (\%)      & MAE     \\
-        \hline
-        \multirow{2}{*}{ARIMA}                & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
-        \hline
-        \multirow{2}{*}{DLM}                  & 7:3              & 61.12   & 114.34         & 52.26   \\ & \textbf{8:2} & \textbf{42.51} & \textbf{38.64} & \textbf{32.04} \\ & 9:1 & 76.20 &  69.34 & 61.13\\
-        \hline
-        \multirow{2}{*}{GaussNewtonNonlinear} & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
-        \hline
-        \multirow{2}{*}{GRU}                  & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
-        \hline
-        \multirow{2}{*}{NBEATS}               & 7:3              & 28.31   & 31.20          & 21.95   \\ & \textbf{8:2} & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  9:1 & 34.99 & 29.10 & 27.17\\
-        \hline
-        \multirow{2}{*}{ResCNN}               & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
-        \hline
-        \multirow{2}{*}{RNN}                  & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & \textbf{8:2} & \textbf{25.7266} & \textbf{24.468} & \textbf{19.4329} \\ & 9:1 &  27.6262 &	29.4822 & 	22.0334 \\
-        \hline
-        \multirow{2}{*}{SES}                  & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
-        \hline
-        \multirow{2}{*}{LinearRegression}     & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
-        \hline
-        \multirow{2}{*}{LSTM}                 & 7:3              & 26.5599 & 31.3548        & 19.7605 \\ & 8:2 & 27.8466 &  27.5532 &  21.4331 \\ & \textbf{9:1} & \textbf{25.2374} & \textbf{26.7950} & \textbf{19.2224}\\
-        \hline
-    \end{tabular}
-    \vspace{5px}
-    \caption{HaNoi Dataset's Evaluation}
-    \label{mbbresult}
-\end{table}
-
-
-\subsection{Kết quả chạy các mô hình với bộ dữ liệu HaNoi's AQI}
-
-\subsubsection{Kết quả chạy mô hình}
-RNN
-\begin{figure}[H]
-    \centering
-    \subfigure[Tỉ lệ 9:1]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/RNN/9_1.png}
+    \subfigure[HaNoi 9:1]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/9_1.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Tỉ lệ 8:2]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/RNN/8_2.png}
+    \subfigure[HaNoi 8:2]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/8_2.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Tỉ lệ 7:3]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/RNN/7_3.png}
+    \subfigure[HaNoi 7:3]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/7_3.png}
     }
-    \caption{Kết quả chạy mô hình RNN}
-    \label{fig
+    \subfigure[DaNang 9:1]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/9_1.png}
     }
+    \subfigure[DaNang 8:2]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/8_2.png}
+    }
+    \subfigure[DaNang 7:3]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/7_3.png}
+    }
+    \subfigure[VietTri 9:1]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/9_1.png}
+    }
+    \subfigure[VietTri 8:2]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/8_2.png}
+    }
+    \subfigure[VietTri 7:3]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/7_3.png}
+    }
+    \caption{Kết quả chạy mô hình RNN trên 3 dataset HaNoi, DaNang và VietTri}
 \end{figure}
 
-\subsubsection{Kết quả chạy mô hình}
-LSTM
-\begin{figure}[H]
+\subsubsection{Kết quả chạy mô hình LSTM}
+\begin{figure}[h]
     \centering
-    \subfigure[Tỉ lệ 9:1]{
-        \includegraphics[width=0.48\textwidth, height=2cm]{bibliography/figure/LSTM/9_1.png}
+    \subfigure[HaNoi 9:1]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/HN/9_1.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Tỉ lệ 8:2]{
-        \includegraphics[width=0.48\textwidth, height=2cm]{bibliography/figure/LSTM/8_2.png}
+    \subfigure[HaNoi 8:2]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/HN/8_2.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Tỉ lệ 7:3]{
-        \includegraphics[width=0.48\textwidth, height=2cm]{bibliography/figure/LSTM/7_3.png}
+    \subfigure[HaNoi 7:3]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/HN/7_3.png}
     }
-    \caption{Kết quả chạy mô hình LSTM}
-    \label{fig
+    \subfigure[DaNang 9:1]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/DN/9_1.png}
     }
+    \subfigure[DaNang 8:2]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/DN/8_2.png}
+    }
+    \subfigure[DaNang 7:3]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/DN/7_3.png}
+    }
+    \subfigure[VietTri 9:1]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/9_1.png}
+    }
+    \subfigure[VietTri 8:2]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/8_2.png}
+    }
+    \subfigure[VietTri 7:3]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/7_3.png}
+    }
+    \caption{Kết quả chạy mô hình LSTM trên 3 bộ dữ liệu HaNoi, DaNang và VietTri}
 \end{figure}
 
-\subsection{Dự đoán giá trị AQI trong 30, 60 và 90 ngày kế tiếp của bộ dữ liệu HaNoi's AQI}
-\subsubsection{Kết quả của mô hình RNN với tỉ lệ chia tập kiểm tra và huấn luyện là}
-9:1
+\subsection{Dự đoán giá trị AQI trong 30, 60 và 90 ngày kế tiếp của 3 bộ dữ liệu HaNoi, DaNang và VietTri}
+Để thực hiện dự đoán, chúng tôi đã sử dụng hai mô hình học máy tiên tiến, được lựa chọn dựa trên hiệu suất cao trong các thử nghiệm ban đầu. Cả hai mô hình này đã được huấn luyện và kiểm tra trên ba bộ dữ liệu khác nhau tương ứng với ba thành phố để đảm bảo tính tổng quát và độ chính xác của dự đoán.
 
-\begin{figure}[htbp]
+2 mô  hình được nói đến ở đây lần lượt là LSTM và RNN có kết quả dự đoán 30, 60 và 90 ngày trên 3 bộ dữ liệu được thể hiện trong 2 ảnh sau:
 
+\begin{figure}[h]
     \centering
-    \subfigure[Kết quả dự đoán 30 ngày kết tiếp]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/RNN/predict_30_days.jpg}
+    \subfigure[HaNoi dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/HN/predict_30_days.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Kết quả dự đoán 60 ngày kết tiếp]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/RNN/predict_60_days.jpg}
+    \subfigure[HaNoi dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/HN/predict_60_days.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Kết quả dự đoán 90 ngày kết tiếp]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/RNN/predict_90_days.jpg}
+    \subfigure[HaNoi dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/HN/predict_90_days.png}
     }
-    \caption{Kết quả dự đoán giá trị AQI 30, 60 và 90 ngày kết tiếp của mô hình RNN}
-    \label{fig
+    \subfigure[DaNang dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/DN/predict_30_days.png}
     }
+    \subfigure[DaNang dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/DN/predict_60_days.png}
+    }
+    \subfigure[DaNang dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/DN/predict_90_days.png}
+    }
+    \subfigure[VietTri dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/predict_30_days.png}
+    }
+    \subfigure[VietTri dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/predict_60_days.png}
+    }
+    \subfigure[VietTri dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/predict_90_days.png}
+    }
+    \caption{Kết quả chạy mô hình LSTM trên 3 bộ dữ liệu HaNoi, DaNang và VietTri}
 \end{figure}
 
-\subsubsection{Kết quả của mô hình LSTM với tỉ lệ chia tập kiểm tra và huấn luyện là}
-9:1
-\begin{figure}[htbp]
+\begin{figure}[h]
     \centering
-    \subfigure[Kết quả dự đoán 30 ngày kết tiếp]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/LSTM/predict_30_days.png}
+    \subfigure[HaNoi dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/predict_30_days.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Kết quả dự đoán 60 ngày kết tiếp]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/LSTM/predict_60_days.png}
+    \subfigure[HaNoi dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/predict_60_days.png}
     }
-    \hspace{0.01\textwidth}
-    \subfigure[Kết quả dự đoán 90 ngày kết tiếp]{
-        \includegraphics[width=0.48\textwidth]{bibliography/figure/LSTM/predict_90_days.png}
+    \subfigure[HaNoi dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/predict_90_days.png}
     }
-    \caption{Kết quả dự đoán giá trị AQI 30, 60 và 90 ngày kết tiếp của mô hình LSTM}
-    \label{fig
+    \subfigure[DaNang dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/predict_30_days.png}
     }
+    \subfigure[DaNang dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/predict_60_days.png}
+    }
+    \subfigure[DaNang dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/predict_90_days.png}
+    }
+    \subfigure[VietTri dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_30_days.png}
+    }
+    \subfigure[VietTri dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_60_days.png}
+    }
+    \subfigure[VietTri dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_90_days.png}
+    }
+    \caption{Kết quả dự đoán của mô hình RNN trên 3 bộ dữ liệu HaNoi, DaNang và VietTri}
 \end{figure}
 
 \section{Tổng kết}
