@@ -86,6 +86,11 @@
     squares
 \end{IEEEkeywords}
 
+\section*{Lời cảm ơn}
+\addcontentsline{toc}{section}{Acknowledgment}
+Nhóm xin gửi lời cảm ơn đến thầy Nguyễn Đình Thuân cùng giảng viên hướng dẫn Nguyễn Minh Nhực cho sự hướng dẫn tận tình, kiến thức bỗ trợ và phản hồi giúp nhóm đạt được kết quả mong muốn. Đặc biệt cảm ơn các thành viên của nhóm nghiên cứu vì những nỗ lực siêng năng và đóng góp sáng tạo trong suốt dự án này.
+
+
 \section{Giới Thiệu}
 Với sự gia tăng dân số nhanh chóng cùng với sự công nghiệp hóa ngày càng mạnh mẽ ở các thành phố lớn Việt Nam, vấn đề chất lượng không khí trờ thành mối quan tâm lớn do có liên quan tới đời sống hàng ngày. Sự suy giảm chất lượng không chỉ gây ra những rủi ro lớn đối với sức khỏe của cư dân mà còn đe dọa sự cân bằng sinh thái của khu vực. Trong bối cảnh này, việc dự đoán chính xác và kịp thời các mức độ chất lượng không khí là rất cần thiết cho các chiến lược giảm thiểu hiệu quả. Nghiên cứu của nhóm sử dụng các mô hình học máy và học sâu để dự đoán chất lượng không khí, bằng cách tận dụng sức mạnh của các thuật toán phức tạp như Gauss Newton Method Non-Linear, Resilient Convolutional Neural Networks (ResCNN), Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), và Long Short Term Memory (LSTM).
 
@@ -130,7 +135,7 @@ Dự báo chất lượng không khí là rất quan trọng để giảm thiể
 
 Do các vấn đề phổ biến liên quan đến bụi mịn ở khu vực phía Bắc, nhóm đã chọn một bộ dữ liệu chi tiết về chất lượng không khí của ba thành phố lớn ở Việt Nam: Đà Nẵng, Hà Nội và Việt Trì.
 
-Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 2024, bao gồm 6 cột tương ứng với các thành phần khác nhau trong không khí và chất lượng không khí được đánh giá thông qua Chỉ số Chất lượng Không khí (AQI): nồng độ PM2.5, nồng độ PM10, nồng độ O3, nồng độ NO2, nồng độ SO2 và nồng độ CO.
+Bộ dữ liệu chủ yếu kéo dài từ năm 2019 đến năm hiện tại, 2024, bao gồm 6 cột tương ứng với các thành phần khác nhau trong không khí và chất lượng không khí được đánh giá thông qua Chỉ số Chất lượng Không khí (AQI): nồng độ PM2.5, nồng độ PM10, nồng độ O3, nồng độ NO2, nồng độ SO2 và nồng độ CO.
 \subsection{Thống kế mô tả}
 
 \begin{table}[H]
@@ -237,7 +242,7 @@ Với hàm \( y = y_0 e^{-kt} \), chúng ta tìm giá trị nhỏ nhất của S
 \end{center}
 
 Hoặc chúng ta có thể giải thích bằng ma trận Hessian như sau:
-
+\vspace{-4mm}
 \begin{center}
     \[
         \begin{pmatrix}
@@ -249,14 +254,13 @@ Hoặc chúng ta có thể giải thích bằng ma trận Hessian như sau:
     \]
 \end{center}
 
-Trong đó: \\
-\indent\textbullet\ \(H = \begin{bmatrix}
+Trong đó: \indent \textbullet\ \( H = \begin{bmatrix}
     \frac{\partial^2 f}{\partial k^2}            & \frac{\partial^2 f}{\partial k \partial y_0} \\
     \frac{\partial^2 f}{\partial y_0 \partial k} & \frac{\partial^2 f}{\partial y_0^2}
-\end{bmatrix}\)\\
-\indent\textbullet\ \(G = \begin{bmatrix}
+\end{bmatrix} \) \quad \textbullet\ \( G = \begin{bmatrix}
     \frac{\partial f}{\partial k} \\ \frac{\partial f}{\partial y_0}
-\end{bmatrix}\)\\
+\end{bmatrix} \)
+
 
 Vấn đề với phương pháp Newton trong hồi quy phi tuyến là việc tính toán ma trận Hessian và nghịch đảo của nó gặp khó khăn. Để giải quyết vấn đề này, phương pháp Gauss-Newton thay thế bằng cách xấp xỉ ma trận Hessian.
 
@@ -364,9 +368,7 @@ Trong đó:\\
 
 \subsection{Autoregressive Integrated Moving Average (ARIMA)}
 
-ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hình ARIMA thường được sử dụng để dự báo dữ liệu chuỗi thời gian đơn biến. Mô hình ARIMA có thể xử lý một chuỗi thời gian nếu chuỗi đó là dừng và không có dữ liệu bị thiếu. Phương pháp này được sử dụng trong nhiều nghiên cứu để dự báo.
-
-ARIMA là sự kết hợp của 3 thành phần, Auto-Regressive – AR, Integrated – I và Moving Average – MA tương ứng với các tham số p, d và q đại diện cho ba thành phần chính của mô hình, trong đó:
+ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hình ARIMA thường được sử dụng để dự báo dữ liệu chuỗi thời gian đơn biến. Mô hình ARIMA có thể xử lý một chuỗi thời gian nếu chuỗi đó là dừng và không có dữ liệu bị thiếu. Phương pháp này được sử dụng trong nhiều nghiên cứu để dự báo. ARIMA là sự kết hợp của 3 thành phần, Auto-Regressive – AR, Integrated – I và Moving Average – MA tương ứng với các tham số p, d và q đại diện cho ba thành phần chính của mô hình, trong đó:
 \\
 \indent\textbullet\ \(p-AR(p)\): Tham số p đại diện cho số lượng các quá trình tự hồi quy trong thành phần tự hồi quy (AutoRegressive) của mô hình ARIMA. Nó chỉ ra số lượng ngày quá khứ của chuỗi dữ liệu mà được sử dụng để dự đoán giá trị hiện tại. Mỗi giá trị quá khứ được sử dụng là một hệ số trong mô hình tự hồi quy. Giá trị của p phụ thuộc vào sự phụ thuộc tạm thời trong chuỗi dữ liệu và có thể được xác định bằng cách sử dụng các phương pháp như đồ thị tự tương quan (ACF - AutoCorrelation Function) hoặc hàm tương quan một lệnh (PACF - Partial AutoCorrelation Function). Phương trình tự hồi quy AR được tổng quát như sau:\\
 \[
@@ -408,8 +410,7 @@ Trong đó: \\
 \indent -- \(c\) là hằng số chặn\\
 \indent -- \(\theta\) là hệ số Moving Average(MA)\\
 \indent -- \(\epsilon_t\) là hệ số tương quan\\
-\indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
-
+\indent -- \(\varphi\) là hệ số AutoRegressive(AR)
 
 \subsection{Recurrent Neural Networks (RNN)}
 Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống tất cả các đầu vào và cả đầu ra là độc lập với nhau. Tức là chúng không liên kết thành chuỗi với nhau. Nhưng các mô hình này không phù hợp trong rất nhiều bài toán. RNN được gọi là hồi quy (Recurrent) bởi thực hiện cùng một tác vụ cho tất cả các phần tử của một chuỗi với đầu ra phụ thuộc vào cả các phép tính trước đó. Nói cách khác, RNN có khả năng nhớ các thông tin được tính toán trước đó.
@@ -794,7 +795,10 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
         ResCNN                 & 7:3                         & 24.544                    & 43.435                         & 16.32                    \\ \cline{2-5}
                                & 8:2                         & 22.256                    & 37.291                         & 17.102                   \\ \cline{2-5}
                                & 9:1                         & \textbf{15.148}           & \textbf{22.727}                & \textbf{10.148}          \\ \hline
-        ARIMA                  & 7:3                         & 36,37                     & \textbf{31,39}                 & 21,76                    \\ \cline{2-5}
+        GRU                    & 7:3                         & 56.16                     & 2161.69                        & 52.97                    \\ \cline{2-5}
+                               & 8:2                         & 56.05                     & 1614.02                        & 52.32                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{52.88}            & \textbf{1439.80}               & \textbf{51.55}           \\ \hline
+        ARIMA                  & 7:3                         & 36.37                     & \textbf{31,39}                 & 21,76                    \\ \cline{2-5}
                                & 8:2                         & \textbf{27,71}            & 42,95                          & \textbf{21,41}           \\ \cline{2-5}
                                & 9:1                         & 34,08                     & 104,89                         & 32,95                    \\ \hline
         N-BEATS                & 7:3                         & 20.64                     & \textbf{26.02}                 & \textbf{14.78}           \\ \cline{2-5}
@@ -1039,13 +1043,12 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \subsection{Tổng quan}
 Phân tích cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, N-BEATS, RNN, GRU và LSTM cho kết quả vượt trội hơn các mô hình thống kê truyền thống như Gauss Newton Non-Linear, LR và ARIMA về độ chính xác và độ tin cậy. Các mô hình học sâu cho hiệu suất vượt trội nhờ khả năng nắm bắt các phức tạp và các mối quan hệ phi tuyến tính vốn có trong dữ liệu chất lượng không khí. Trong số này, mô hình LSTM và RNN cung cấp các dự báo nhất quán và đáng tin cậy nhất trên cả ba thành phố.
 \subsection{Định hướng phát triển tương lai}
-Tuy kết quả nghiên cứu của nhóm mang lại hứa hẹn, song phần dự báo vẫn còn dấu hiệu không chính xác với chỉ số đánh giá thấp, và vẫn còn nhiều hướng nghiên cứu trong tương lai để nâng cao khả năng dự báo cũng cải thiện chỉ số:\\
+
 \indent\textbullet\ Thứ nhất, việc kết hợp, chọn lọc các nguồn dữ liệu bổ sung như dữ liệu khí tượng, lưu lượng giao thông và hoạt động công nghiệp có thể cải thiện độ chính xác của mô hình.\\
 \indent\textbullet\ Thứ hai, tìm hiểu các mô hình kết hợp các điểm mạnh khác nhau để mang lại hiệu suất dự báo tốt hơn là sử dụng riêng lẽ để cho từng dự báo, đặc biệt rõ ràng ở việc sử dụng RNN + LSTM.
 
-\section*{Lời cảm ơn}
-\addcontentsline{toc}{section}{Acknowledgment}
-Nhóm xin gửi lời cảm ơn đến thầy Nguyễn Đình Thuân cùng giảng viên hướng dẫn Nguyễn Minh Nhực cho sự hướng dẫn tận tình, kiến thức bỗ trợ và phản hồi giúp nhóm đạt được kết quả mong muốn. Đặc biệt cảm ơn các thành viên của nhóm nghiên cứu vì những nỗ lực siêng năng và đóng góp sáng tạo trong suốt dự án này.
+
+
 \begin{thebibliography}{00}
     \bibitem{gaussnewtonrelated} Ke, Z., Zhang, J., \& Wen, Z. (2023). Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation.
     \bibitem{b2} H. Choi, C. Jung, T. Kang, H. J. Kim, and I. -Y. Kwak, "Explainable time-series prediction using a residual network and gradient-based methods," in IEEE Access, vol. 10, pp. 108469-108482, 2022.
