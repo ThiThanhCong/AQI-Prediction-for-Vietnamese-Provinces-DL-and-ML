@@ -32,7 +32,7 @@
 
 \title{DỰ BÁO MỨC ĐỘ CHỈ SỐ CHẤT LƯỢNG KHÔNG KHÍ TẠI BA THÀNH PHỐ CỦA VIỆT NAM SỬ DỤNG PHƯƠNG PHÁP HỌC MÁY VÀ HỌC SÂU\\
 {\footnotesize}
-\thanks{Identify applicable funding agency here. If none, delete this.}
+
 }
 
 \makeatletter
@@ -97,7 +97,7 @@ Việc bao gồm một tập hợp đa dạng các mô hình cho phép chúng t�
 
 Vào năm 2023 , Gauss-Newton được Zhifa Ke, Junyu Zhang và Zaiwen Wen ứng dụng để tối ưu hóa một biến thể của sai phân bình phương trung bình Bellman (MSBE). Cụ thể, Gauss-Newton được sử dụng trong mỗi vòng lặp của phương pháp học Tăng Cường Sai Phân Gauss-Newton (Gauss-Newton Temporal Difference - GNTD) để thực hiện các bước cập nhật tham số của mô hình xấp xỉ hàm phi tuyến.\cite{gaussnewtonrelated}. Hạn chế của phương pháp này là đòi hỏi tính toán gradient và ma trận Jacobi tại mỗi bước lặp, làm tăng tải tính toán và cần một lượng dữ liệu lớn để đạt độ chính xác mong muốn
 
-\subsection{ResCNN}
+\subsection{Residual Controversal Neural Network}
 Phân loại ECG bằng bộ Ensemble của Residual CNNs với Cơ chế Chú ý.
 
 Trong phân loại ECG, sử dụng ResNet kết hợp với cơ chế chú ý đa đầu đã chứng minh hiệu quả. Giải pháp của Đội ISIBrno-AIMT trong Cuộc thi PhysioNet 2021 đã thể hiện sự vượt trội bằng việc phân loại ECG thành 26 nhóm khác nhau. Phương pháp này tích hợp các hàm mất mát và tối ưu hóa tiến hóa, mang lại đóng góp quan trọng cho lĩnh vực này. \cite{b4}
@@ -131,7 +131,7 @@ ARIMA đã được áp dụng để giải quyết các vấn đề thực tế
 \subsection{Bộ dữ liệu}
 Dự báo chất lượng không khí là rất quan trọng để giảm thiểu các tác động tiêu cực của ô nhiễm lên sức khỏe con người và môi trường. Phân tích chuỗi thời gian nổi lên như một công cụ mạnh mẽ trong lĩnh vực này, cho phép dự đoán các mức độ chất lượng không khí trong tương lai dựa trên dữ liệu lịch sử.
 
-Do các vấn đề phổ biến liên quan đến bụi mịn ở khu vực phía Bắc, nhóm đã chọn một bộ dữ liệu chi tiết về chất lượng không khí của ba thành phố lớn ở miền Bắc Việt Nam: Bắc Ninh, Hà Nội và Quảng Ninh.
+Do các vấn đề phổ biến liên quan đến bụi mịn ở khu vực phía Bắc, nhóm đã chọn một bộ dữ liệu chi tiết về chất lượng không khí của ba thành phố lớn ở Việt Nam: Đà Nẵng, Hà Nội và Việt Trì.
 
 Bộ dữ liệu chủ yếu kéo dài từ năm 2021 đến năm hiện tại, 2024, bao gồm 6 cột tương ứng với các thành phần khác nhau trong không khí và chất lượng không khí được đánh giá thông qua Chỉ số Chất lượng Không khí (AQI): nồng độ PM2.5, nồng độ PM10, nồng độ O3, nồng độ NO2, nồng độ SO2 và nồng độ CO.
 \subsection{Thống kế mô tả}
@@ -549,14 +549,8 @@ Trong đó:\\
 
 \subsection{Gated Recurrent Unit (GRU)}
 \subsubsection{GRU là gì?}
-GRU là một biến thể của LSTM
+GRU là một biến thể của LSTM. Không có ô nhớ riêng biệt, thay vào đó, nó sử dụng một “trạng thái ẩn tiềm năng” và hai cổng (reset gate và update gate).
 
-Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng thái ẩn và ô nhớ:
-
-\begin{itemize}
-    \item \textbf{LSTM}: Sử dụng ba cổng (input gate, output gate và forget gate) để duy trì trạng thái của ô nhớ riêng biệt.
-    \item \textbf{GRU}: Không có ô nhớ riêng biệt, thay vào đó, nó sử dụng một “vector kích hoạt ứng viên” và hai cổng (reset gate và update gate).
-\end{itemize}
 
 \begin{itemize}
     \item \textbf{Cổng thiết lập lại (reset gate)}: Quyết định bao nhiêu trạng thái ẩn trước đó cần quên.
@@ -578,9 +572,6 @@ Sự khác biệt chính giữa GRU và LSTM nằm ở cách xử lý trạng th
     \end{minipage}
 \end{figure}
 
-Ta bắt đầu bằng việc thiết kế các cổng tạo ra các biến này. Hình \ref{fig:gru_del_up}
-minh họa các đầu vào cho cả cổng thiết lập lại và cổng cập nhật trong GRU, với đầu vào ở bước thời gian hiện tại  \(\mathbf{X}_t \)
-và trạng thái ẩn ở bước thời gian trước đó  \(\mathbf{H}_{t-1} \). Đầu ra được tạo bởi một tầng kết nối đầy đủ với hàm kích hoạt sigmoid.
 
 Tại bước thời gian $t$, với đầu vào là $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ (số lượng mẫu: $n$, số lượng đầu vào: $d$) và trạng thái ẩn ở bước thời gian gần nhất là $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$ (số lượng trạng thái ẩn: $h$), cổng thiết lập lại $\mathbf{R}_t \in \mathbb{R}^{n \times h}$ và cổng cập nhật $\mathbf{Z}_t \in \mathbb{R}^{n \times h}$ được tính như sau:
 
@@ -593,12 +584,7 @@ Tại bước thời gian $t$, với đầu vào là $\mathbf{X}_t \in \mathbb{R
 
 Ở đây, $\mathbf{W}_{xr}, \mathbf{W}_{xz} \in \mathbb{R}^{d \times h}$ và $\mathbf{W}_{hr}, \mathbf{W}_{hz} \in \mathbb{R}^{h \times h}$ là các ma trận trọng số và $\mathbf{b}_r, \mathbf{b}_z \in \mathbb{R}^{1 \times h}$ là các hệ số điều chỉnh. Ta sẽ sử dụng hàm sigmoid để biến đổi các giá trị đầu vào nằm trong khoảng $(0, 1)$.
 
-\subsubsection{Hoạt động của cổng thiết lập lại}
-Trong RNN thông thường, ta cập nhật trọng thái cổng thiết lập lại theo công thức
-\[
-    \mathbf{H}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xh} + \mathbf{H}_{t-1} \mathbf{W}_{hh} + \mathbf{b}_h).
-\]
-
+\subsubsection{Tính toán trạng thái ẩn mới}
 Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng thiết lập lại. Ký hiệu \(\bigodot\) biểu thị phép nhân theo từng phần tử giữa các tensor.
 
 \begin{figure}[H]
@@ -612,24 +598,23 @@ Hình \ref{fig:gru_del} minh họa luồng tính toán sau khi áp dụng cổng
 
 \end{figure}
 
+Ta có công thức để tính trạng thái ẩn tiềm năng:
 \begin{equation*}
     \tilde{\mathbf{H}}_t = \tanh (\mathbf{X}_t \mathbf{W}_{xh} + (\mathbf{R}_t \odot \mathbf{H}_{t-1}) \mathbf{W}_{hh} + \mathbf{b}_h).
 \end{equation*}
-
-\subsubsection{Hoạt động của cổng cập nhật}
-Cổng này xác định mức độ giống nhau giữa trạng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Cổng cập nhật \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
+\subsubsection{Tính toán trạng thái ẩn cuối cùng}
+Xác định mức độ giống nhau giữa trạng thái mới \(\mathbf{H}_t \) và trạng thái cũ \(\mathbf{H}_{t-1}\) cũng như mức độ trạng thái tiềm năng \(\widetilde{\mathbf{H}}_t\) được sử dụng. Cổng cập nhật \(\mathbf{Z}_t\) được sử dụng cho mục đích này bằng cách áp dụng tổ hợp lồi giữa trạng thái cũ và trạng thái tiềm năng. Ta có phương
 trình cập nhật cuối cho GRU.
-
-\begin{equation*}
+\[
     \mathbf{H}_t = \mathbf{Z}_t \circ \mathbf{H}_{t-1} + (1 - \mathbf{Z}_t) \circ \tilde{\mathbf{H}}_t.
-\end{equation*}
+\]
 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.43\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/figure/GRU/gru_3.pdf}
-        \caption{Tính toán trạng thái ẩn trong một GRU. Phép nhân được thực hiện cho từng phần tử}
+        \caption{Tính toán trạng thái ẩn cuối cùng trong GRU.}
         \label{fig:gru_up}
     \end{minipage}
 
@@ -802,7 +787,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \end{itemize}
 
 \section{Kết quả}
-\subsection{Phương pháp đánh giá}
+\subsection{Phương pháp đánh giá và kết quả mô hình}
 \textbf{Mean Percentage Absolute Error (MAPE)}: là một phép đo đánh giá mức độ sai lệch tương đối giữa các giá trị dự đoán và giá trị thực tế trong dự đoán
 \[
     MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%
@@ -816,6 +801,123 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \[
     RMSE = \sqrt{\frac{\sum_{i=0}^{N - 1} (y_i - \hat{y}_i)^2}{N}}
 \]
+
+\begin{table}[ht]
+    \centering
+    \caption{Bảng đánh giá độ đo trên dataset Việt Trì}
+    \begin{tabular}{|l|l|c|c|c|}
+        \hline
+        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
+                               &                             & Value                     & Value                          & Value                    \\ \hline
+        GaussNewtonNonlinear   & 7:3                         & 56.59                     & 143.99                         & 49.95                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{25.19}            & \textbf{39.11}                 & \textbf{19.29}           \\ \cline{2-5}
+                               & 9:1                         & 28.01                     & 76.27                          & 25.23                    \\ \hline
+        ResCNN                 & 7:3                         & 24.544                    & 43.435                         & 16.32                    \\ \cline{2-5}
+                               & 8:2                         & 22.256                    & 37.291                         & 17.102                   \\ \cline{2-5}
+                               & 9:1                         & \textbf{15.148}           & \textbf{22.727}                & \textbf{10.148}          \\ \hline
+        ARIMA                  & 7:3                         & 36,37                     & \textbf{31,39}                 & 21,76                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{27,71}            & 42,95                          & \textbf{21,41}           \\ \cline{2-5}
+                               & 9:1                         & 34,08                     & 104,89                         & 32,95                    \\ \hline
+        N-BEATS                & 7:3                         & 20.64                     & \textbf{26.02}                 & \textbf{14.78}           \\ \cline{2-5}
+                               & 8:2                         & 19.76                     & 43.13                          & 15.99                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{19.36}            & 37.76                          & 15.18                    \\ \hline
+        Linear Regression      & 7:3                         & 47.146                    & 70.275                         & 36.808                   \\ \cline{2-5}
+                               & 8:2                         & 43.092                    & 64.671                         & 35.84                    \\ \cline{2-5}
+                               & 9.1                         & \textbf{23.933}           & \textbf{30.738}                & \textbf{16.738}          \\ \hline
+        DLM                    & 7:3                         & 50.22                     & 72.03                          & 40.87                    \\ \cline{2-5}
+                               & 8:2                         & 31.83                     & 63.62                          & 26.06                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{24.98}            & \textbf{41.56}                 & \textbf{19.80}           \\ \hline
+        RNN                    & 7:3                         & 22.20                     & 29.52                          & 13.57                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{17.66}            & \textbf{22.83}                 & \textbf{11.66}           \\ \cline{2-5}
+                               & 9:1                         & 18.66                     & 29.27                          & 13.90                    \\ \hline
+        SES                    & 7:3                         & 29.72                     & 36.02                          & 18.90                    \\ \cline{2-5}
+                               & 8:2                         & 29.26                     & 66.71                          & 66.71                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{18.00}            & \textbf{31.29}                 & \textbf{13.89}           \\ \hline
+        LSTM                   & 7:3                         & 22.59                     & 27.09                          & 12.78                    \\ \cline{2-5}
+                               & 8:2                         & 15.86                     & \textbf{21.36}                 & \textbf{10.36}           \\ \cline{2-5}
+                               & 9:1                         & \textbf{14.05}            & 22.64                          & 10.53                    \\ \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \centering
+    \caption{Bảng đánh giá độ đo trên dataset Hà Nội}
+    \begin{tabular}{|l|l|c|c|c|}
+        \hline
+        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
+                               &                             & Value                     & Value                          & Value                    \\ \hline
+        GaussNewtonNonlinear   & 7:3                         & 99.75                     & 106.15                         & 83.29                    \\ \cline{2-5}
+                               & 8:2                         & 50.95                     & 40.74                          & 38.15                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{51.96}            & \textbf{76.15}                 & \textbf{46.45}           \\ \hline
+        ResCNN                 & 7:3                         & 28.739                    & 31.412                         & \textbf{20.543}          \\ \cline{2-5}
+                               & 8:2                         & 32.038                    & 30.35                          & 24.295                   \\ \cline{2-5}
+                               & 9:1                         & \textbf{28.71}            & \textbf{26.15}                 & 21.505                   \\ \hline
+        ARIMA                  & 7:3                         & 49.32                     & \textbf{43.87}                 & 36.28                    \\ \cline{2-5}
+                               & 8:2                         & 54.44                     & 77.00                          & 48.37                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{31.09}            & 49.10                          & \textbf{26.47}           \\ \hline
+        DLM                    & 7:3                         & 61.12                     & 114.34                         & 52.26                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{42.51}            & \textbf{38.64}                 & \textbf{32.04}           \\ \cline{2-5}
+                               & 9:1                         & 76.20                     & 69.34                          & 61.13                    \\ \hline
+        GRU                    & 7:3                         & 81.26                     & 746.69                         & 76.35                    \\ \cline{2-5}
+                               & 8:2                         & 88.87                     & \textbf{627.15}                & 86.02                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{84.89}            & 642.77                         & \textbf{82.38}           \\ \hline
+        N-BEATS                & 7:3                         & 30.38                     & 26.82                          & 22.84                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{27.64}            & \textbf{25.62}                 & \textbf{21.20}           \\ \cline{2-5}
+                               & 9:1                         & 31.69                     & 33.08                          & 26.12                    \\ \hline
+        RNN                    & 7:3                         & 24.92                     & 29.35                          & 10.09                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{25.73}            & \textbf{24.47}                 & \textbf{19.43}           \\ \cline{2-5}
+                               & 9:1                         & 27.63                     & 29.48                          & 22.03                    \\ \hline
+        SES                    & 7:3                         & 57.67                     & 49.73                          & 44.02                    \\ \cline{2-5}
+                               & 8:2                         & 68.84                     & 61.06                          & 57.16                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{32.02}            & \textbf{26.83}                 & \textbf{22.77}           \\ \hline
+        Linear Regression      & 7:3                         & 64.77                     & 59.609                         & 51.019                   \\ \cline{2-5}
+                               & 8:2                         & 65.904                    & 58.715                         & 54.566                   \\ \cline{2-5}
+                               & 9:1                         & \textbf{40.55}            & \textbf{33.03}                 & \textbf{30.33}           \\ \hline
+        LSTM                   & 7:3                         & 26.56                     & 31.35                          & 19.76                    \\ \cline{2-5}
+                               & 8:2                         & 27.85                     & \textbf{27.55}                 & 21.43                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{25.24}            & 26.79                          & \textbf{19.22}           \\ \hline
+    \end{tabular}
+    \label{mbbresult}
+\end{table}
+\begin{table}[H]
+    \centering
+    \caption{Bảng đánh giá độ đo trên dataset Đà Nẵng}
+    \begin{tabular}{|l|l|c|c|c|}
+        \hline
+        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
+                               &                             & Value                     & Value                          & Value                    \\ \hline
+        GaussNewtonNonlinear   & 7:3                         & 145.73                    & \textbf{104.77}                & \textbf{88.44}           \\ \cline{2-5}
+                               & 8:2                         & \textbf{133.19}           & 190.12                         & 105.14                   \\ \cline{2-5}
+                               & 9:1                         & 136.55                    & 149.32                         & 93.19                    \\ \hline
+        ResCNN                 & 7:3                         & \textbf{82,208}           & \textbf{62,294}                & \textbf{41,028}          \\ \cline{2-5}
+                               & 8:2                         & 92,096                    & 74,695                         & 51,225                   \\ \cline{2-5}
+                               & 9:1                         & 93,917                    & 68,218                         & 47,323                   \\ \hline
+        GRU                    & 7:3                         & 117.04                    & \textbf{1094.12}               & 85.75                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{102.37}           & 1340.91                        & \textbf{77.82}           \\ \cline{2-5}
+                               & 9:1                         & 127.76                    & 1388.00                        & 96.50                    \\ \hline
+        ARIMA                  & 7:3                         & 154.76                    & 313.9                          & 142.54                   \\ \cline{2-5}
+                               & 8:2                         & \textbf{146.74}           & \textbf{50.15}                 & \textbf{66.27}           \\ \cline{2-5}
+                               & 9:1                         & 194.28                    & 71.58                          & 105.03                   \\ \hline
+        N-BEATS                & 7:3                         & 79.46                     & \textbf{68.11}                 & \textbf{43.31}           \\ \cline{2-5}
+                               & 8:2                         & 101.91                    & 155.01                         & 74.18                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{65.87}            & 101.96                         & 44.18                    \\ \hline
+        LinearRegression       & 7:3                         & \textbf{120.89}           & \textbf{42,574}                & \textbf{54,318}          \\ \cline{2-5}
+                               & 8:2                         & 131,599                   & 47,929                         & 60,224                   \\ \cline{2-5}
+                               & 9:1                         & 140,505                   & 60,559                         & 66,297                   \\ \hline
+        DLM                    & 7:3                         & \textbf{122.86}           & \textbf{40.93}                 & \textbf{55.68}           \\ \cline{2-5}
+                               & 8:2                         & 204.85                    & 300.90                         & 160.82                   \\ \cline{2-5}
+                               & 9:1                         & 154.70                    & 69.37                          & 78.50                    \\ \hline
+        RNN                    & 7:3                         & 76.78                     & 41.23                          & 36.03                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{53.3}             & \textbf{32.39}                 & \textbf{22.66}           \\ \cline{2-5}
+                               & 9:1                         & 67.44                     & 52.2                           & 35.54                    \\ \hline
+        SES                    & 7:3                         & \textbf{121.30}           & \textbf{38.11}                 & \textbf{53.38}           \\ \cline{2-5}
+                               & 8:2                         & 124.75                    & 81.16                          & 64.94                    \\ \cline{2-5}
+                               & 9:1                         & 140.65                    & 58.48                          & 65.63                    \\ \hline
+        LSTM                   & 7:3                         & \textbf{87.20}            & \textbf{51.02}                 & \textbf{39.57}           \\ \cline{2-5}
+                               & 8:2                         & 100.42                    & 83.03                          & 48.04                    \\ \cline{2-5}
+                               & 9:1                         & 114.13                    & 79.01                          & 60.05                    \\ \hline
+    \end{tabular}
+    \label{mbbresult}
+\end{table}
 
 
 
@@ -953,124 +1055,6 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
     }
     \caption{Kết quả chạy mô hình RNN trên 3 bộ dữ liệu HaNoi, DaNang và VietTri với tỉ lệ tập huấn luyện và kiểm tra 9:1}
 \end{figure}
-
-\subsection{Bộ dữ liệu}
-\begin{table}[ht]
-    \centering
-    \caption{Bảng đánh giá độ đo trên dataset Việt Trì}
-    \begin{tabular}{|l|l|c|c|c|}
-        \hline
-        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
-                               &                             & Value                     & Value                          & Value                    \\ \hline
-        GaussNewtonNonlinear   & 7:3                         & 56.59                     & 143.99                         & 49.95                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{25.19}            & \textbf{39.11}                 & \textbf{19.29}           \\ \cline{2-5}
-                               & 9:1                         & 28.01                     & 76.27                          & 25.23                    \\ \hline
-        ResCNN                 & 7:3                         & 24.544                    & 43.435                         & 16.32                    \\ \cline{2-5}
-                               & 8:2                         & 22.256                    & 37.291                         & 17.102                   \\ \cline{2-5}
-                               & 9:1                         & \textbf{15.148}           & \textbf{22.727}                & \textbf{10.148}          \\ \hline
-        ARIMA                  & 7:3                         & 36,37                     & \textbf{31,39}                 & 21,76                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{27,71}            & 42,95                          & \textbf{21,41}           \\ \cline{2-5}
-                               & 9:1                         & 34,08                     & 104,89                         & 32,95                    \\ \hline
-        N-BEATS                & 7:3                         & 20.64                     & \textbf{26.02}                 & \textbf{14.78}           \\ \cline{2-5}
-                               & 8:2                         & 19.76                     & 43.13                          & 15.99                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{19.36}            & 37.76                          & 15.18                    \\ \hline
-        Linear Regression      & 7:3                         & 47.146                    & 70.275                         & 36.808                   \\ \cline{2-5}
-                               & 8:2                         & 43.092                    & 64.671                         & 35.84                    \\ \cline{2-5}
-                               & 9.1                         & \textbf{23.933}           & \textbf{30.738}                & \textbf{16.738}          \\ \hline
-        DLM                    & 7:3                         & 50.22                     & 72.03                          & 40.87                    \\ \cline{2-5}
-                               & 8:2                         & 31.83                     & 63.62                          & 26.06                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{24.98}            & \textbf{41.56}                 & \textbf{19.80}           \\ \hline
-        RNN                    & 7:3                         & 22.20                     & 29.52                          & 13.57                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{17.66}            & \textbf{22.83}                 & \textbf{11.66}           \\ \cline{2-5}
-                               & 9:1                         & 18.66                     & 29.27                          & 13.90                    \\ \hline
-        SES                    & 7:3                         & 29.72                     & 36.02                          & 18.90                    \\ \cline{2-5}
-                               & 8:2                         & 29.26                     & 66.71                          & 66.71                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{18.00}            & \textbf{31.29}                 & \textbf{13.89}           \\ \hline
-        LSTM                   & 7:3                         & 22.59                     & 27.09                          & 12.78                    \\ \cline{2-5}
-                               & 8:2                         & 15.86                     & \textbf{21.36}                 & \textbf{10.36}           \\ \cline{2-5}
-                               & 9:1                         & \textbf{14.05}            & 22.64                          & 10.53                    \\ \hline
-    \end{tabular}
-\end{table}
-\begin{table}[H]
-    \centering
-    \caption{Bảng đánh giá độ đo trên dataset Hà Nội}
-    \begin{tabular}{|l|l|c|c|c|}
-        \hline
-        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
-                               &                             & Value                     & Value                          & Value                    \\ \hline
-        GaussNewtonNonlinear   & 7:3                         & 99.75                     & 106.15                         & 83.29                    \\ \cline{2-5}
-                               & 8:2                         & 50.95                     & 40.74                          & 38.15                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{51.96}            & \textbf{76.15}                 & \textbf{46.45}           \\ \hline
-        ResCNN                 & 7:3                         & 28.739                    & 31.412                         & \textbf{20.543}          \\ \cline{2-5}
-                               & 8:2                         & 32.038                    & 30.35                          & 24.295                   \\ \cline{2-5}
-                               & 9:1                         & \textbf{28.71}            & \textbf{26.15}                 & 21.505                   \\ \hline
-        ARIMA                  & 7:3                         & 49.32                     & \textbf{43.87}                 & 36.28                    \\ \cline{2-5}
-                               & 8:2                         & 54.44                     & 77.00                          & 48.37                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{31.09}            & 49.10                          & \textbf{26.47}           \\ \hline
-        DLM                    & 7:3                         & 61.12                     & 114.34                         & 52.26                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{42.51}            & \textbf{38.64}                 & \textbf{32.04}           \\ \cline{2-5}
-                               & 9:1                         & 76.20                     & 69.34                          & 61.13                    \\ \hline
-        GRU                    & 7:3                         & 81.26                     & 746.69                         & 76.35                    \\ \cline{2-5}
-                               & 8:2                         & 88.87                     & \textbf{627.15}                & 86.02                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{84.89}            & 642.77                         & \textbf{82.38}           \\ \hline
-        N-BEATS                & 7:3                         & 30.38                     & 26.82                          & 22.84                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{27.64}            & \textbf{25.62}                 & \textbf{21.20}           \\ \cline{2-5}
-                               & 9:1                         & 31.69                     & 33.08                          & 26.12                    \\ \hline
-        RNN                    & 7:3                         & 24.92                     & 29.35                          & 10.09                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{25.73}            & \textbf{24.47}                 & \textbf{19.43}           \\ \cline{2-5}
-                               & 9:1                         & 27.63                     & 29.48                          & 22.03                    \\ \hline
-        SES                    & 7:3                         & 57.67                     & 49.73                          & 44.02                    \\ \cline{2-5}
-                               & 8:2                         & 68.84                     & 61.06                          & 57.16                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{32.02}            & \textbf{26.83}                 & \textbf{22.77}           \\ \hline
-        Linear Regression      & 7:3                         & 64.77                     & 59.609                         & 51.019                   \\ \cline{2-5}
-                               & 8:2                         & 65.904                    & 58.715                         & 54.566                   \\ \cline{2-5}
-                               & 9:1                         & \textbf{40.55}            & \textbf{33.03}                 & \textbf{30.33}           \\ \hline
-        LSTM                   & 7:3                         & 26.56                     & 31.35                          & 19.76                    \\ \cline{2-5}
-                               & 8:2                         & 27.85                     & \textbf{27.55}                 & 21.43                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{25.24}            & 26.79                          & \textbf{19.22}           \\ \hline
-    \end{tabular}
-    \label{mbbresult}
-\end{table}
-\begin{table}[H]
-    \centering
-    \caption{Bảng đánh giá độ đo trên dataset Đà Nẵng}
-    \begin{tabular}{|l|l|c|c|c|}
-        \hline
-        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
-                               &                             & Value                     & Value                          & Value                    \\ \hline
-        GaussNewtonNonlinear   & 7:3                         & 145.73                    & \textbf{104.77}                & \textbf{88.44}           \\ \cline{2-5}
-                               & 8:2                         & \textbf{133.19}           & 190.12                         & 105.14                   \\ \cline{2-5}
-                               & 9:1                         & 136.55                    & 149.32                         & 93.19                    \\ \hline
-        ResCNN                 & 7:3                         & \textbf{82,208}           & \textbf{62,294}                & \textbf{41,028}          \\ \cline{2-5}
-                               & 8:2                         & 92,096                    & 74,695                         & 51,225                   \\ \cline{2-5}
-                               & 9:1                         & 93,917                    & 68,218                         & 47,323                   \\ \hline
-        GRU                    & 7:3                         & 117.04                    & \textbf{1094.12}               & 85.75                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{102.37}           & 1340.91                        & \textbf{77.82}           \\ \cline{2-5}
-                               & 9:1                         & 127.76                    & 1388.00                        & 96.50                    \\ \hline
-        ARIMA                  & 7:3                         & 154.76                    & 313.9                          & 142.54                   \\ \cline{2-5}
-                               & 8:2                         & \textbf{146.74}           & \textbf{50.15}                 & \textbf{66.27}           \\ \cline{2-5}
-                               & 9:1                         & 194.28                    & 71.58                          & 105.03                   \\ \hline
-        N-BEATS                & 7:3                         & 79.46                     & \textbf{68.11}                 & \textbf{43.31}           \\ \cline{2-5}
-                               & 8:2                         & 101.91                    & 155.01                         & 74.18                    \\ \cline{2-5}
-                               & 9:1                         & \textbf{65.87}            & 101.96                         & 44.18                    \\ \hline
-        LinearRegression       & 7:3                         & \textbf{120.89}           & \textbf{42,574}                & \textbf{54,318}          \\ \cline{2-5}
-                               & 8:2                         & 131,599                   & 47,929                         & 60,224                   \\ \cline{2-5}
-                               & 9:1                         & 140,505                   & 60,559                         & 66,297                   \\ \hline
-        DLM                    & 7:3                         & \textbf{122.86}           & \textbf{40.93}                 & \textbf{55.68}           \\ \cline{2-5}
-                               & 8:2                         & 204.85                    & 300.90                         & 160.82                   \\ \cline{2-5}
-                               & 9:1                         & 154.70                    & 69.37                          & 78.50                    \\ \hline
-        RNN                    & 7:3                         & 76.78                     & 41.23                          & 36.03                    \\ \cline{2-5}
-                               & 8:2                         & \textbf{53.3}             & \textbf{32.39}                 & \textbf{22.66}           \\ \cline{2-5}
-                               & 9:1                         & 67.44                     & 52.2                           & 35.54                    \\ \hline
-        SES                    & 7:3                         & \textbf{121.30}           & \textbf{38.11}                 & \textbf{53.38}           \\ \cline{2-5}
-                               & 8:2                         & 124.75                    & 81.16                          & 64.94                    \\ \cline{2-5}
-                               & 9:1                         & 140.65                    & 58.48                          & 65.63                    \\ \hline
-        LSTM                   & 7:3                         & \textbf{87.20}            & \textbf{51.02}                 & \textbf{39.57}           \\ \cline{2-5}
-                               & 8:2                         & 100.42                    & 83.03                          & 48.04                    \\ \cline{2-5}
-                               & 9:1                         & 114.13                    & 79.01                          & 60.05                    \\ \hline
-    \end{tabular}
-    \label{mbbresult}
-\end{table}
 
 \section{Tổng kết}
 \subsection{Tổng quan}
