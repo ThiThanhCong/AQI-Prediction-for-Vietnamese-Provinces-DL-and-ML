@@ -110,7 +110,7 @@ Năm 2021, một nhóm nghiên cứu tại Đại học Khoa học và Công ngh
 Trong nghiên cứu về hiểu biết ô nhiễm không khí, Brian S. Freemana, Graham Taylora, Bahram Gharabaghia, và Jesse Thé từ Trường Kỹ thuật, Đại học Guelph, Guelph, Ontario, Canada dự báo chuỗi thời gian chất lượng không khí bằng cách sử dụng mô hình học sâu mạng nơ-ron hồi quy (RNN) với bộ nhớ dài hạn (LSTM)\cite{b10}. Nghiên cứu của nhóm đã chỉ ra được hạn chế lớn nhất của RNN chính là vấn đề Vanishing Gradient.
 
 \subsection{SES}
-Nhóm tác giả từ University of Karachi, Pakistan đã sử dụng mô hình ARIMA và SES để dự đoán lượng khí thải CO2 từ một số nước châu Á như Japan, Bangladesh, China, Pakistan, India, Sri Lanka, Iran, Singapore, và Nepal trong khoảng từ năm 1971 đến 2014. Dựa trên FMAE, SES phù hợp để dự đoán lượng CO2 ở Pakistan và Sri Lanka. Trong khi đó, ARIMA thì phù hợp với Japan, China, India, Iran và Singapore. Đối với Nepal và Bangladesh, cả hai mô hình đều cho kết quả tương đương nhau. \cite{b11}
+Nhóm tác giả từ University of Karachi, Pakistan đã sử dụng mô hình ARIMA và SES để dự đoán lượng khí thải CO2 từ một số nước châu Á như Japan, Bangladesh, China, Pakistan, India, Sri Lanka, Iran, Singapore, và Nepal trong khoảng từ năm 1971 đến 2014. \cite{b11}
 
 \subsection{GRU}
 Nhóm tác giả Zhengping Che, Sanjay Purushotham, Kyunghyun Cho, David Sontag và Yan Liu đã cải tiến GRU dành cho đa biến ở bài toán thiếu dữ liệu cho Time Series \cite{che2016recurrent}. Tuy nhiên, mô hình GRU-D gặp hạn chế trong việc đòi hỏi tài nguyên tính toán lớn, khó khăn trong việc điều chỉnh siêu tham số và khả năng tổng quát hóa chưa tốt khi dữ liệu bị thiếu không tuân theo các mô hình dự đoán được xác định sẵn
@@ -241,10 +241,10 @@ Hoặc chúng ta có thể giải thích bằng ma trận Hessian như sau:
 \begin{center}
     \[
         \begin{pmatrix}
-            k_{\text{new}} \\ y_{0,\text{new}}
+            k_{\text{new}} \\ y_{0_\text{new}}
         \end{pmatrix} =
         \begin{pmatrix}
-            k_{\text{old}} \\ y_{0,\text{old}}
+            k_{\text{old}} \\ y_{0_\text{old}}
         \end{pmatrix} - H^{-1}G
     \]
 \end{center}
@@ -313,10 +313,10 @@ Sử dụng quy tắc cập nhật sau trong phương pháp Newton. Đối với
 \begin{center}
     \[
         \begin{pmatrix}
-            k_{\text{new}} \\ y_{0,\text{new}}
+            k_{\text{new}} \\ y_{0_\text{new}}
         \end{pmatrix} =
         \begin{pmatrix}
-            k_{\text{old}} \\ y_{0,\text{old}}
+            k_{\text{old}} \\ y_{0_\text{old}}
         \end{pmatrix} - (J^T_r J_r)^{-1} J^T_r r
     \]
 \end{center}
@@ -329,12 +329,12 @@ Với \(\beta\) là một vector cột với các tham số được ước tín
     \]
     \[
         \begin{pmatrix}
-            k_{\text{new}} \\ y_{0,\text{new}}
+            k_{\text{new}} \\ y_{0_\text{new}}
         \end{pmatrix} =
         \begin{pmatrix}
-            k_{\text{old}} \\ y_{0,\text{old}}
+            k_{\text{old}} \\ y_{0_\text{old}}
         \end{pmatrix} - (J^T_r J_r)^{-1} J^T_r r \begin{pmatrix}
-            k_{\text{old}} \\ y_{0,\text{old}}
+            k_{\text{old}} \\ y_{0_\text{old}}
         \end{pmatrix}
     \]
 \end{center}
@@ -428,7 +428,7 @@ Trong đó: \\
 Mô hình trên mô tả phép triển khai nội dung của một RNN. Triển khai ở đây có thể hiểu đơn giản là ta vẽ ra một mạng nơ-ron chuỗi tuần tự. Ví dụ ta có một câu gồm 5 chữ, thì mạng nơ-ron được triển khai sẽ gồm 5 tầng nơ-ron tương ứng với mỗi chữ một tầng. Lúc đó việc tính toán bên trong RNN được thực hiện như sau:
 \begin{itemize}
     \item x\textsubscript{t} là đầu vào tại bước t. Ví dụ, x\textsubscript{t} là một vec-tơ one-hot tương ứng với từ thứ 2 của câu.
-    \item s\textsubscript{t} là trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. 
+    \item s\textsubscript{t} là trạng thái ẩn tại bước t. Nó chính là bộ nhớ của mạng. s\textsubscript{t} được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: s\textsubscript{t} = f(Ux\textsubscript{t} +  Ws\textsubscript{t-1}). Hàm f thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu.
     \item o\textsubscript{t} là đầu ra tại bước t. Ví dụ, ta muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì o\textsubscript{t} chính là một vec-tơ xác xuất các từ trong danh sách từ vựng của ta: o\textsubscript{t} = softmax(Vs\textsubscript{t})
 \end{itemize}
 
