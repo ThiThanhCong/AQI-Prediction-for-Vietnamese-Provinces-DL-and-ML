@@ -78,7 +78,7 @@
 \maketitle
 
 \begin{abstract}
-    Mục tiêu chính của nghiên cứu này là dự đoán chất lượng không khí tai ba thành phố được chỉ định (Hà Nội, Việt Trì và Đà Nẵng) của Việt Nam bằng cách kết hợp các thuật toán học máy và học sâu. Các mô hình bao gồm Gauss Newton Method Non-Linear, Residual Convolutional Neural Networks (ResCNN), Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), Long Short Term Memory (LSTM). Hiệu quả của tất cả các mô hình được đề cập trên được đo lường bằng Mean Absolute Percentage Error (MAPE), Root Mean Squared Error, nhằm đạt được độ chính xác tối đa trong dự báo chuỗi thời gian chất lượng không khí chính xác.
+    Mục tiêu chính của nghiên cứu này là dự đoán chất lượng không khí tai ba thành phố được chỉ định (Hà Nội, Việt Trì và Đà Nẵng) của Việt Nam bằng cách kết hợp các thuật toán học máy và học sâu. Các mô hình bao gồm Gauss Newton Method Non-Linear, Residual Convolutional Neural Networks (ResCNN), NBEATS, Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), Long Short Term Memory (LSTM). Hiệu quả của tất cả các mô hình được đề cập trên được đo lường bằng Mean Absolute Percentage Error (MAPE), Root Mean Squared Error, nhằm đạt được độ chính xác tối đa trong dự báo chuỗi thời gian chất lượng không khí chính xác.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -92,7 +92,7 @@ Nhóm xin gửi lời cảm ơn đến thầy Nguyễn Đình Thuân cùng giả
 
 
 \section{Giới Thiệu}
-Với sự gia tăng dân số nhanh chóng cùng với sự công nghiệp hóa ngày càng mạnh mẽ ở các thành phố lớn Việt Nam, vấn đề chất lượng không khí trờ thành mối quan tâm lớn do có liên quan tới đời sống hàng ngày. Sự suy giảm chất lượng không chỉ gây ra những rủi ro lớn đối với sức khỏe của cư dân mà còn đe dọa sự cân bằng sinh thái của khu vực. Trong bối cảnh này, việc dự đoán chính xác và kịp thời các mức độ chất lượng không khí là rất cần thiết cho các chiến lược giảm thiểu hiệu quả. Nghiên cứu của nhóm sử dụng các mô hình học máy và học sâu để dự đoán chất lượng không khí, bằng cách tận dụng sức mạnh của các thuật toán phức tạp như Gauss Newton Method Non-Linear, Resilient Convolutional Neural Networks (ResCNN), Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS), Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), và Long Short Term Memory (LSTM).
+Với sự gia tăng dân số nhanh chóng cùng với sự công nghiệp hóa ngày càng mạnh mẽ ở các thành phố lớn Việt Nam, vấn đề chất lượng không khí trờ thành mối quan tâm lớn do có liên quan tới đời sống hàng ngày. Sự suy giảm chất lượng không chỉ gây ra những rủi ro lớn đối với sức khỏe của cư dân mà còn đe dọa sự cân bằng sinh thái của khu vực. Trong bối cảnh này, việc dự đoán chính xác và kịp thời các mức độ chất lượng không khí là rất cần thiết cho các chiến lược giảm thiểu hiệu quả. Nghiên cứu của nhóm sử dụng các mô hình học máy và học sâu để dự đoán chất lượng không khí, bằng cách tận dụng sức mạnh của các thuật toán phức tạp như Gauss Newton Method Non-Linear, Resilient Convolutional Neural Networks (ResCNN), NBEATS, Dynamic Linear Model (DLM), Simple Exponential Smoothing (SES), Linear Regression (LR), Autoregressive Integrated Moving Average (ARIMA), Recurrent Neural Network (RNN), Gated Recurrent Unit (GRU), và Long Short Term Memory (LSTM).
 
 \section{Nghiên cứu liên quan}
 
@@ -108,7 +108,7 @@ Trong phân loại ECG, sử dụng ResNet kết hợp với cơ chế chú ý �
 \subsection{Dynamic linear models}
 Vào năm 2014, D. Osthus, P. C. Caragea, D. Higdon, S. K. Morley, G.D. Reeves, và B. P. Weaver đã sử dụng các mô hình tuyến tính động để dự báo electron trong vành đai bức xạ bằng cách so sánh độ chính xác dự báo trước 1 ngày của một mô hình tuyến tính động đơn giản với mô hình dự báo electron tương đối hiện tại (REFM)\cite{b6}. Hạn chế của nghiên cứu của họ là việc mô hình mang lại hiệu quả thấp đối với dữ liệu có tính biến thiên cao.
 
-\subsection{N-BEATS}
+\subsection{NBEATS}
 Năm 2021, một nhóm nghiên cứu tại Đại học Khoa học và Công nghệ Hà Nội và Đại học FPT đã áp dụng mô hình NBEATS để dự báo nhu cầu điện ngắn hạn ở Việt Nam \cite{b7}. Sau khi quan sát thấy mô hình hoạt động tốt với dữ liệu chuỗi thời gian trong các lĩnh vực khác nhau như công nghiệp, tài chính. Tuy nhiên, những phương pháp này có nhược điểm là thời gian chạy tương đối chậm, làm cho việc triển khai chúng trong các ứng dụng thực tế gặp khó khăn.
 
 \subsection{Recurrent Neural Network}
@@ -127,7 +127,7 @@ Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Pa
 Ricardo Navares và José L. Aznarte đã sử dụng mô hình LSTM để dự đoán chất lượng không khí tại thành phố Marid. Nhóm tác giả dựa vào các chỉ số không khí gây hại như CO, NO2, O3, PM10, SO2 được thu thập tại các địa điểm khác nhau của Madrid. Sau đó sử dụng các cấu hình khác nhau của mô hình LSTM để dự đoán chất lượng không khí và so sánh cấu hình LSTM nào sẽ là tốt nhất. \cite{b12}
 
 \subsection{ARIMA}
-ARIMA đã được áp dụng để giải quyết các vấn đề thực tế trong thị trường chứng khoán bằng cách dự báo giá cổ phiếu của bốn công ty hàng đầu trong chỉ số Nifty Midcap-50 bằng MATLAB kèm theo các chỉ số hiệu suất \cite{b14} .Kết hợp mô hình hồi quy mờ và mô hình ARIMA, mô hình ARIMA mờ (FARIMA) đã được phát triển để dự đoán tỷ giá đồng Đài tệ sang Đô la Mỹ\cite{b15}.Một mục đích khác mà mô hình ARIMA đã được sử dụng là để dự đoán hoặc dự báo giá cả, cụ thể là giá điện của ngày mai \cite{b16} .
+ARIMA đã được áp dụng để giải quyết các vấn đề thực tế trong thị trường chứng khoán bằng cách dự báo giá cổ phiếu của bốn công ty hàng đầu trong chỉ số Nifty Midcap-50 bằng MATLAB kèm theo các chỉ số hiệu suất \cite{b14} .Kết hợp mô hình hồi quy mờ và mô hình ARIMA, mô hình ARIMA mờ (FARIMA) đã được phát triển để dự đoán tỷ giá đồng Đài tệ sang Đô la Mỹ\cite{b15}.
 
 \section{Tài nguyên}
 \subsection{Bộ dữ liệu}
@@ -342,7 +342,7 @@ Với \(\beta\) là một vector cột với các tham số được ước tín
         \end{pmatrix}
     \]
 \end{center}
-\vspace{3mm}
+\vspace{1mm}
 
 
 \subsection{Simple Exponential Smoothing (SES)}
@@ -365,12 +365,13 @@ Trong đó:\\
 \indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
 \indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
 
-
+\vspace{-5mm}
 \subsection{Autoregressive Integrated Moving Average (ARIMA)}
 
 ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hình ARIMA thường được sử dụng để dự báo dữ liệu chuỗi thời gian đơn biến. Mô hình ARIMA có thể xử lý một chuỗi thời gian nếu chuỗi đó là dừng và không có dữ liệu bị thiếu. Phương pháp này được sử dụng trong nhiều nghiên cứu để dự báo. ARIMA là sự kết hợp của 3 thành phần, Auto-Regressive – AR, Integrated – I và Moving Average – MA tương ứng với các tham số p, d và q đại diện cho ba thành phần chính của mô hình, trong đó:
 \\
 \indent\textbullet\ \(p-AR(p)\): Tham số p đại diện cho số lượng các quá trình tự hồi quy trong thành phần tự hồi quy (AutoRegressive) của mô hình ARIMA. Nó chỉ ra số lượng ngày quá khứ của chuỗi dữ liệu mà được sử dụng để dự đoán giá trị hiện tại. Mỗi giá trị quá khứ được sử dụng là một hệ số trong mô hình tự hồi quy. Giá trị của p phụ thuộc vào sự phụ thuộc tạm thời trong chuỗi dữ liệu và có thể được xác định bằng cách sử dụng các phương pháp như đồ thị tự tương quan (ACF - AutoCorrelation Function) hoặc hàm tương quan một lệnh (PACF - Partial AutoCorrelation Function). Phương trình tự hồi quy AR được tổng quát như sau:\\
+\vspace{-4mm}
 \[
     Y_t = c + \varphi_1 Y_{t-1} + \varphi_2 Y_{t-2} + \ldots + \varphi_p Y_{t-p} + \epsilon_t
 \]
@@ -380,8 +381,8 @@ Trong đó: \\
 \indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
 \indent -- \(\epsilon_t\) là sai số ngẫu nhiên \\
 \indent -- \(p\) là số bậc \\
-
 \indent\textbullet\ \(q-MA(q)\): Tham số q đại diện cho số lượng các thành phần trung bình động (Moving Average) trong mô hình ARIMA. Nó chỉ ra số lượng giá trị trung bình động được sử dụng để dự đoán giá trị hiện tại.\\
+\vspace{-4mm}
 \[
     Y_t = c + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \ldots + \theta_p \epsilon_{t-p} + \epsilon_t
 \]
@@ -394,12 +395,12 @@ Trong đó: \\
 \indent -- \(p\) là số bậc \\
 
 \indent\textbullet\  \(d-I(d)\): Tham số d đại diện cho số lần lấy đạo hàm-sai phân (differencing) trên chuỗi dữ liệu ban đầu để loại bỏ xu hướng (trend) và/hoặc thành phần mùa vụ (seasonality) hay chuyển đổi dữ liệu thành chuỗi dừng. chuỗi dừng là chuỗi có trung bình, phương sai và tự tương quan không đổi theo thời gian. Một chuỗi thời gian được coi là chuỗi dừng nếu nó có trung bình không đổi, phương sai không đổi và tự tương quan không đổi. Chuỗi dừng là Công thức tính sai phân tại thời điểm t như sau
+\vspace{-5mm}
 \[
     \Delta y_t = y_t - y_{t-1}
 \]
-
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
-
+\vspace{-4mm}
 \begin{multline}
     \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} \\
     + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2}
@@ -717,16 +718,16 @@ Với những quan hệ ràng buộc trên, ma trận G có thể được xây 
     \item Hàng thứ hai: Độ dốc mới \(\beta_{t}\) là giống với độ dốc trước \(\beta_{t-1}\), chỉ ra sự không thay đổi của độ dốc.
     \item Hàng thứ ba tới hàng thứ sáu: Những hàng này thay đổi trạng thái mùa. Mỗi trạng thái mùa và phiên bản thay đổi của trạng thái mùa trước: \(\gamma_{t}\) đặt thành \(\gamma_{t-1}\) -> \(\gamma_{t-1}\) đặt thành \(\gamma_{t-2}\) -> \(\gamma_{t-2}\) đặt thành \(\gamma_{t-3}\) -> \(\gamma_{t-3}\) quay trở lại đầu chu kỳ (sang năm mới) nên đặt thành \(\gamma_{t}\).
 \end{itemize}
-\subsection{Neural Basis Expansion Analysis for Time Series Forecasting (N-BEATS)}
+\subsection{NBEATS}
 \vspace{1mm}
 \subsubsection{Tổng quan}
-Mô hình N-BEATS, viết tắt của "Neural Basis Expansion Analysis for Time Series Forecasting," được phát triển bởi nhóm nghiên cứu từ Element AI và được công bố trong bài báo năm 2019 bởi Boris Oreshkin và cộng sự.
+Mô hình NBEATS, viết tắt của "The Neural Basis Expansion Analysis for Time Series forecasting" được phát triển bởi nhóm nghiên cứu từ Element AI và được công bố trong bài báo năm 2019 bởi Boris Oreshkin và cộng sự.
 
 \subsubsection{Backcast và Forecast}
-Trong N-BEATS, mỗi khối (block) tạo ra hai đầu ra: backcast và forecast. Backcast tái tạo lại dữ liệu đầu vào để mô hình có thể học từ phần dư sau khi trừ đi phần tái tạo này, giúp khối tiếp theo xử lý thông tin còn lại. Forecast là đầu ra dự báo các giá trị tương lai, góp phần vào kết quả cuối cùng.
+Trong NBEATS, mỗi khối (block) tạo ra hai đầu ra: backcast và forecast. Backcast tái tạo lại dữ liệu đầu vào để mô hình có thể học từ phần dư sau khi trừ đi phần tái tạo này, giúp khối tiếp theo xử lý thông tin còn lại. Forecast là đầu ra dự báo các giá trị tương lai, góp phần vào kết quả cuối cùng.
 
 \subsubsection{Dữ liệu đầu vào}
-N-BEATS làm việc với chuỗi thời gian đơn biến. Đầu vào là một chuỗi thời gian có độ dài $t$:
+NBEATS làm việc với chuỗi thời gian đơn biến. Đầu vào là một chuỗi thời gian có độ dài $t$:
 \[
     x = [y_{T-t+1}, y_{T-t+2}, \ldots, y_T]
 \]
@@ -737,7 +738,7 @@ Mục tiêu là dự báo giá trị cho $H$ bước tiếp theo:
 Khoảng thời gian xem lại (lookback period) thường có độ dài $t = nH$ với $n$ từ 2 đến 7.
 
 \subsubsection{Kiến trúc tổng quát}
-Mô hình N-BEATS gồm nhiều block xếp chồng lên nhau. Đầu vào của block đầu tiên là dữ liệu $x$. Mỗi block tạo ra hai đầu ra: backcast làm đầu vào cho block kế tiếp, và forecast dùng để tổng hợp dự đoán cuối cùng. Đầu vào của block thứ $i$ (với $i > 1$) là:
+Mô hình NBEATS gồm nhiều block xếp chồng lên nhau. Đầu vào của block đầu tiên là dữ liệu $x$. Mỗi block tạo ra hai đầu ra: backcast làm đầu vào cho block kế tiếp, và forecast dùng để tổng hợp dự đoán cuối cùng. Đầu vào của block thứ $i$ (với $i > 1$) là:
 \[
     x_i = x_{i-1} - \hat{x}_{i-1}
 \]
@@ -772,7 +773,6 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \[
     MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%
 \]
-
 \textbf{Mean Absolute Error (MAE)}: được tính bằng trung bình của sai số tuyệt đối giữa giá trị thực tế và giá trị dự đoán trong tập dữ liệu.
 \[
     MAE = \frac{1}{n}\sum_{i=1}^{n}\left|y_i-{\hat{y}}_i\right|
@@ -801,7 +801,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
         ARIMA                  & 7:3                         & 36.37                     & \textbf{31,39}                 & 21,76                    \\ \cline{2-5}
                                & 8:2                         & \textbf{27,71}            & 42,95                          & \textbf{21,41}           \\ \cline{2-5}
                                & 9:1                         & 34,08                     & 104,89                         & 32,95                    \\ \hline
-        N-BEATS                & 7:3                         & 20.64                     & \textbf{26.02}                 & \textbf{14.78}           \\ \cline{2-5}
+        NBEATS                & 7:3                         & 20.64                     & \textbf{26.02}                 & \textbf{14.78}           \\ \cline{2-5}
                                & 8:2                         & 19.76                     & 43.13                          & 15.99                    \\ \cline{2-5}
                                & 9:1                         & \textbf{19.36}            & 37.76                          & 15.18                    \\ \hline
         Linear Regression      & 7:3                         & 47.146                    & 70.275                         & 36.808                   \\ \cline{2-5}
@@ -843,7 +843,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
         GRU                    & 7:3                         & 81.26                     & 746.69                         & 76.35                    \\ \cline{2-5}
                                & 8:2                         & 88.87                     & \textbf{627.15}                & 86.02                    \\ \cline{2-5}
                                & 9:1                         & \textbf{84.89}            & 642.77                         & \textbf{82.38}           \\ \hline
-        N-BEATS                & 7:3                         & 30.38                     & 26.82                          & 22.84                    \\ \cline{2-5}
+        NBEATS                & 7:3                         & 30.38                     & 26.82                          & 22.84                    \\ \cline{2-5}
                                & 8:2                         & \textbf{27.64}            & \textbf{25.62}                 & \textbf{21.20}           \\ \cline{2-5}
                                & 9:1                         & 31.69                     & 33.08                          & 26.12                    \\ \hline
         RNN                    & 7:3                         & 24.92                     & 29.35                          & 10.09                    \\ \cline{2-5}
@@ -880,7 +880,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
         ARIMA                  & 7:3                         & 154.76                    & 313.9                          & 142.54                   \\ \cline{2-5}
                                & 8:2                         & \textbf{146.74}           & \textbf{50.15}                 & \textbf{66.27}           \\ \cline{2-5}
                                & 9:1                         & 194.28                    & 71.58                          & 105.03                   \\ \hline
-        N-BEATS                & 7:3                         & 79.46                     & \textbf{68.11}                 & \textbf{43.31}           \\ \cline{2-5}
+        NBEATS                & 7:3                         & 79.46                     & \textbf{68.11}                 & \textbf{43.31}           \\ \cline{2-5}
                                & 8:2                         & 101.91                    & 155.01                         & 74.18                    \\ \cline{2-5}
                                & 9:1                         & \textbf{65.87}            & 101.96                         & 44.18                    \\ \hline
         LinearRegression       & 7:3                         & \textbf{120.89}           & \textbf{42,574}                & \textbf{54,318}          \\ \cline{2-5}
@@ -1041,7 +1041,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 
 \section{Tổng kết}
 \subsection{Tổng quan}
-Phân tích cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, N-BEATS, RNN, GRU và LSTM cho kết quả vượt trội hơn các mô hình thống kê truyền thống như Gauss Newton Non-Linear, LR và ARIMA về độ chính xác và độ tin cậy. Các mô hình học sâu cho hiệu suất vượt trội nhờ khả năng nắm bắt các phức tạp và các mối quan hệ phi tuyến tính vốn có trong dữ liệu chất lượng không khí. Trong số này, mô hình LSTM và RNN cung cấp các dự báo nhất quán và đáng tin cậy nhất trên cả ba thành phố.
+Phân tích cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, NBEATS, RNN, GRU và LSTM cho kết quả vượt trội hơn các mô hình thống kê truyền thống như Gauss Newton Non-Linear, LR và ARIMA về độ chính xác và độ tin cậy. Các mô hình học sâu cho hiệu suất vượt trội nhờ khả năng nắm bắt các phức tạp và các mối quan hệ phi tuyến tính vốn có trong dữ liệu chất lượng không khí. Trong số này, mô hình LSTM và RNN cung cấp các dự báo nhất quán và đáng tin cậy nhất trên cả ba thành phố.
 \subsection{Định hướng phát triển tương lai}
 
 \indent\textbullet\ Thứ nhất, việc kết hợp, chọn lọc các nguồn dữ liệu bổ sung như dữ liệu khí tượng, lưu lượng giao thông và hoạt động công nghiệp có thể cải thiện độ chính xác của mô hình.\\
@@ -1061,8 +1061,6 @@ Phân tích cho thấy các mô hình mạng nơ-ron tiên tiến như ResCNN, N
     \bibitem{b12} Navares, Ricardo \& Aznarte, José. (2019). Predicting air quality with deep learning LSTM: Towards comprehensive models. Ecological Informatics. 55. 101019. 10.1016/j.ecoinf.2019.101019.
     \bibitem{b14} Devi, B. Uma, D. Sundar, and P. Alli. "An Effective Time Series Analysis for Stock Trend Prediction Using ARIMA Model for Nifty Midcap-50."
     \bibitem{b15} Tseng, Fang-Mei, et al. "Fuzzy ARIMA model for forecasting the foreign exchange market." Fuzzy sets and systems 118.1 (2001): 9-19
-    \bibitem{b16} Contreras, J., Espinola, R., Nogales, F. J., \& Conejo, A. J. (2003). ARIMA models to predict next-day electricity prices. Power Systems, IEEE Transactions on, 18(3), 1014-1020.
-    \bibitem{b17} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
     \bibitem{b18} Loganathan, A. \& Palraj, Sumithra \& V, Deneshkumar. (2022). Estimation of Air Quality Index Using Multiple Linear Regression. Applied Ecology and Environmental Sciences. 10. 717-722. 10.12691/aees-10-12-3.
     \bibitem{che2016recurrent}
     Che, Zhengping, Sanjay Purushotham, Kyunghyun Cho, David Sontag, and Yan Liu.
