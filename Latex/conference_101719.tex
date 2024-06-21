@@ -924,7 +924,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \subsection{Dự đoán giá trị AQI trong 30, 60 và 90 ngày kế tiếp của 3 bộ dữ liệu HaNoi, DaNang và VietTri}
 Để thực hiện dự đoán, chúng tôi đã sử dụng hai mô hình học máy tiên tiến, được lựa chọn dựa trên hiệu suất cao trong các thử nghiệm ban đầu. Cả hai mô hình này đã được huấn luyện và kiểm tra trên ba bộ dữ liệu khác nhau tương ứng với ba thành phố để đảm bảo tính tổng quát và độ chính xác của dự đoán.
 
-2 mô  hình được nói đến ở đây lần lượt là LSTM và RNN có kết quả dự đoán 30, 60 và 90 ngày trên 3 bộ dữ liệu được thể hiện trong 2 ảnh sau:
+2 mô  hình được nói đến ở đây lần lượt là LSTM và RNN có kết quả dự đoán 30, 60 và 90 ngày trên 3 bộ dữ liệu, với tỉ lệ chia tập huấn luyện và tập kiểm tra là 9:1 được thể hiện trong 2 ảnh sau:
 
 \begin{figure}[h]
     \centering
@@ -955,7 +955,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
     \subfigure[VietTri dự đoán 90 ngày]{
         \includegraphics[width=0.15\textwidth]{bibliography/figure/LSTM/VT/predict_90_days.png}
     }
-    \caption{Kết quả chạy mô hình LSTM trên 3 bộ dữ liệu HaNoi, DaNang và VietTri}
+    \caption{Kết quả chạy mô hình LSTM trên 3 bộ dữ liệu HaNoi, DaNang và VietTri với tỉ lệ tập huấn luyện và kiểm tra 9:1}
 \end{figure}
 
 \begin{figure}[h]
@@ -987,7 +987,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
     \subfigure[VietTri dự đoán 90 ngày]{
         \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_90_days.png}
     }
-    \caption{Kết quả dự đoán của mô hình RNN trên 3 bộ dữ liệu HaNoi, DaNang và VietTri}
+    \caption{Kết quả dự đoán của mô hình RNN trên 3 bộ dữ liệu HaNoi, DaNang và VietTri với tỉ lệ tập huấn luyện và kiểm tra 9:1}
 \end{figure}
 
 \section{Tổng kết}
