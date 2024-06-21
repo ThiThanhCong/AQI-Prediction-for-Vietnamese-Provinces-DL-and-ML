@@ -122,7 +122,7 @@ Năm 2022, tại Đại học Manonmaniam Sundaranar, A. Loganathan, Sumithra Pa
 Ricardo Navares và José L. Aznarte đã sử dụng mô hình LSTM để dự đoán chất lượng không khí tại thành phố Marid. Nhóm tác giả dựa vào các chỉ số không khí gây hại như CO, NO2, O3, PM10, SO2 được thu thập tại các địa điểm khác nhau của Madrid. Sau đó sử dụng các cấu hình khác nhau của mô hình LSTM để dự đoán chất lượng không khí và so sánh cấu hình LSTM nào sẽ là tốt nhất. \cite{b12}
 
 \subsection{ARIMA}
-ARIMA đã được áp dụng để giải quyết các vấn đề thực tế trong thị trường chứng khoán bằng cách dự báo giá cổ phiếu của bốn công ty hàng đầu trong chỉ số Nifty Midcap-50 bằng MATLAB kèm theo các chỉ số hiệu suất \cite{b14} .Kết hợp mô hình hồi quy mờ và mô hình ARIMA, mô hình ARIMA mờ (FARIMA) đã được phát triển để dự đoán tỷ giá đồng Đài tệ sang Đô la Mỹ\cite{b15}.Một mục đích khác mà mô hình ARIMA đã được sử dụng là để dự đoán hoặc dự báo giá cả, cụ thể là giá điện của ngày mai \cite{b16} .
+ARIMA đã được áp dụng để giải quyết các vấn đề thực tế trong thị trường chứng khoán bằng cách dự báo giá cổ phiếu của bốn công ty hàng đầu trong chỉ số Nifty Midcap-50 bằng MATLAB kèm theo các chỉ số hiệu suất \cite{b14} .Kết hợp mô hình hồi quy mờ và mô hình ARIMA, mô hình ARIMA mờ (FARIMA) đã được phát triển để dự đoán tỷ giá đồng Đài tệ sang Đô la Mỹ\cite{b15}.
 
 \section{Tài nguyên}
 \subsection{Bộ dữ liệu}
@@ -338,7 +338,7 @@ Với \(\beta\) là một vector cột với các tham số được ước tín
         \end{pmatrix}
     \]
 \end{center}
-\vspace{3mm}
+\vspace{1mm}
 
 
 \subsection{Simple Exponential Smoothing (SES)}
@@ -361,7 +361,7 @@ Trong đó:\\
 \indent\textbullet\ \(\alpha\): hệ số làm trơn \((0\le\alpha\le1)\).\\
 \indent\textbullet\ \(\l_t \): cấp độ (giá trị đã được làm trơn) của chuỗi tại thời điểm t.\\
 
-
+\vspace{-5mm}
 \subsection{Autoregressive Integrated Moving Average (ARIMA)}
 
 ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hình ARIMA thường được sử dụng để dự báo dữ liệu chuỗi thời gian đơn biến. Mô hình ARIMA có thể xử lý một chuỗi thời gian nếu chuỗi đó là dừng và không có dữ liệu bị thiếu. Phương pháp này được sử dụng trong nhiều nghiên cứu để dự báo.
@@ -369,6 +369,7 @@ ARIMA là viết tắt của "Autoregressive Integrated Moving Average". Mô hì
 ARIMA là sự kết hợp của 3 thành phần, Auto-Regressive – AR, Integrated – I và Moving Average – MA tương ứng với các tham số p, d và q đại diện cho ba thành phần chính của mô hình, trong đó:
 \\
 \indent\textbullet\ \(p-AR(p)\): Tham số p đại diện cho số lượng các quá trình tự hồi quy trong thành phần tự hồi quy (AutoRegressive) của mô hình ARIMA. Nó chỉ ra số lượng ngày quá khứ của chuỗi dữ liệu mà được sử dụng để dự đoán giá trị hiện tại. Mỗi giá trị quá khứ được sử dụng là một hệ số trong mô hình tự hồi quy. Giá trị của p phụ thuộc vào sự phụ thuộc tạm thời trong chuỗi dữ liệu và có thể được xác định bằng cách sử dụng các phương pháp như đồ thị tự tương quan (ACF - AutoCorrelation Function) hoặc hàm tương quan một lệnh (PACF - Partial AutoCorrelation Function). Phương trình tự hồi quy AR được tổng quát như sau:\\
+\vspace{-4mm}
 \[
     Y_t = c + \varphi_1 Y_{t-1} + \varphi_2 Y_{t-2} + \ldots + \varphi_p Y_{t-p} + \epsilon_t
 \]
@@ -378,8 +379,8 @@ Trong đó: \\
 \indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
 \indent -- \(\epsilon_t\) là sai số ngẫu nhiên \\
 \indent -- \(p\) là số bậc \\
-
 \indent\textbullet\ \(q-MA(q)\): Tham số q đại diện cho số lượng các thành phần trung bình động (Moving Average) trong mô hình ARIMA. Nó chỉ ra số lượng giá trị trung bình động được sử dụng để dự đoán giá trị hiện tại.\\
+\vspace{-4mm}
 \[
     Y_t = c + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \ldots + \theta_p \epsilon_{t-p} + \epsilon_t
 \]
@@ -392,12 +393,12 @@ Trong đó: \\
 \indent -- \(p\) là số bậc \\
 
 \indent\textbullet\  \(d-I(d)\): Tham số d đại diện cho số lần lấy đạo hàm-sai phân (differencing) trên chuỗi dữ liệu ban đầu để loại bỏ xu hướng (trend) và/hoặc thành phần mùa vụ (seasonality) hay chuyển đổi dữ liệu thành chuỗi dừng. chuỗi dừng là chuỗi có trung bình, phương sai và tự tương quan không đổi theo thời gian. Một chuỗi thời gian được coi là chuỗi dừng nếu nó có trung bình không đổi, phương sai không đổi và tự tương quan không đổi. Chuỗi dừng là Công thức tính sai phân tại thời điểm t như sau
+\vspace{-5mm}
 \[
     \Delta y_t = y_t - y_{t-1}
 \]
-
 Sau khi kết hợp tất cả, ta có ARIMA(p, d, q) được biểu diễn như sau:
-
+\vspace{-4mm}
 \begin{multline}
     \Delta y_t = c + \varphi_1 \Delta y_{t-1} + \ldots + \varphi_p \Delta y_{t-p} \\
     + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2}
@@ -409,8 +410,7 @@ Trong đó: \\
 \indent -- \(\theta\) là hệ số Moving Average(MA)\\
 \indent -- \(\epsilon_t\) là hệ số tương quan\\
 \indent -- \(\varphi\) là hệ số AutoRegressive(AR)\\
-
-
+\vspace{-7mm}
 \subsection{Recurrent Neural Networks (RNN)}
 Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống tất cả các đầu vào và cả đầu ra là độc lập với nhau. Tức là chúng không liên kết thành chuỗi với nhau. Nhưng các mô hình này không phù hợp trong rất nhiều bài toán. RNN được gọi là hồi quy (Recurrent) bởi thực hiện cùng một tác vụ cho tất cả các phần tử của một chuỗi với đầu ra phụ thuộc vào cả các phép tính trước đó. Nói cách khác, RNN có khả năng nhớ các thông tin được tính toán trước đó.
 
@@ -771,7 +771,6 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \[
     MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%
 \]
-
 \textbf{Mean Absolute Error (MAE)}: được tính bằng trung bình của sai số tuyệt đối giữa giá trị thực tế và giá trị dự đoán trong tập dữ liệu.
 \[
     MAE = \frac{1}{n}\sum_{i=1}^{n}\left|y_i-{\hat{y}}_i\right|
@@ -1058,8 +1057,6 @@ Nhóm xin gửi lời cảm ơn đến thầy Nguyễn Đình Thuân cùng giả
     \bibitem{b12} Navares, Ricardo \& Aznarte, José. (2019). Predicting air quality with deep learning LSTM: Towards comprehensive models. Ecological Informatics. 55. 101019. 10.1016/j.ecoinf.2019.101019.
     \bibitem{b14} Devi, B. Uma, D. Sundar, and P. Alli. "An Effective Time Series Analysis for Stock Trend Prediction Using ARIMA Model for Nifty Midcap-50."
     \bibitem{b15} Tseng, Fang-Mei, et al. "Fuzzy ARIMA model for forecasting the foreign exchange market." Fuzzy sets and systems 118.1 (2001): 9-19
-    \bibitem{b16} Contreras, J., Espinola, R., Nogales, F. J., \& Conejo, A. J. (2003). ARIMA models to predict next-day electricity prices. Power Systems, IEEE Transactions on, 18(3), 1014-1020.
-    \bibitem{b17} Oreshkin, B. N., Carpov, D., Chapados, N., \& Bengio, Y. (2019). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. arXiv preprint arXiv: 1905.10437. \url{https://doi.org/10.48550/arXiv.1905.10437}.
     \bibitem{b18} Loganathan, A. \& Palraj, Sumithra \& V, Deneshkumar. (2022). Estimation of Air Quality Index Using Multiple Linear Regression. Applied Ecology and Environmental Sciences. 10. 717-722. 10.12691/aees-10-12-3.
     \bibitem{che2016recurrent}
     Che, Zhengping, Sanjay Purushotham, Kyunghyun Cho, David Sontag, and Yan Liu.
