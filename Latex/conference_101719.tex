@@ -820,40 +820,7 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
 \[
     RMSE = \sqrt{\frac{\sum_{i=0}^{N - 1} (y_i - \hat{y}_i)^2}{N}}
 \]
-\subsection{Bộ dữ liệu}
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|}
-        \hline
-        \multicolumn{5}{|c|}{\textbf{Đánh giá bộ dữ liệu}}                                            \\
-        \hline
-        \centering Model                      & Training:Testing & RMSE    & MAPE (\%)      & MAE     \\
-        \hline
-        \multirow{2}{*}{ARIMA}                & 7:3              & 49.32   & \textbf{43.87} & 36.28   \\ & 8:2 & 54.44 & 77.00 & 48.37 \\ & \textbf{9:1} & \textbf{31.09} & 49.10 & \textbf{26.47} \\
-        \hline
-        \multirow{2}{*}{DLM}                  & 7:3              & 61.12   & 114.34         & 52.26   \\ & \textbf{8:2} & \textbf{42.51} & \textbf{38.64} & \textbf{32.04} \\ & 9:1 & 76.20 &  69.34 & 61.13\\
-        \hline
-        \multirow{2}{*}{GaussNewtonNonlinear} & 7:3              & 99.755  & 106.15         & 83.293  \\ &  8:2 & 50.950 & 40.74 & 38.152  \\ & \textbf{9:1} &. \textbf{51.968} & \textbf{76.15} & \textbf{46.458}\\
-        \hline
-        \multirow{2}{*}{GRU}                  & 7:3              & 81.263  & 746.699        & 76.353  \\ & 8:2 & 88.876 & 627.15 & 86.025 \\ & \textbf{9:1} & \textbf{84.89} & \textbf{642.77} & \textbf{82.38}\\
-        \hline
-        \multirow{2}{*}{NBEATS}               & 7:3              & 28.31   & 31.20          & 21.95   \\ & \textbf{8:2} & \textbf{27.26} & \textbf{27.06} & \textbf{21.62} \\ &  9:1 & 34.99 & 29.10 & 27.17\\
-        \hline
-        \multirow{2}{*}{ResCNN}               & 7:3              & 28.739  & 31.41          & 20.543  \\ & 8:2 & 32.038	& 30.35 & 24.295\\ & \textbf{9:1} & \textbf{28.718} & \textbf{26.159} & \textbf{21.505}\\
-        \hline
-        \multirow{2}{*}{RNN}                  & 7:3              & 24.9188 & 29.3465        & 10.0873 \\ & \textbf{8:2} & \textbf{25.7266} & \textbf{24.468} & \textbf{19.4329} \\ & 9:1 &  27.6262 &	29.4822 & 	22.0334 \\
-        \hline
-        \multirow{2}{*}{SES}                  & 7:3              & 57.6650 & 49.7333        & 44.0185 \\ & 8:2 & 68.8439 &  61.0638 &  57.1620 \\ & \textbf{9:1} & \textbf{32.0192} & \textbf{26.8332} & \textbf{22.7681}\\
-        \hline
-        \multirow{2}{*}{LinearRegression}     & 7:3              & 64.77   & 59.609         & 51.019  \\ & 8:2 & 65.904 &  58.715 & 54.566 \\ & \textbf{9:1} & \textbf{40.554} & \textbf{33.039} & \textbf{30.327}\\
-        \hline
-        \multirow{2}{*}{LSTM}                 & 7:3              & 26.5599 & 31.3548        & 19.7605 \\ & 8:2 & 27.8466 &  27.5532 &  21.4331 \\ & \textbf{9:1} & \textbf{25.2374} & \textbf{26.7950} & \textbf{19.2224}\\
-        \hline
-    \end{tabular}
-    \vspace{5px}
-    \caption{Đánh giá bộ dữ liệu HaNoi}
-    \label{mbbresult}
-\end{table}
+
 
 
 \subsection{Kết quả chạy 2 mô hình RNN và LSTM với các chỉ số tốt nhất cho 3 bộ dữ liệu HaNoi, DaNang và VietTri}
@@ -959,6 +926,38 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
     \caption{Kết quả chạy mô hình LSTM trên 3 bộ dữ liệu HaNoi, DaNang và VietTri với tỉ lệ tập huấn luyện và kiểm tra 9:1}
 \end{figure}
 
+\begin{figure}[h]
+    \centering
+    \subfigure[HaNoi dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/predict_30_days.png}
+    }
+    \subfigure[HaNoi dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/predict_60_days.png}
+    }
+    \subfigure[HaNoi dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/HN/predict_90_days.png}
+    }
+    \subfigure[DaNang dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/predict_30_days.png}
+    }
+    \subfigure[DaNang dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/predict_60_days.png}
+    }
+    \subfigure[DaNang dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/DN/predict_90_days.png}
+    }
+    \subfigure[VietTri dự đoán 30 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_30_days.png}
+    }
+    \subfigure[VietTri dự đoán 60 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_60_days.png}
+    }
+    \subfigure[VietTri dự đoán 90 ngày]{
+        \includegraphics[width=0.15\textwidth]{bibliography/figure/RNN/VT/predict_90_days.png}
+    }
+    \caption{Kết quả chạy mô hình RNN trên 3 bộ dữ liệu HaNoi, DaNang và VietTri với tỉ lệ tập huấn luyện và kiểm tra 9:1}
+\end{figure}
+
 \begin{table}[ht]
     \centering
     \caption{Bảng đánh giá độ đo trên dataset Việt Trì}
@@ -995,7 +994,46 @@ Trong đó, $W$ và $b$ là các tham số được học. Mỗi block có $M$ l
                                & 9:1                         & \textbf{14.05}            & 22.64                          & 10.53                    \\ \hline
     \end{tabular}
 \end{table}
-
+\begin{table}[H]
+    \centering
+    \caption{Bảng đánh giá độ đo trên dataset Hà Nội}
+    \begin{tabular}{|l|l|c|c|c|}
+        \hline
+        \multirow{2}{*}{Model} & \multirow{2}{*}{Train:Test} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE (\%)} & \multicolumn{1}{l|}{MAE} \\ \cline{3-5}
+                               &                             & Value                     & Value                          & Value                    \\ \hline
+        GaussNewtonNonlinear   & 7:3                         & 99.75                     & 106.15                         & 83.29                    \\ \cline{2-5}
+                               & 8:2                         & 50.95                     & 40.74                          & 38.15                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{51.96}            & \textbf{76.15}                 & \textbf{46.45}           \\ \hline
+        ResCNN                 & 7:3                         & 28.739                    & 31.412                         & \textbf{20.543}          \\ \cline{2-5}
+                               & 8:2                         & 32.038                    & 30.35                          & 24.295                   \\ \cline{2-5}
+                               & 9:1                         & \textbf{28.71}            & \textbf{26.15}                 & 21.505                   \\ \hline
+        ARIMA                  & 7:3                         & 49.32                     & \textbf{43.87}                 & 36.28                    \\ \cline{2-5}
+                               & 8:2                         & 54.44                     & 77.00                          & 48.37                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{31.09}            & 49.10                          & \textbf{26.47}           \\ \hline
+        DLM                    & 7:3                         & 61.12                     & 114.34                         & 52.26                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{42.51}            & \textbf{38.64}                 & \textbf{32.04}           \\ \cline{2-5}
+                               & 9:1                         & 76.20                     & 69.34                          & 61.13                    \\ \hline
+        GRU                    & 7:3                         & 81.26                     & 746.69                         & 76.35                    \\ \cline{2-5}
+                               & 8:2                         & 88.87                     & \textbf{627.15}                & 86.02                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{84.89}            & 642.77                         & \textbf{82.38}           \\ \hline
+        N-BEATS                & 7:3                         & 29.31                     & 31.20                          & 21.95                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{27.26}            & \textbf{27.06}                 & \textbf{21.62}           \\ \cline{2-5}
+                               & 9:1                         & 34.99                     & 29.10                          & 27.17                    \\ \hline
+        RNN                    & 7:3                         & 24.92                     & 29.35                          & 10.09                    \\ \cline{2-5}
+                               & 8:2                         & \textbf{25.73}            & \textbf{24.47}                 & \textbf{19.43}           \\ \cline{2-5}
+                               & 9:1                         & 27.63                     & 29.48                          & 22.03                    \\ \hline
+        SES                    & 7:3                         & 57.67                     & 49.73                          & 44.02                    \\ \cline{2-5}
+                               & 8:2                         & 68.84                     & 61.06                          & 57.16                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{32.02}            & \textbf{26.83}                 & \textbf{22.77}           \\ \hline
+        Linear Regression      & 7:3                         & 64.77                     & 59.609                         & 51.019                   \\ \cline{2-5}
+                               & 8:2                         & 65.904                    & 58.715                         & 54.566                   \\ \cline{2-5}
+                               & 9:1                         & \textbf{40.55}            & \textbf{33.03}                 & \textbf{30.33}           \\ \hline
+        LSTM                   & 7:3                         & 26.56                     & 31.35                          & 19.76                    \\ \cline{2-5}
+                               & 8:2                         & 27.85                     & \textbf{27.55}                 & 21.43                    \\ \cline{2-5}
+                               & 9:1                         & \textbf{25.24}            & 26.79                          & \textbf{19.22}           \\ \hline
+    \end{tabular}
+    \label{mbbresult}
+\end{table}
 
 \section{Tổng kết}
 \subsection{Tổng quan}
